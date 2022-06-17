@@ -3,22 +3,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-}
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
 
-/* *Enable font variants */
-@supports (font-variation-settings: normal) {
-  html {
-    font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss04' on, 'ss08' on,
-      'ss09' on, 'ss11' on, 'ss10' on;
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @supports (font-variation-settings: normal) {
+    html {
+      font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss04' on, 'ss08' on,
+        'ss09' on, 'ss11' on, 'ss10' on;
+    }
   }
 }
 
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-.bg-moovies {
-  background: radial-gradient(50% 50% at 50% 50%, #181818 0%, #171717 100%) !important;
+@layer utilities {
+  .bg-moovies {
+    background: radial-gradient(50% 50% at 50% 50%, #181818 0%, #171717 100%) !important;
+  }
 }
