@@ -1,8 +1,11 @@
 import profileImage from '../assets/imgs/user.jpg'
 import { Plus, Bell, Search, MenuHamburger, ChevronSmallDown } from 'react-swm-icon-pack'
 import Nav from '../components/Nav'
+import { useState } from 'react'
+import Modal from '../components/Modal'
 
 const Admin = () => {
+  const [open, setOpen] = useState(false)
   return (
     <>
       <div className="bg-moovies min-h-screen antialiased">
@@ -28,6 +31,7 @@ const Admin = () => {
                   <div>
                     <button
                       type="button"
+                      onClick={() => setOpen(true)}
                       className="rounded-md p-2 text-neutral-200 transition-colors hover:bg-neutral-800/50 focus:bg-neutral-800/60 focus:text-primary-400 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-neutral-700/40">
                       <Plus color="currentColor" set="curved" strokeWidth="1.8" />
                     </button>
@@ -69,6 +73,7 @@ const Admin = () => {
             </nav>
           </div>
         </div>
+        <Modal open={open} setOpen={setOpen} />
       </div>
     </>
   )
