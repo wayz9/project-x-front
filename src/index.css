@@ -10,6 +10,7 @@
 
   * {
     -webkit-tap-highlight-color: transparent;
+    font-smooth: never !important;
   }
 
   @supports (font-variation-settings: normal) {

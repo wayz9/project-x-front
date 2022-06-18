@@ -2,13 +2,13 @@ import profileImage from '../assets/imgs/user.jpg'
 import { Plus, Bell, Search, MenuHamburger, ChevronSmallDown } from 'react-swm-icon-pack'
 import Nav from '../components/Nav'
 import { useState } from 'react'
-import Modal from '../components/Modal'
+import CreateModal from './Movies/CreateModal'
 
 const Admin = () => {
   const [open, setOpen] = useState(false)
   return (
     <>
-      <div className="bg-moovies min-h-screen antialiased">
+      <div className="bg-moovies min-h-screen">
         <div className="flex">
           <Nav />
           <div className="flex-grow py-4 pr-5 pl-4 lg:pl-5 lg:pr-6 2xl:py-6 2xl:pl-14 2xl:pr-[52px]">
@@ -73,7 +73,7 @@ const Admin = () => {
             </nav>
           </div>
         </div>
-        <Modal open={open} setOpen={setOpen} />
+        <CreateModal open={open} setOpen={setOpen} />
       </div>
     </>
   )
