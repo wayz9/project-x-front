@@ -2,15 +2,12 @@ import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { Search as SearchIcon } from 'react-swm-icon-pack'
 import { Link } from 'react-router-dom'
+import useHotkeys from '../hooks/useHotkeys'
 
 const Search = ({ openSearch, setOpenSearch }) => {
   const cancelButtonRef = useRef(null)
-  document.addEventListener('keydown', function (e) {
-    if (e.ctrlKey && e.key === 'k') {
-      e.preventDefault()
-      setOpenSearch(true)
-    }
-  })
+
+  useHotkeys('k', true, () => setOpenSearch(true))
 
   return (
     <Transition.Root show={openSearch} as={Fragment}>
