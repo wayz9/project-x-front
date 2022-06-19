@@ -83,6 +83,60 @@ const Admin = () => {
                 </div>
               </div>
             </nav>
+            <main className="px-1.5 pb-8 pt-8 sm:px-0 xl:pt-12 2xl:pt-14">
+              <div>
+                <h1 className="text-3xl font-extrabold text-neutral-200 xl:text-4xl">
+                  Catalogs <span className="text-neutral-400">(lists)</span>
+                </h1>
+                <p className="mt-1.5 block font-semibold text-neutral-400 md:hidden">
+                  Manage users catalogs aka lists.
+                </p>
+                <p className="mt-2 hidden max-w-2xl text-base font-semibold text-neutral-400 md:mt-3 md:block">
+                  Catalogs or better said lists are all displayed here, either private or public an
+                  admin or permissioned user can see them, manage and delete them accordingly.
+                </p>
+              </div>
+              <div className="mt-10 grid auto-rows-fr gap-x-7 gap-y-8 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+                <div className="bg-catalog-card flex h-full flex-col justify-between gap-y-10 rounded-lg py-5 px-6 transition-transform hover:cursor-pointer md:hover:-translate-y-2">
+                  <div className="flex-grow pt-5 text-center">
+                    <div className="small-caps text-sm font-black tracking-wider text-violet-400">
+                      private
+                    </div>
+                    <h2 className="mt-1 text-xl font-black uppercase text-neutral-200 line-clamp-2">
+                      Marvel Collection
+                    </h2>
+                    <p className="mt-2 px-8 text-base font-semibold text-neutral-400 line-clamp-2">
+                      Marvel movies in chronological watching order.
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-black text-neutral-300">17 items</span>
+                    <span className="text-sm font-semibold text-neutral-400">
+                      By: Vukašin Vitorović
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-catalog-card flex h-full flex-col justify-between gap-y-10 rounded-lg py-5 px-6 transition-transform hover:cursor-pointer md:hover:-translate-y-2">
+                  <div className="flex-grow pt-5 text-center">
+                    <div className="small-caps text-sm font-black tracking-wider text-yellow-400">
+                      public
+                    </div>
+                    <h2 className="mt-1 text-xl font-black uppercase text-neutral-200 line-clamp-2">
+                      Random Movies
+                    </h2>
+                    <p className="mt-2 px-8 text-base font-semibold text-neutral-400 line-clamp-2">
+                      Just a random collection.
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-black text-neutral-300">4 items</span>
+                    <span className="text-sm font-semibold text-neutral-400">
+                      By: Vukašin Vitorović
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </main>
           </div>
         </div>
         <CreateModal open={open} setOpen={setOpen} />

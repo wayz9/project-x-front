@@ -37,8 +37,8 @@ const Search = ({ openSearch, setOpenSearch }) => {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-              <Dialog.Panel className="relative w-full max-w-[689px] transform overflow-hidden rounded-lg bg-neutral-800/40 text-left shadow-xl transition-all sm:my-16 md:rounded-xl">
-                <div className="flex flex-col divide-y divide-neutral-900">
+              <Dialog.Panel className="relative w-full max-w-[689px] transform overflow-hidden rounded-lg bg-neutral-900 text-left shadow-xl transition-all sm:my-16 md:rounded-xl">
+                <div className="flex flex-col divide-y divide-neutral-900 bg-neutral-800/40">
                   <div className="relative">
                     <input
                       type="text"
@@ -55,17 +55,162 @@ const Search = ({ openSearch, setOpenSearch }) => {
                       </div>
                     </div>
                   </div>
-                  <div id="results" className="py-5 px-4">
+                  <div id="results" className="flex flex-col gap-y-8 py-5 px-4">
                     <div>
                       <div className="ml-2 text-xs font-extrabold uppercase tracking-wider text-neutral-400">
                         Movies (1)
                       </div>
-                      <ul className="grid gap-0.5">
+                      <ul className="mt-2 grid gap-0.5">
                         <li>
-                          <Link to="movie/11" className="flex items-center justify-between">
+                          <Link
+                            to="movie/11"
+                            className="flex cursor-pointer items-center justify-between rounded-md py-[18px] pl-2 pr-4 transition-colors hover:bg-neutral-800/70 focus:bg-neutral-800/70 focus:outline-none focus:ring-1 focus:ring-cyan-100/10">
                             <div className="flex items-center gap-3">
                               <div className="rounded bg-cyan-100/5 px-1.5 text-xs font-extrabold uppercase leading-[22px] tracking-wider text-sky-400">
-                                Tv Show
+                                Movie
+                              </div>
+                              <div className="flex items-baseline gap-2 text-base font-bold">
+                                <p className="text-neutral-100">
+                                  Avengers: Endgame <span className="text-neutral-400">(2019)</span>
+                                </p>
+                              </div>
+                            </div>
+                            <div className="inline-flex items-center gap-2 text-sm font-semibold leading-6 text-neutral-400">
+                              <div>Enter</div>
+                              <div>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="18"
+                                  height="18"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round">
+                                  <polyline points="9 10 4 15 9 20"></polyline>
+                                  <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                                </svg>
+                              </div>
+                            </div>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="ml-2 text-xs font-extrabold uppercase tracking-wider text-neutral-400">
+                        Tv Shows (2)
+                      </div>
+                      <ul className="mt-2 grid gap-0.5">
+                        <li>
+                          <Link
+                            to="movie/11"
+                            className="flex cursor-pointer items-center justify-between rounded-md py-[18px] pl-2 pr-4 transition-colors hover:bg-neutral-800/70 focus:bg-neutral-800/70 focus:outline-none focus:ring-1 focus:ring-cyan-100/10">
+                            <div className="flex items-center gap-3">
+                              <div className="rounded bg-cyan-100/5 px-1.5 text-xs font-extrabold uppercase leading-[22px] tracking-wider text-sky-400">
+                                TV Show
+                              </div>
+                              <div className="flex items-baseline gap-2 text-base font-bold">
+                                <p className="text-neutral-100">
+                                  Better Call Saul{' '}
+                                  <span className="text-neutral-400">(2015-2022)</span>
+                                </p>
+                                <p className="font-medium text-neutral-400">(6 seasons)</p>
+                              </div>
+                            </div>
+                            <div className="inline-flex items-center gap-2 text-sm font-semibold leading-6 text-neutral-400">
+                              <div>Enter</div>
+                              <div>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="18"
+                                  height="18"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round">
+                                  <polyline points="9 10 4 15 9 20"></polyline>
+                                  <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                                </svg>
+                              </div>
+                            </div>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="movie/11"
+                            className="flex cursor-pointer items-center justify-between rounded-md py-[18px] pl-2 pr-4 transition-colors hover:bg-neutral-800/70 focus:bg-neutral-800/70 focus:outline-none focus:ring-1 focus:ring-cyan-100/10">
+                            <div className="flex items-center gap-3">
+                              <div className="rounded bg-cyan-100/5 px-1.5 text-xs font-extrabold uppercase leading-[22px] tracking-wider text-sky-400">
+                                TV Show
+                              </div>
+                              <div className="flex items-baseline gap-2 text-base font-bold">
+                                <p className="text-neutral-100">
+                                  Mr. Robot <span className="text-neutral-400">(2015-2019)</span>
+                                </p>
+                                <p className="font-medium text-neutral-400">(4 seasons)</p>
+                              </div>
+                            </div>
+                            <div className="inline-flex items-center gap-2 text-sm font-semibold leading-6 text-neutral-400">
+                              <div>Enter</div>
+                              <div>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="18"
+                                  height="18"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round">
+                                  <polyline points="9 10 4 15 9 20"></polyline>
+                                  <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                                </svg>
+                              </div>
+                            </div>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="ml-2 text-xs font-extrabold uppercase tracking-wider text-neutral-400">
+                        Genres (1)
+                      </div>
+                      <ul className="mt-2 grid gap-0.5">
+                        <li>
+                          <Link
+                            to="movie/11"
+                            className="flex cursor-pointer items-center justify-between rounded-md py-[18px] pl-2 pr-4 transition-colors hover:bg-neutral-800/70 focus:bg-neutral-800/70 focus:outline-none focus:ring-1 focus:ring-cyan-100/10">
+                            <div className="flex items-center gap-3">
+                              <div className="rounded bg-cyan-100/5 px-1.5 text-xs font-extrabold uppercase leading-[22px] tracking-wider text-sky-400">
+                                Genres
+                              </div>
+                              <div className="flex items-baseline gap-2 text-base font-bold">
+                                <p className="text-neutral-100">
+                                  Better Call Saul <span className="text-neutral-400">Horror</span>
+                                </p>
+                                <p className="font-medium text-neutral-400">(512 seasons)</p>
+                              </div>
+                            </div>
+                            <div className="inline-flex items-center gap-2 text-sm font-semibold leading-6 text-neutral-400">
+                              <div>Enter</div>
+                              <div>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="18"
+                                  height="18"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round">
+                                  <polyline points="9 10 4 15 9 20"></polyline>
+                                  <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                                </svg>
                               </div>
                             </div>
                           </Link>

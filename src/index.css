@@ -18,11 +18,23 @@
       font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss04' on, 'ss08' on,
         'ss09' on, 'ss11' on, 'ss10' on;
     }
+
+    .small-caps {
+      font-variant: small-caps;
+    }
   }
 }
 
 @layer utilities {
   .bg-moovies {
     background: radial-gradient(50% 50% at 50% 50%, #181818 0%, #171717 100%) !important;
+  }
+
+  .bg-catalog-card {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(39, 39, 42, 0.4) 0%,
+      rgba(38, 38, 38, 0.5) 100%
+    );
   }
 }
