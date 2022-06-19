@@ -36,7 +36,7 @@ const CreateModal = ({ open, setOpen }) => {
                       <div className="2xl:col-span-2">
                         <div className="grid gap-8 lg:grid-cols-3 2xl:gap-11">
                           <div>
-                            <div className="flex flex-col items-center justify-center gap-y-5 rounded-lg border border-dashed border-neutral-700 bg-neutral-800/[0.55] py-[140px] text-neutral-500 lg:py-24">
+                            <div className="flex flex-col items-center justify-center gap-y-5 rounded-lg border border-dashed border-neutral-700 bg-neutral-800/[0.55] py-40 text-neutral-500 lg:py-24">
                               <div>
                                 <svg
                                   width="60"
@@ -256,36 +256,38 @@ const CreateModal = ({ open, setOpen }) => {
                       </div>
                       <div>
                         <div className="mt-8 grid gap-y-8 2xl:mt-0 2xl:gap-y-11">
-                          <div className="flex flex-col gap-y-2">
-                            <label
-                              htmlFor="genres"
-                              className="text-xs font-extrabold uppercase tracking-wider text-neutral-400">
-                              Genres
-                            </label>
-                            <div>
-                              <input
-                                type="text"
-                                autoComplete="off"
-                                id="genres"
-                                placeholder="Click to add genres.."
-                                className="block w-full rounded-md bg-neutral-800/[0.55] py-3 px-5 text-base font-semibold text-neutral-200 placeholder:text-neutral-400 focus:bg-neutral-800 focus:outline-none"
-                              />
+                          <div className="grid gap-8 lg:grid-cols-2 2xl:grid-cols-1 2xl:gap-11">
+                            <div className="flex flex-col gap-y-2">
+                              <label
+                                htmlFor="genres"
+                                className="text-xs font-extrabold uppercase tracking-wider text-neutral-400">
+                                Genres
+                              </label>
+                              <div>
+                                <input
+                                  type="text"
+                                  autoComplete="off"
+                                  id="genres"
+                                  placeholder="Click to add genres.."
+                                  className="block w-full rounded-md bg-neutral-800/[0.55] py-3 px-5 text-base font-semibold text-neutral-200 placeholder:text-neutral-400 focus:bg-neutral-800 focus:outline-none"
+                                />
+                              </div>
                             </div>
-                          </div>
-                          <div className="flex flex-col gap-y-2">
-                            <label
-                              htmlFor="languages"
-                              className="text-xs font-extrabold uppercase tracking-wider text-neutral-400">
-                              Languages
-                            </label>
-                            <div>
-                              <input
-                                type="text"
-                                autoComplete="off"
-                                id="languages"
-                                placeholder="Click to add languages.."
-                                className="block w-full rounded-md bg-neutral-800/[0.55] py-3 px-5 text-base font-semibold text-neutral-200 placeholder:text-neutral-400 focus:bg-neutral-800 focus:outline-none"
-                              />
+                            <div className="flex flex-col gap-y-2">
+                              <label
+                                htmlFor="languages"
+                                className="text-xs font-extrabold uppercase tracking-wider text-neutral-400">
+                                Languages
+                              </label>
+                              <div>
+                                <input
+                                  type="text"
+                                  autoComplete="off"
+                                  id="languages"
+                                  placeholder="Click to add languages.."
+                                  className="block w-full rounded-md bg-neutral-800/[0.55] py-3 px-5 text-base font-semibold text-neutral-200 placeholder:text-neutral-400 focus:bg-neutral-800 focus:outline-none"
+                                />
+                              </div>
                             </div>
                           </div>
                           <div className="flex flex-col gap-y-2">
@@ -383,7 +385,7 @@ const CreateModal = ({ open, setOpen }) => {
                               <div>Add New Source</div>
                             </button>
                             <div className="relative mt-3">
-                              <p className="text-sm font-semibold leading-6 text-neutral-400 2xl:absolute 2xl:text-center">
+                              <p className="text-sm font-semibold leading-6 text-neutral-400 lg:text-center 2xl:absolute">
                                 <span className="font-extrabold uppercase text-neutral-300">
                                   Warning:&nbsp;
                                 </span>

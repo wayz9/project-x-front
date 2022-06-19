@@ -38,10 +38,10 @@ const Nav = () => {
       <div className="mt-8 flex flex-col gap-y-11 pb-8">
         <div>
           <ul className="flex flex-col gap-y-5">
-            <NavLink path="/111" linkText="Dashboard" Icon={Home1} />
-            <NavLink path="/asd" linkText="Monitoring" Icon={Screen}>
+            <NavLink path="/1" linkText="Dashboard" Icon={Home1} />
+            <NavLink path="/2" linkText="Monitoring" Icon={Screen}>
               <div className="rounded bg-cyan-100/5 px-1.5 text-xs font-extrabold uppercase leading-[22px] tracking-wider text-cyan-400">
-                new
+                beta
               </div>
             </NavLink>
           </ul>

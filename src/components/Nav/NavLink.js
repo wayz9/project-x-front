@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { NavLink as NavbarLink } from 'react-router-dom'
 
 const NavLink = ({ path, linkText = '', Icon = null, children = null }) => {
@@ -6,9 +7,13 @@ const NavLink = ({ path, linkText = '', Icon = null, children = null }) => {
       <NavbarLink
         to={path}
         className={({ isActive }) => {
-          return isActive
-            ? 'relative block pl-7 pr-6 before:absolute before:left-0 before:h-full before:w-1 before:rounded-r before:bg-primary-400'
-            : 'relative block pl-7 pr-6'
+          return clsx(
+            'relative block pl-7 pr-6 before:absolute before:left-0 before:h-full before:w-1 before:rounded-r before:bg-primary-400 before:transition before:duration-300 before:ease-in-out',
+            {
+              'before:opacity-0 before:hover:animate-colorChange hover:before:opacity-100':
+                !isActive
+            }
+          )
         }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">

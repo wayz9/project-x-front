@@ -1,11 +1,20 @@
 import profileImage from '../assets/imgs/user.jpg'
-import { Plus, Bell, Search, MenuHamburger, ChevronSmallDown } from 'react-swm-icon-pack'
+import {
+  Plus,
+  Bell,
+  Search as SearchIcon,
+  MenuHamburger,
+  ChevronSmallDown
+} from 'react-swm-icon-pack'
 import Nav from '../components/Nav'
 import { useState } from 'react'
 import CreateModal from './Movies/CreateModal'
+import Search from './Search'
 
 const Admin = () => {
   const [open, setOpen] = useState(false)
+  const [openSearch, setOpenSearch] = useState(false)
+
   return (
     <>
       <div className="bg-moovies min-h-screen">
@@ -42,13 +51,16 @@ const Admin = () => {
                       className="rounded-md p-2 text-neutral-200 transition-colors hover:bg-neutral-800/50 focus:bg-neutral-800/60 focus:text-primary-400 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-neutral-700/40">
                       <Bell color="currentColor" set="curved" strokeWidth="1.8" />
                     </button>
-                    <div className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary-400"></div>
+                    <div className="absolute top-1 right-1 inline-flex h-2 w-2 rounded-full bg-primary-400">
+                      <div className="relative h-2 w-2 animate-ping rounded-full bg-primary-400"></div>
+                    </div>
                   </div>
                   <div>
                     <button
                       type="button"
+                      onClick={() => setOpenSearch(true)}
                       className="rounded-md p-2 text-neutral-200 transition-colors hover:bg-neutral-800/50 focus:bg-neutral-800/60 focus:text-primary-400 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-neutral-700/40">
-                      <Search color="currentColor" set="curved" strokeWidth="1.8" />
+                      <SearchIcon color="currentColor" set="curved" strokeWidth="1.8" />
                     </button>
                   </div>
                 </div>
@@ -74,6 +86,7 @@ const Admin = () => {
           </div>
         </div>
         <CreateModal open={open} setOpen={setOpen} />
+        <Search openSearch={openSearch} setOpenSearch={setOpenSearch} />
       </div>
     </>
   )
