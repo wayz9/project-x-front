@@ -50,11 +50,14 @@ const Register = () => {
                   autoComplete="off"
                   id="email"
                   placeholder="Email address"
-                  className="block w-full rounded-md bg-neutral-800/[0.55] py-3 pl-[50px] pr-6 text-base font-semibold 
-                  text-neutral-200 placeholder:text-neutral-400 focus:bg-neutral-800 focus:outline-none"
+                  className="block w-full rounded-md bg-red-400/10 py-3 pl-[50px] pr-6 text-base font-semibold 
+                  text-neutral-200 placeholder:text-red-400 focus:outline-none"
                 />
-                <div className="absolute inset-y-0 left-3.5 flex items-center justify-center text-neutral-400">
+                <div className="absolute inset-y-0 left-3.5 flex items-center justify-center text-red-400">
                   <AtEmail color="currentColor" set="broken" />
+                </div>
+                <div className="absolute pt-1 text-xs font-semibold text-red-400">
+                  Email has already been taken.
                 </div>
               </div>
             </div>
