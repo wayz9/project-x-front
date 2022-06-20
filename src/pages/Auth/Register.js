@@ -16,8 +16,9 @@ const Register = () => {
     // setAttemptedLogin(true)
     // if (!isValid) return
     const body = new FormData()
-    body.append('fulLName', fullName)
+    body.append('name', fullName)
     body.append('password', password)
+    body.append('password_confirmation', password)
     body.append('email', email)
     try {
       const response = await register(body)
