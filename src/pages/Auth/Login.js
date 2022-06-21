@@ -1,9 +1,30 @@
+import Cookies from 'js-cookie'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AtEmail, Key } from 'react-swm-icon-pack'
 import Button from '../../components/Essentials/Button'
 import Logo from '../../components/Logo'
+import { login } from '../../services/api'
 
-const Login = () => {
+const Login = ({ setAuth }) => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    const body = new FormData()
+    body.append('email', email)
+    body.append('password', password)
+    const response = await login(body)
+    if (response.ok) {
+      localStorage.setItem('token', Cookies.get('XSRF-TOKEN'))
+      setAuth(true)
+    } else {
+      const { message } = await response.json()
+      alert(message)
+    }
+  }
+
   return (
     <div className="bg-moovies min-h-screen justify-items-center pt-20 antialiased sm:grid sm:place-items-center sm:pt-0">
       <div className="w-full sm:py-12">
@@ -15,7 +36,7 @@ const Login = () => {
           <p className="mt-2.5 text-base font-semibold text-neutral-400 sm:mt-3">
             Login to manage your account.
           </p>
-          <form className="mt-8 block">
+          <form className="mt-8 block" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="email"
@@ -25,7 +46,8 @@ const Login = () => {
               <div className="relative mt-2">
                 <input
                   type="email"
-                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   autoComplete="off"
                   id="email"
                   placeholder="Email address"
@@ -46,7 +68,8 @@ const Login = () => {
               <div className="relative mt-2">
                 <input
                   type="password"
-                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   autoComplete="off"
                   id="password"
                   placeholder="Your password"
@@ -61,7 +84,7 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            <Button name="Sign In" />
+            <Button name="Sign In" type="submit" />
           </form>
         </div>
         <div className="mt-4 text-center text-base font-semibold text-neutral-400">

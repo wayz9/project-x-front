@@ -1,15 +1,17 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AtEmail, Key, User1 } from 'react-swm-icon-pack'
 import Button from '../../components/Essentials/Button'
 import Logo from '../../components/Logo'
 import { register } from '../../services/api'
+import Cookies from 'js-cookie'
 
 const Register = () => {
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const navigate = useNavigate()
 
   const handleRegister = async (e) => {
     e.preventDefault()
@@ -23,22 +25,11 @@ const Register = () => {
     try {
       const response = await register(body)
       if (response.ok) {
-        const { data } = await response.json()
-        console.log(data)
-        // const body = { email, password }
-        // const response = await register(JSON.stringify(body))
-        // const json = await response.json()
-        // if (response.ok) {
-        //   if (json.data.type === 'admin' && json.access_token) {
-        //     localStorage.setItem('token', json.access_token)
-        //     setAuth(true)
-        //   }
-        //   setPendingReset(false)
-        // }
+        localStorage.setItem('token', Cookies.get('XSRF-TOKEN'))
+        navigate('/')
       } else {
-        // const { errors } = await response.json()
-        // if (errors.email) toast.error(errors.email[0])
-        // if (errors.password) toast.error(errors.password[0])
+        const { message } = await response.json()
+        console.log(JSON.stringify(message))
       }
     } catch (err) {
       throw err
