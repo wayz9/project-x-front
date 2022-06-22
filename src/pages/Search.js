@@ -55,7 +55,7 @@ const Search = ({ openSearch, setOpenSearch }) => {
                       </div>
                     </div>
                   </div>
-                  <div id="results" className="flex flex-col gap-y-8 py-5 px-4">
+                  <div id="results" className="flex flex-col gap-y-8 px-4 pt-5">
                     <div>
                       <div className="ml-2 text-xs font-extrabold uppercase tracking-wider text-neutral-400">
                         Movies (1)
@@ -217,6 +217,14 @@ const Search = ({ openSearch, setOpenSearch }) => {
                         </li>
                       </ul>
                     </div>
+                  </div>
+                  <div className="mt-7 flex items-center justify-between px-6 pb-6">
+                    <button type="button" className="text-sm font-semibold text-neutral-400">
+                      Filters
+                    </button>
+                    <button type="button" className="text-sm font-semibold text-neutral-400">
+                      Settings
+                    </button>
                   </div>
                 </div>
               </Dialog.Panel>

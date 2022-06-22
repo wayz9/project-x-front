@@ -29,7 +29,7 @@ window.fetch = async (...args) => {
     'X-XSRF-TOKEN': XSRF_TOKEN
   }
   config.credentials = 'include'
-  resource = API_URL + resource
+  /*   resource = API_URL + resource */
 
   const response = await originalFetch(resource, config)
   if (!response.ok && response.status === 404) {
@@ -44,7 +44,7 @@ window.fetch = async (...args) => {
 }
 
 export const register = async (body) => {
-  const response = await fetch('register', {
+  const response = await fetch(API_URL + 'register', {
     method: 'POST',
     body
   })
@@ -52,7 +52,7 @@ export const register = async (body) => {
 }
 
 export const login = async (body) => {
-  const response = await fetch('login', {
+  const response = await fetch(API_URL + 'login', {
     method: 'POST',
     body
   })
@@ -60,13 +60,13 @@ export const login = async (body) => {
 }
 
 export const logout = async () => {
-  const response = await fetch('logout', {
+  const response = await fetch(API_URL + 'logout', {
     method: 'POST'
   })
   return response
 }
 
 export const getUser = async () => {
-  const response = await fetch('api/user')
+  const response = await fetch(API_URL + 'api/user')
   return response
 }
