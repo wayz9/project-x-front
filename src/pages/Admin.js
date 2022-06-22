@@ -16,19 +16,12 @@ const Admin = () => {
   const [open, setOpen] = useState(false)
   const [openSearch, setOpenSearch] = useState(false)
   /* eslint-disable-next-line */
-  const [auth, setAuth] = useOutletContext()
+  const [_, setIsLoggedIn] = useOutletContext()
 
   const handleLogout = async () => {
-    try {
-      const response = await logout()
-      if (response.ok) {
-        localStorage.removeItem('token')
-        setAuth(false)
-      } else {
-        const { message } = await response.json()
-        console.log(message)
-      }
-    } catch (err) {}
+    await logout()
+    localStorage.removeItem('logoutTime')
+    setIsLoggedIn(false)
   }
 
   return (

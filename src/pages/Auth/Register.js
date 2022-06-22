@@ -1,38 +1,29 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AtEmail, Key, User1 } from 'react-swm-icon-pack'
 import Button from '../../components/Essentials/Button'
 import Logo from '../../components/Logo'
 import { register } from '../../services/api'
-import Cookies from 'js-cookie'
 
-const Register = () => {
+const Register = ({ setIsLoggedIn }) => {
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  const navigate = useNavigate()
 
   const handleRegister = async (e) => {
     e.preventDefault()
-    // setAttemptedLogin(true)
-    // if (!isValid) return
     const body = new FormData()
     body.append('name', fullName)
     body.append('password', password)
-    body.append('password_confirmation', password)
+    body.append('password_confirmation', passwordConfirmation)
     body.append('email', email)
-    try {
-      const response = await register(body)
-      if (response.ok) {
-        localStorage.setItem('token', Cookies.get('XSRF-TOKEN'))
-        navigate('/')
-      } else {
-        const { message } = await response.json()
-        console.log(JSON.stringify(message))
-      }
-    } catch (err) {
-      throw err
+    const response = await register(body)
+    if (response && response.status === 204) {
+      let now = new Date()
+      now.setHours(now.getHours() + 2)
+      localStorage.setItem('logoutTime', String(now))
+      setIsLoggedIn(true)
     }
   }
 
