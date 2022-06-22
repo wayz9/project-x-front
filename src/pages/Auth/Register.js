@@ -1,9 +1,41 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { AtEmail, Key, User1 } from 'react-swm-icon-pack'
 import Button from '../../components/Essentials/Button'
 import Logo from '../../components/Logo'
+import { register } from '../../services/api'
+import Cookies from 'js-cookie'
 
 const Register = () => {
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const navigate = useNavigate()
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    // setAttemptedLogin(true)
+    // if (!isValid) return
+    const body = new FormData()
+    body.append('name', fullName)
+    body.append('password', password)
+    body.append('password_confirmation', password)
+    body.append('email', email)
+    try {
+      const response = await register(body)
+      if (response.ok) {
+        localStorage.setItem('token', Cookies.get('XSRF-TOKEN'))
+        navigate('/')
+      } else {
+        const { message } = await response.json()
+        console.log(JSON.stringify(message))
+      }
+    } catch (err) {
+      throw err
+    }
+  }
+
   return (
     <div className="bg-moovies min-h-screen justify-items-center pt-20 antialiased sm:grid sm:place-items-center sm:pt-0">
       <div className="w-full pb-10 sm:py-12">
@@ -15,7 +47,7 @@ const Register = () => {
           <p className="mt-2.5 text-base font-semibold text-neutral-400 sm:mt-3">
             Register for better experience
           </p>
-          <form className="mt-8 block">
+          <form className="mt-8 block" onSubmit={handleRegister}>
             <div>
               <label
                 htmlFor="name"
@@ -24,6 +56,8 @@ const Register = () => {
               </label>
               <div className="relative mt-2">
                 <input
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
                   type="text"
                   name="name"
                   autoComplete="off"
@@ -45,8 +79,9 @@ const Register = () => {
               </label>
               <div className="relative mt-2">
                 <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
-                  name="email"
                   autoComplete="off"
                   id="email"
                   placeholder="Email address"
@@ -69,8 +104,9 @@ const Register = () => {
               </label>
               <div className="relative mt-2">
                 <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
-                  name="password"
                   autoComplete="off"
                   id="password"
                   placeholder="Password"
@@ -93,8 +129,9 @@ const Register = () => {
               </label>
               <div className="relative mt-2">
                 <input
+                  value={passwordConfirmation}
+                  onChange={(e) => setPasswordConfirmation(e.target.value)}
                   type="password"
-                  name="password_confirmation"
                   autoComplete="off"
                   id="password_confirmation"
                   placeholder="Confirm password"
@@ -109,7 +146,7 @@ const Register = () => {
                 </div>
               </div>
             </div>
-            <Button name="Register" />
+            <Button name="Register" type="submit" />
           </form>
         </div>
         <div className="mt-4 text-center text-base font-semibold text-neutral-400">
