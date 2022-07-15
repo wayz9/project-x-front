@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AtEmail, Key } from 'react-swm-icon-pack'
@@ -6,7 +5,7 @@ import Button from '../../components/Essentials/Button'
 import Logo from '../../components/Logo'
 import { login } from '../../services/api'
 
-const Login = ({ setAuth }) => {
+const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -15,13 +14,13 @@ const Login = ({ setAuth }) => {
     const body = new FormData()
     body.append('email', email)
     body.append('password', password)
+
     const response = await login(body)
-    if (response.ok) {
-      localStorage.setItem('token', Cookies.get('XSRF-TOKEN'))
-      setAuth(true)
-    } else {
-      const { message } = await response.json()
-      alert(message)
+    if (response && response.status === 204) {
+      let now = new Date()
+      now.setHours(now.getHours() + 2)
+      localStorage.setItem('logoutTime', String(now))
+      setIsLoggedIn(true)
     }
   }
 

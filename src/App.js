@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import * as ROUTES from './constants/routes'
 import { lazy, Suspense } from 'react'
-import useAuth from './hooks/useAuth'
 import ProtectedRoute from './helpers/protected-route'
+import useXSRFCookie from './hooks/useXSRFCookie'
+import useLogin from './hooks/useLogin'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -11,9 +12,8 @@ const Register = lazy(() => import('./pages/Auth/Register'))
 const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword'))
 
 function App() {
-  const { isAuthenticated, setIsAuthenticated, isLoadingAuth } = useAuth()
-
-  if (isLoadingAuth) return <div>Loading...</div>
+  const { isLoggedIn, setIsLoggedIn } = useLogin()
+  useXSRFCookie()
 
   return (
     <Router>
@@ -22,18 +22,14 @@ function App() {
           <Route
             path={ROUTES.LOGIN}
             element={
-              !isAuthenticated ? (
-                <Login setAuth={setIsAuthenticated} />
-              ) : (
-                <Navigate to={ROUTES.HOME} />
-              )
+              !isLoggedIn ? <Login setIsLoggedIn={setIsLoggedIn} /> : <Navigate to={ROUTES.HOME} />
             }
           />
           <Route
             path={ROUTES.REGISTER}
             element={
-              !isAuthenticated ? (
-                <Register setAuth={setIsAuthenticated} />
+              !isLoggedIn ? (
+                <Register setIsLoggedIn={setIsLoggedIn} />
               ) : (
                 <Navigate to={ROUTES.HOME} />
               )
@@ -43,10 +39,10 @@ function App() {
 
           <Route
             path={ROUTES.RESET_PASSWORD}
-            element={<ResetPassword setAuth={setIsAuthenticated} />}
+            element={<ResetPassword setIsLoggedIn={setIsLoggedIn} />}
           />
 
-          <Route element={<ProtectedRoute auth={isAuthenticated} setAuth={setIsAuthenticated} />}>
+          <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}>
             <Route path={ROUTES.HOME} element={<Admin />} />
             <Route path={ROUTES.MOVIES} element={<Admin />} />
           </Route>
