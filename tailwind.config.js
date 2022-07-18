@@ -23,7 +23,8 @@ module.exports = {
       }
     },
     fontFamily: {
-      sans: ['Raleway-v4020', ...defaultTheme.fontFamily.sans]
+      sans: ['Raleway-v4020', ...defaultTheme.fontFamily.sans],
+      lex: ['Lexend']
     }
   },
   plugins: [require('tailwind-scrollbar'), require('@tailwindcss/line-clamp')]

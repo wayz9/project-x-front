@@ -10,6 +10,7 @@ const Login = lazy(() => import('./pages/Auth/Login'))
 const ResetPassword = lazy(() => import('./pages/Auth/ResetPassword'))
 const Register = lazy(() => import('./pages/Auth/Register'))
 const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword'))
+const Test = lazy(() => import('./pages/Test'))
 
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useLogin()
@@ -36,6 +37,7 @@ function App() {
             }
           />
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+          <Route path="/test" element={<Test />} />
 
           <Route
             path={ROUTES.RESET_PASSWORD}
