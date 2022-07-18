@@ -33,14 +33,14 @@ const ForgotPassword = () => {
                 </div>
                 <div className="py-3">Magnet</div>
               </div>
-              <div className="divide-y divide-neutral-700/50">
+              <div className="divide-y divide-neutral-700/50 border-b border-neutral-700/50">
                 <div className="grid grid-cols-4 gap-4">
                   <div className="col-span-3 flex items-center gap-5">
-                    <div className="h-11 w-1 shrink-0 bg-green-500"></div>
+                    <div className="h-11 w-1 shrink-0 bg-transparent"></div>
                     <div className="flex items-center gap-2 text-sm">
-                      <div className="font-medium text-neutral-200">Mio</div>
+                      <div className="font-medium text-neutral-200">Uno</div>
                       <div className="font-medium text-neutral-400">&middot;</div>
-                      <div className="shrink-0 text-neutral-400">52 min</div>
+                      <div className="shrink-0 text-neutral-400">1h 15min</div>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -54,13 +54,47 @@ const ForgotPassword = () => {
                 </div>
                 <div className="grid grid-cols-4 gap-4">
                   <div className="col-span-3 flex items-center gap-5">
-                    <div className="h-11 w-1 shrink-0 bg-yellow-500"></div>
+                    <div className="h-11 w-1 shrink-0 bg-green-500"></div>
                     <div className="flex items-center gap-2 text-sm">
-                      <div
-                        className="font-medium text-neutral-200 line-clamp-1"
-                        title="BingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingoBingo">
-                        BingoBingoBingo BingoBingoBingo
+                      <div className="font-medium text-neutral-200">Mijo</div>
+                      <div className="font-medium text-neutral-400">&middot;</div>
+                      <div className="shrink-0 text-neutral-400">51 min</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <button className="flex items-center gap-1.5">
+                      <div className="text-sm font-medium text-neutral-200">Get</div>
+                      <div>
+                        <ArrowSmallRight color="currentColor" set="duotone" />
                       </div>
+                    </button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="col-span-3 flex items-center gap-5">
+                    <div className="h-11 w-1 shrink-0 bg-violet-500"></div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="font-medium text-neutral-200 line-clamp-1" title="">
+                        Hero
+                      </div>
+                      <div className="font-medium text-neutral-400">&middot;</div>
+                      <div className="shrink-0 text-neutral-400">49 min</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <button className="flex items-center gap-1.5">
+                      <div className="text-sm font-medium text-neutral-200">Get</div>
+                      <div>
+                        <ArrowSmallRight color="currentColor" set="duotone" />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="col-span-3 flex items-center gap-5">
+                    <div className="h-11 w-1 shrink-0 bg-violet-500"></div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="font-medium text-neutral-200">Alpine Boy</div>
                       <div className="font-medium text-neutral-400">&middot;</div>
                       <div className="shrink-0 text-neutral-400">52 min</div>
                     </div>
@@ -78,9 +112,9 @@ const ForgotPassword = () => {
                   <div className="col-span-3 flex items-center gap-5">
                     <div className="h-11 w-1 shrink-0 bg-violet-500"></div>
                     <div className="flex items-center gap-2 text-sm">
-                      <div className="font-medium text-neutral-200">Hero</div>
+                      <div className="font-medium text-neutral-200">Five-O</div>
                       <div className="font-medium text-neutral-400">&middot;</div>
-                      <div className="shrink-0 text-neutral-400">52 min</div>
+                      <div className="shrink-0 text-neutral-400">58 min</div>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -90,6 +124,103 @@ const ForgotPassword = () => {
                         <ArrowSmallRight color="currentColor" set="duotone" />
                       </div>
                     </button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="col-span-3 flex items-center gap-5">
+                    <div className="h-11 w-1 shrink-0 bg-yellow-500"></div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="font-medium text-neutral-200">Bingo</div>
+                      <div className="font-medium text-neutral-400">&middot;</div>
+                      <div className="shrink-0 text-neutral-400">45 min</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <button className="flex items-center gap-1.5">
+                      <div className="text-sm font-medium text-neutral-200">Get</div>
+                      <div>
+                        <ArrowSmallRight color="currentColor" set="duotone" />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="col-span-3 flex items-center gap-5">
+                    <div className="h-11 w-1 shrink-0 bg-yellow-500"></div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="font-medium text-neutral-200">RICO</div>
+                      <div className="font-medium text-neutral-400">&middot;</div>
+                      <div className="shrink-0 text-neutral-400">45 min</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <button className="flex items-center gap-1.5">
+                      <div className="text-sm font-medium text-neutral-200">Get</div>
+                      <div>
+                        <ArrowSmallRight color="currentColor" set="duotone" />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="col-span-3 flex items-center gap-5">
+                    <div className="h-11 w-1 shrink-0 bg-violet-500"></div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="font-medium text-neutral-200">Pimento</div>
+                      <div className="font-medium text-neutral-400">&middot;</div>
+                      <div className="shrink-0 text-neutral-400">45 min</div>
+                      <div className="rounded bg-violet-100/5 px-1.5 text-[10px] font-bold uppercase leading-5 tracking-wider text-violet-400">
+                        new
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <button className="flex items-center gap-1.5">
+                      <div className="text-sm font-medium text-neutral-200">Get</div>
+                      <div>
+                        <ArrowSmallRight color="currentColor" set="duotone" />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="col-span-3 flex items-center gap-5">
+                    <div className="h-11 w-1 shrink-0 bg-neutral-200"></div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="font-medium text-neutral-200">TBA</div>
+                      <div className="font-medium text-neutral-400">&middot;</div>
+                      <div className="shrink-0 text-neutral-400">- min</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="text-sm font-medium text-neutral-400">N.A.</div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-start justify-between gap-7 py-3.5 pl-6 pr-4">
+                <div className="text-sm text-neutral-400">Legend</div>
+                <div className="grid flex-grow grid-cols-2 gap-x-4 gap-y-3">
+                  <div className="flex items-center gap-2 py-0.5">
+                    <div className="h-1 w-5 rounded bg-yellow-500"></div>
+                    <div className="text-sm font-medium uppercase text-neutral-200">720p</div>
+                  </div>
+                  <div className="flex items-center gap-2 py-0.5">
+                    <div className="h-1 w-5 rounded bg-green-500"></div>
+                    <div className="text-sm font-medium uppercase text-neutral-200">1080p</div>
+                  </div>
+                  <div className="flex items-center gap-2 py-0.5">
+                    <div className="h-1 w-5 rounded bg-violet-500"></div>
+                    <div className="text-sm font-medium uppercase text-neutral-200">2160p</div>
+                  </div>
+                  <div className="flex items-center gap-2 py-0.5">
+                    <div className="h-1 w-5 rounded bg-blue-500">
+                      <div className="h-full w-1/2 bg-red-500"></div>
+                    </div>
+                    <div className="text-sm font-medium uppercase text-neutral-200">3D</div>
+                  </div>
+                  <div className="col-span-2 flex items-center gap-2 py-0.5">
+                    <div className="h-1 w-5 rounded bg-neutral-200"></div>
+                    <div className="text-sm font-medium text-neutral-200">Not available</div>
                   </div>
                 </div>
               </div>
