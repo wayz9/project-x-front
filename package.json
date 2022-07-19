@@ -5,6 +5,8 @@
   "dependencies": {
     "@headlessui/react": "^1.6.4",
     "@heroicons/react": "^1.0.6",
+    "@splidejs/splide": "^4.0.7",
+    "@splidejs/splide-shader-carousel": "github:Splidejs/splide-shader-carousel",
     "@tailwindcss/line-clamp": "^0.4.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -17,7 +19,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "react-swm-icon-pack": "^1.0.13"
+    "react-swm-icon-pack": "^1.0.13",
+    "three": "^0.142.0"
   },
   "scripts": {
     "start": "react-scripts start",
