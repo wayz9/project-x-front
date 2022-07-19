@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Collapse } from 'react-collapse'
 import { ArrowSmallRight } from 'react-swm-icon-pack'
 import { FolderOpenIcon, ChevronDownIcon } from '@heroicons/react/outline'
+import { StarIcon } from '@heroicons/react/solid'
 
 const ForgotPassword = () => {
   const [isOpened, setIsOpened] = useState(false)

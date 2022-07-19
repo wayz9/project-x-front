@@ -5,6 +5,7 @@ import ProtectedRoute from './helpers/protected-route'
 import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
 import SplideTest from './pages/SplideTest'
+import Reviews from './pages/Reviews'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -40,6 +41,7 @@ function App() {
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
           <Route path="/test" element={<Test />} />
           <Route path="/splide-test" element={<SplideTest />} />
+          <Route path="/reviews-demo" element={<Reviews />} />
 
           <Route
             path={ROUTES.RESET_PASSWORD}
