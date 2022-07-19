@@ -6,6 +6,7 @@ import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
 import SplideTest from './pages/SplideTest'
 import Reviews from './pages/Reviews'
+import CarouselDemo from './pages/CarouselDemo'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -42,6 +43,7 @@ function App() {
           <Route path="/test" element={<Test />} />
           <Route path="/splide-test" element={<SplideTest />} />
           <Route path="/reviews-demo" element={<Reviews />} />
+          <Route path="/carousel-demo" element={<CarouselDemo />} />
 
           <Route
             path={ROUTES.RESET_PASSWORD}
