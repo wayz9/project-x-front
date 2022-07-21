@@ -38,16 +38,16 @@ const Reviews = () => {
               id="bottom-review"
               className="relative overflow-hidden rounded-xl bg-neutral-800/75 px-6 pb-4 pt-6 backdrop-blur">
               <div className="absolute inset-x-0 top-0 h-1.5 w-full bg-neutral-600"></div>
-              <div>
+              <div className="flex flex-col gap-y-2.5">
                 <h3 className="text-base font-medium tracking-tight text-neutral-200 sm:text-lg">
                   Not enough multiverse and maybe too much madness.
                 </h3>
+                <p className="text-sm leading-6 text-neutral-400 sm:text-base">
+                  Sam Raimi definitely put a splash of horror in this action film. Doctor Strange in
+                  the Multiverse of Madness is darker & more violent than any previous MCU movie,
+                  which could be considered a strength.
+                </p>
               </div>
-              <p className="mt-2.5 text-sm leading-6 text-neutral-400 sm:text-base">
-                Sam Raimi definitely put a splash of horror in this action film. Doctor Strange in
-                the Multiverse of Madness is darker & more violent than any previous MCU movie,
-                which could be considered a strength.
-              </p>
               <div className="mt-5 flex items-center justify-between">
                 <div className="text-sm text-neutral-400">Source: TMDB</div>
                 <div className="flex items-center gap-0.5 rounded-full bg-neutral-700 py-1 pl-2 pr-2.5 text-[15px] leading-5 text-neutral-100">
