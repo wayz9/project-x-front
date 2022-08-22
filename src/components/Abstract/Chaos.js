@@ -3,8 +3,8 @@ const Icon = ({ className }) => {
     <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
       <defs>
         <linearGradient id="ccchaos-grad" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="hsl(206, 75%, 49%)"></stop>
-          <stop offset="100%" stopColor="hsl(331, 90%, 56%)"></stop>
+          <stop offset="0%" stopColor="hsl(142, 71%, 45%)"></stop>
+          <stop offset="100%" stopColor="hsl(258, 90%, 66%)"></stop>
         </linearGradient>
       </defs>
       <g fill="none" stroke="url(#ccchaos-grad)" strokeLinecap="round" strokeWidth="1">

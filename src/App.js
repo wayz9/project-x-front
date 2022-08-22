@@ -8,6 +8,7 @@ import SplideTest from './pages/SplideTest'
 import Reviews from './pages/Reviews'
 import CarouselDemo from './pages/CarouselDemo'
 import Movie from './pages/Public/Movie'
+import Demo2 from './pages/Demo2'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -46,6 +47,7 @@ function App() {
           <Route path="/reviews-demo" element={<Reviews />} />
           <Route path="/carousel-demo" element={<CarouselDemo />} />
           <Route path="/movie/1" element={<Movie />} />
+          <Route path="/demodemo" element={<Demo2 />} />
 
           <Route
             path={ROUTES.RESET_PASSWORD}
