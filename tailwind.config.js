@@ -9,6 +9,12 @@ module.exports = {
       colors: {
         primary: colors.sky
       },
+      fontSize: {
+        md: '15px'
+      },
+      backgroundImage: {
+        'dotted-pattern': "url('/src/assets/dotted-pattern.svg')"
+      },
       animation: {
         colorChange: 'colorChange 5s ease-in-out infinite'
       },
@@ -23,8 +29,8 @@ module.exports = {
       }
     },
     fontFamily: {
-      sans: ['Raleway-v4020', ...defaultTheme.fontFamily.sans],
-      lex: ['Lexend']
+      sans: ['Lexend', ...defaultTheme.fontFamily.sans],
+      mono: ['IBM Plex Mono', ...defaultTheme.fontFamily.mono]
     }
   },
   plugins: [require('tailwind-scrollbar'), require('@tailwindcss/line-clamp')]
