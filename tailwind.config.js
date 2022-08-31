@@ -7,13 +7,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.sky
+        primary: colors.indigo
       },
       fontSize: {
         md: '15px'
       },
       backgroundImage: {
-        'dotted-pattern': "url('/src/assets/dotted-pattern.svg')"
+        'dotted-pattern': "url('/src/assets/dotted-pattern.svg')",
+        'dotted-pattern-vertical': "url('/src/assets/dotted-pattern-vertical.svg')"
       },
       animation: {
         colorChange: 'colorChange 5s ease-in-out infinite'
