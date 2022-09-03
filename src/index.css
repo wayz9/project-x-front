@@ -9,6 +9,29 @@
     font-smooth: never !important;
   }
 
+  input,
+  textarea {
+    @apply block w-full rounded-md border-none py-2 px-4 text-md leading-6 text-gray-800 ring-1 ring-gray-200 focus:outline-none focus:outline-1 focus:outline-primary-200 focus:ring-primary-300;
+  }
+
+  input[type='date']::-webkit-inner-spin-button,
+  input[type='date']::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+
+  .overflow-anywhere {
+    overflow-wrap: anywhere;
+  }
+
+  input[type='date'] {
+    background: transparent;
+  }
+
+  label {
+    @apply text-sm font-normal leading-5 text-gray-600 md:text-md;
+  }
+
   @supports (font-variation-settings: normal) {
     html {
       font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss04' on, 'ss08' on,

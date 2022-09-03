@@ -14,7 +14,8 @@ module.exports = {
       },
       backgroundImage: {
         'dotted-pattern': "url('/src/assets/dotted-pattern.svg')",
-        'dotted-pattern-vertical': "url('/src/assets/dotted-pattern-vertical.svg')"
+        'dotted-pattern-vertical': "url('/src/assets/dotted-pattern-vertical.svg')",
+        grid: "url('/src/assets/grid.svg')"
       },
       animation: {
         colorChange: 'colorChange 5s ease-in-out infinite'
