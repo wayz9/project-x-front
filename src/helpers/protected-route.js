@@ -30,9 +30,13 @@ import {
 } from 'tabler-icons-react'
 import clsx from 'clsx'
 import { useState } from 'react'
+import UpdateTorrent from '../pages/Modals/UpdateTorrent'
+import DeleteTorrent from '../pages/Modals/DeleteTorrent'
 
 const ProtectedRoute = () => {
   const [headerOpen, setHeaderOpen] = useState(false)
+  const [updateTorrent, setUpdateTorrent] = useState(false)
+  const [deleteTorrent, setDeleteTorrent] = useState(false)
   const data = [
     {
       id: 1,
@@ -104,6 +108,8 @@ const ProtectedRoute = () => {
 
   return (
     <div className="relative flex min-h-screen antialiased">
+      <DeleteTorrent deleteTorrent={deleteTorrent} setDeleteTorrent={setDeleteTorrent} />
+      <UpdateTorrent updateTorrent={updateTorrent} setUpdateTorrent={setUpdateTorrent} />
       <nav
         className={clsx(
           'fixed top-0 left-0 z-30 h-screen w-[300px] shrink-0 overflow-y-auto bg-white bg-dotted-pattern-vertical bg-right bg-repeat-y duration-150 md:w-80 lg:sticky lg:transform-none lg:overflow-hidden lg:opacity-100 lg:transition-none lg:hover:overflow-y-auto',
@@ -521,10 +527,14 @@ const ProtectedRoute = () => {
                           </p>
                         </div>
                         <div className="flex items-center gap-x-2">
-                          <button className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
+                          <button
+                            onClick={() => setUpdateTorrent(true)}
+                            className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
                             <Pencil strokeWidth={1.5} />
                           </button>
-                          <button className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
+                          <button
+                            onClick={() => setDeleteTorrent(true)}
+                            className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
                             <Trash strokeWidth={1.5} />
                           </button>
                         </div>
@@ -534,20 +544,26 @@ const ProtectedRoute = () => {
                     <div className="relative overflow-hidden rounded-lg">
                       <div className="flex items-center justify-between gap-x-8 rounded-lg border border-gray-200 py-3 pr-4 pl-8">
                         <div>
-                          <div className="flex gap-x-1.5 text-gray-800">
+                          <div className="flex gap-x-1.5 font-medium text-gray-800">
                             <span>2,73GB</span>
                             <span>&middot;</span>
                             <span>1080P</span>
+                            <span className="hidden md:inline">&middot;</span>
+                            <span className="hidden md:inline">23.976 FPS</span>
                           </div>
                           <p className="overflow-anywhere mt-1 text-sm text-gray-400 line-clamp-1">
                             9289f24a3b5fd98f6542af72a6f8cf5f5dc7b8aa
                           </p>
                         </div>
                         <div className="flex items-center gap-x-2">
-                          <button className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
+                          <button
+                            onClick={() => setUpdateTorrent(true)}
+                            className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
                             <Pencil strokeWidth={1.5} />
                           </button>
-                          <button className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
+                          <button
+                            onClick={() => setDeleteTorrent(true)}
+                            className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
                             <Trash strokeWidth={1.5} />
                           </button>
                         </div>
@@ -567,10 +583,14 @@ const ProtectedRoute = () => {
                           </p>
                         </div>
                         <div className="flex items-center gap-x-2">
-                          <button className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
+                          <button
+                            onClick={() => setUpdateTorrent(true)}
+                            className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
                             <Pencil strokeWidth={1.5} />
                           </button>
-                          <button className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
+                          <button
+                            onClick={() => setDeleteTorrent(true)}
+                            className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
                             <Trash strokeWidth={1.5} />
                           </button>
                         </div>
@@ -590,10 +610,14 @@ const ProtectedRoute = () => {
                           </p>
                         </div>
                         <div className="flex items-center gap-x-2">
-                          <button className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
+                          <button
+                            onClick={() => setUpdateTorrent(true)}
+                            className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
                             <Pencil strokeWidth={1.5} />
                           </button>
-                          <button className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
+                          <button
+                            onClick={() => setDeleteTorrent(true)}
+                            className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
                             <Trash strokeWidth={1.5} />
                           </button>
                         </div>
@@ -732,13 +756,9 @@ const ProtectedRoute = () => {
                 </div>
                 <hr className="my-4 block md:hidden" />
                 <div className="flex items-center justify-between md:hidden">
-                  <button className="rounded-lg py-2.5 px-4 text-sm font-medium text-gray-600 ring-1 ring-inset ring-gray-300 transition-all hover:bg-white focus:outline-none ">
-                    Save as Draft
-                  </button>
+                  <button className="bg-secondary">Save as Draft</button>
                   <div className="h-0.5 w-6 rounded-full bg-gray-400"></div>
-                  <button className="rounded-lg bg-gray-900 py-2.5 px-4 text-sm font-medium text-gray-100 transition-all hover:bg-gray-800 focus:bg-gray-800 focus:outline-none">
-                    Save Changes
-                  </button>
+                  <button className="btn-primary">Save Changes</button>
                 </div>
               </div>
             </div>
