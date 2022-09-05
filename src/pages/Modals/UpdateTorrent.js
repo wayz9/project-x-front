@@ -1,6 +1,5 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { ArrowNarrowRight, Clock, Dice, LetterF, LetterP, LetterS, Stars } from 'tabler-icons-react'
 
 const UpdateTorrent = ({ updateTorrent, setUpdateTorrent }) => {
   const cancelButtonRef = useRef(null)
