@@ -368,7 +368,7 @@ const ProtectedRoute = () => {
               <div className="grow items-center justify-between md:flex">
                 <div>
                   <div className="text-sm leading-5 text-gray-500 md:text-md">Updating</div>
-                  <h3 className="mt-2.5 w-4/5 font-medium uppercase text-gray-900 lg:w-full 2xl:text-lg">
+                  <h3 className="mt-2.5 w-4/5 font-medium uppercase text-gray-900 lg:w-full 2xl:text-lg 2xl:leading-6">
                     {data[0].title}
                   </h3>
                   <p className="mt-2 hidden text-md leading-5 text-gray-400 md:block xl:hidden">
@@ -407,7 +407,7 @@ const ProtectedRoute = () => {
                 </div>
                 <h5 className="font-medium text-gray-900">Base Information</h5>
               </div>
-              <div className="flex flex-col gap-y-6 px-6 py-7 pb-14 md:gap-y-7 md:px-9">
+              <div className="flex flex-col gap-y-6 px-6 py-7 pb-10 md:gap-y-7 md:px-9">
                 <div>
                   <label htmlFor="title">Movie Title</label>
                   <input
@@ -615,7 +615,7 @@ const ProtectedRoute = () => {
                 </p>
               </div>
             </div>
-            <div className="bg-right bg-repeat-y 2xl:bg-dotted-pattern-vertical">
+            <div>
               <div className="sticky top-[72px] z-10 border-y border-gray-200 bg-gray-50 py-3.5 px-6 text-xs font-medium uppercase text-gray-900 md:hidden">
                 Other Relations
               </div>
@@ -708,23 +708,37 @@ const ProtectedRoute = () => {
                     future.
                   </p>
                 </div>
-                <div className="mt-3 flex flex-col gap-y-4 2xl:mt-4">
-                  <Link to="/" className="flex items-center gap-x-3">
-                    <span>
-                      <Focus2 strokeWidth={1.5} className="text-gray-400" />
-                    </span>
-                    <div className="text-sm font-medium leading-6 text-primary-500 hover:text-primary-400">
-                      View All Genres
-                    </div>
-                  </Link>
-                  <Link to="/" className="flex items-center gap-x-3">
-                    <span>
-                      <Language strokeWidth={1.5} className="text-gray-400" />
-                    </span>
-                    <div className="text-sm font-medium leading-6 text-primary-500 hover:text-primary-400">
-                      View All Languages
-                    </div>
-                  </Link>
+                <div className="mt-3 flex flex-col items-start gap-y-4 2xl:mt-4">
+                  <div>
+                    <Link to="/" className="flex items-center gap-x-3">
+                      <span>
+                        <Focus2 strokeWidth={1.5} className="text-gray-400" />
+                      </span>
+                      <div className="text-sm font-medium leading-6 text-primary-500 hover:text-primary-400">
+                        View All Genres
+                      </div>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="/" className="flex items-center gap-x-3">
+                      <span>
+                        <Language strokeWidth={1.5} className="text-gray-400" />
+                      </span>
+                      <div className="text-sm font-medium leading-6 text-primary-500 hover:text-primary-400">
+                        View All Languages
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <hr className="my-4 block md:hidden" />
+                <div className="flex items-center justify-between md:hidden">
+                  <button className="rounded-lg py-2.5 px-4 text-sm font-medium text-gray-600 ring-1 ring-inset ring-gray-300 transition-all hover:bg-white focus:outline-none ">
+                    Save as Draft
+                  </button>
+                  <div className="h-0.5 w-6 rounded-full bg-gray-400"></div>
+                  <button className="rounded-lg bg-gray-900 py-2.5 px-4 text-sm font-medium text-gray-100 transition-all hover:bg-gray-800 focus:bg-gray-800 focus:outline-none">
+                    Save Changes
+                  </button>
                 </div>
               </div>
             </div>
