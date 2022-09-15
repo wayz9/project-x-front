@@ -38,7 +38,7 @@ const UpdateTorrent = ({ updateTorrent, setUpdateTorrent }) => {
                       Torrent Update
                     </h5>
                     <p className="mt-2 text-sm font-normal text-gray-500 sm:text-md">
-                      Updatet currently selected torrent.
+                      Update currently selected torrent.
                     </p>
                   </div>
                   <div className="mt-7 flex flex-col gap-y-6 md:mt-9 md:gap-y-7">
