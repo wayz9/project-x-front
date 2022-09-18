@@ -1,8 +1,11 @@
 /* import { Navigate, Outlet } from 'react-router-dom'
 import { LOGIN } from '../constants/routes'
 import Nav from '../components/Nav' */
+import AvatarChangeSvg from '../assets/avatar-change.svg'
+import FakeQRCode from '../assets/qr-code.svg'
 import { Link } from 'react-router-dom'
 import {
+  AlertCircle,
   ArrowNarrowRight,
   Book2,
   Braces,
@@ -20,15 +23,20 @@ import {
   Focus2,
   Ghost,
   HeartRateMonitor,
+  Key,
   Language,
   LayersUnion,
   LetterM,
+  Lock,
   Menu2,
   Pencil,
   Settings,
   Stack2,
   Stars,
+  Target,
   Trash,
+  TwoFA,
+  UserExclamation,
   Users
 } from 'tabler-icons-react'
 import clsx from 'clsx'
@@ -43,7 +51,17 @@ const ProtectedRoute = () => {
   const [updateTorrent, setUpdateTorrent] = useState(false)
   const [deleteTorrent, setDeleteTorrent] = useState(false)
   const [showTorrent, setShowTorrent] = useState(false)
-  const data = [
+  const recoveryCodes = [
+    'Hsr3FT2K2b-1SpeuYbCn7',
+    'T58YjxLe8T-a5zpcmP0Qv',
+    'EoR6DHaRrp-YWV783oS30',
+    'bmBh4vnv99-Gi0oHEho5U',
+    'TqhEiavt1f-v6FCG4TFXN',
+    'ZWcoAZQsWg-Hd6LbsJQON',
+    'JOaUGGzgwF-IVgnmLSoc2',
+    '5Z40XSXag0-t0bhEng08Y'
+  ]
+  /*   const data = [
     {
       id: 1,
       image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/74xTEgt7R36Fpooo50r9T25onhq.jpg',
@@ -110,7 +128,7 @@ const ProtectedRoute = () => {
       description:
         'When danger threatens her camp, the fierce and highly skilled Comanche warrior Naru sets out to protect her people. But the prey she stalks turns out to be a highly evolved alien predator with a technically advanced arsenal.'
     }
-  ]
+  ] */
 
   return (
     <div className="relative flex min-h-screen antialiased">
@@ -369,226 +387,207 @@ const ProtectedRoute = () => {
           </div>
         </section>
         <div>
-          <main className="w-full grow">
-            <section className="hidden items-center justify-between px-9 py-7 md:flex">
-              <div>
-                <h4 className="text-lg font-medium leading-6 text-gray-900">Movies</h4>
-                <p className="mt-2.5 text-md text-gray-500">Add or update existing movies.</p>
+          <section className="bg-white bg-opacity-50 bg-grid bg-repeat py-10 px-6 md:px-9">
+            <div className="flex flex-col gap-y-2.5">
+              <h5 className="text-lg font-medium leading-6 text-gray-900">Account Settings</h5>
+              <p className="text-md leading-5 text-gray-600">Your personal specialized page.</p>
+            </div>
+          </section>
+          <section className="w-full grid-cols-3 divide-gray-100 bg-dotted-pattern bg-top bg-repeat-x md:divide-y 2xl:grid">
+            <div className="bg-right bg-repeat-y 2xl:bg-dotted-pattern-vertical">
+              <div className="sticky top-[72px] z-10 border-y border-gray-200 bg-gray-50 py-3.5 px-6 text-xs font-medium uppercase text-gray-900 md:hidden">
+                Profile Settings
               </div>
-              <button className="rounded-lg bg-gray-900 py-2.5 px-4 text-sm font-medium text-gray-100 transition-all hover:bg-gray-800 focus:bg-gray-800 focus:outline-none">
-                Add new movie
-              </button>
-            </section>
-            <section className="relative -mt-px w-full border-y border-gray-200/50 md:mt-0">
-              <input
-                type="text"
-                className="focus:ring-none !focus:ring-0 block w-full rounded-none py-5 px-6 pl-[54px] text-md focus:outline-none focus:ring-gray-200 focus:ring-offset-0 md:pl-[66px]"
-                placeholder="Browse movies..."
-              />
-              <div className="absolute inset-y-0 left-6 flex items-center justify-center text-gray-400 md:left-9">
-                <Search size={20} strokeWidth={1.5} color="currentColor" />
-              </div>
-              <div className="absolute inset-y-0 right-6 flex items-center justify-center md:right-9">
-                <button className="text-sm leading-6 text-gray-800 transition-colors hover:text-gray-500">
-                  Filters
-                </button>
-              </div>
-            </section>
-            <section className="block lg:hidden">
-              <div className="py-5 px-6 md:px-9 md:py-4">
-                <p className="text-gray-600">Results: </p>
-                <div className="mt-4 grid grid-cols-1 gap-5 md:gap-7">
-                  {data.map((item) => (
-                    <div
-                      key={item.id}
-                      className="-mx-4 rounded-lg border border-dotted border-gray-200 p-4 md:-mx-5 md:px-5">
-                      <div className="flex gap-x-5">
-                        <div className="shrink-0">
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="w-20 rounded-md border border-gray-200 object-cover object-center md:w-[86px]"
-                          />
-                        </div>
-                        <div className="flex grow flex-col">
-                          <div className="flex flex-col justify-between md:flex-row md:items-center">
-                            <div className="font-medium uppercase text-gray-800 line-clamp-2 md:line-clamp-1">
-                              {item.title}
-                              <span className="pl-2.5 font-mono text-sm font-medium leading-6 text-gray-400">
-                                ({item.year})
-                              </span>
-                            </div>
-                            <div className="mt-2 font-mono text-md italic text-gray-500 line-clamp-1 md:mt-0">
-                              {item.tagline}
-                            </div>
-                          </div>
-                          <div className="hidden grow md:block">
-                            <p className="mt-1.5 w-2/3 text-md leading-6 text-gray-500 line-clamp-2">
-                              {item.description}
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <div className="mt-2.5 text-sm text-gray-400 md:mt-0 md:text-md md:line-clamp-1">
-                              Available in: {item.availability}
-                            </div>
-                            <div className="hidden md:block">
-                              <span className="text-sm text-gray-500">Added by:</span>
-                              <span className="pl-1.5 text-md text-gray-800">
-                                Vukasin Vitorovic
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-            <section className="hidden lg:grid">
-              <div className="overflow-x-auto">
-                <div className="inline-block min-w-full align-middle">
-                  <div className="overflow-hidden">
-                    <table className="min-w-full">
-                      <thead className="bg-dotted-pattern bg-bottom bg-repeat-x">
-                        <tr>
-                          <th className="whitespace-nowrap py-4 pl-9 pr-4 text-left text-sm font-normal uppercase text-gray-700">
-                            Poster & Title
-                          </th>
-                          <th className="whitespace-nowrap py-4 px-4 text-left text-sm font-normal uppercase text-gray-700">
-                            Added By
-                          </th>
-                          <th className="whitespace-nowrap py-4 px-4 text-center text-sm font-normal uppercase text-gray-700">
-                            Available
-                          </th>
-                          <th className="whitespace-nowrap py-4 px-4 text-center text-sm font-normal uppercase text-gray-700">
-                            Released At
-                          </th>
-                          <th className="whitespace-nowrap py-4 px-4 text-center text-sm font-normal uppercase text-gray-700">
-                            Tmdb_Id
-                          </th>
-                          <th className="whitespace-nowrap py-4 px-4 text-center text-sm font-normal uppercase text-gray-700">
-                            Created At <br /> Updated At
-                          </th>
-                          <th className="whitespace-nowrap py-4 px-4 text-center text-sm font-normal uppercase text-gray-700">
-                            Genres <br /> Languages
-                          </th>
-                          <th className="whitespace-nowrap py-4 pl-4 pr-9 text-center text-sm font-normal uppercase text-gray-700">
-                            Actions
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {data.map((item) => (
-                          <tr key={item.id} className="bg-dotted-pattern bg-bottom bg-repeat-x">
-                            <td>
-                              <div className="flex w-96 items-center gap-7 py-5 pl-9">
-                                <div className="flex-shrink-0">
-                                  <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="w-20 rounded-md border border-gray-200 object-cover object-center"
-                                  />
-                                </div>
-                                <div>
-                                  <div className="font-medium uppercase text-gray-800 line-clamp-2">
-                                    {item.title}
-                                  </div>
-                                  <div className="mt-1 text-md text-gray-500 line-clamp-1">
-                                    {item.tagline}
-                                  </div>
-                                  <div className="mt-3.5 flex flex-wrap items-center gap-2">
-                                    <span className="rounded bg-yellow-500 py-0.5 px-1.5 text-[13px] font-semibold uppercase leading-4 text-yellow-50">
-                                      720p
-                                    </span>
-                                    <span className="rounded bg-green-500 py-0.5 px-1.5 text-[13px] font-semibold uppercase leading-4 text-green-50">
-                                      1080p
-                                    </span>
-                                    <span className="rounded bg-indigo-500 py-0.5 px-1.5 text-[13px] font-semibold uppercase leading-4 text-indigo-50">
-                                      2160p
-                                    </span>
-                                    <span className="rounded bg-blue-500 py-0.5 px-1.5 text-[13px] font-semibold uppercase leading-4 text-blue-50">
-                                      3D
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="flex flex-col justify-center px-4">
-                                <p className="whitespace-nowrap text-gray-800">Vukasin Vitorovic</p>
-                                <p className="mt-1.5 whitespace-nowrap text-sm text-gray-500">
-                                  Administrator
-                                </p>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="flex flex-col items-center justify-center px-4">
-                                <p className="text-gray-700">Yes</p>
-                                <p className="mt-2 text-sm text-gray-500">2 torrents</p>
-                                <button
-                                  onClick={() => setShowTorrent(true)}
-                                  className="mt-1 flex items-center text-primary-500 hover:text-primary-400 focus:outline-none">
-                                  <span className="text-sm font-medium">view all</span>
-                                  <ArrowNarrowRight className="text-primary-400" size={20} />
-                                </button>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="flex flex-col items-center justify-center px-4">
-                                <Calendar strokeWidth={1.5} className="text-gray-400" />
-                                <p className="mt-1 text-gray-700">{item.released_at}</p>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="flex flex-col items-center justify-center px-4">
-                                <button className="flex items-center gap-x-2">
-                                  <span>
-                                    <Copy className="text-gray-400" strokeWidth={1.5} />
-                                  </span>
-                                  <span className="text-gray-700">5912305</span>
-                                </button>
-                                <Link
-                                  to="/"
-                                  className="mt-2 text-sm font-medium text-primary-500 hover:text-primary-400">
-                                  Validate
-                                </Link>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="justify-ceenter flex flex-col items-center px-4 text-center">
-                                <p className="text-gray-700">04.07.2022</p>
-                                <p className="mt-1 text-gray-700">06.07.2022</p>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="flex flex-col items-center justify-center text-gray-700">
-                                <div className="text-center line-clamp-1">Crime, Mystery</div>
-                                <div className="mt-1.5 text-center line-clamp-1">
-                                  English, Espanol
-                                </div>
-                                <button className="mt-1 flex items-center text-primary-500 hover:text-primary-400 focus:outline-none">
-                                  <span className="text-sm font-medium">view all</span>
-                                  <ArrowNarrowRight className="text-primary-400" size={20} />
-                                </button>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="flex items-center justify-center">
-                                <button className="rounded-md p-2 text-gray-600 hover:bg-gray-50 focus:text-gray-800">
-                                  <Dots size={20} />
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+              <div className="hidden items-center gap-x-4 px-9 pt-5 pb-1 md:flex">
+                <div className="rounded-full bg-gray-100 p-2">
+                  <div className="rounded-full bg-gray-800 p-1.5 text-gray-200">
+                    <Target />
                   </div>
                 </div>
+                <h5 className="font-medium text-gray-900">Profile Settings</h5>
               </div>
-            </section>
-          </main>
+              <div className="flex flex-col gap-y-6 px-6 py-7 pb-10 md:gap-y-7 md:px-9">
+                <div>
+                  <label htmlFor="name">Full Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="mt-2.5 md:mt-3"
+                    defaultValue="Vukasin Vitorovic"
+                  />
+                </div>
+                <div className="flex items-center justify-between gap-x-6 py-3">
+                  <input type="file" name="avatar" className="hidden" />
+                  <div className="flex items-center gap-x-4">
+                    <img
+                      src={AvatarChangeSvg}
+                      className="h-16 w-16 rounded-full object-cover object-center"
+                      alt="Change Avatar SVG"
+                    />
+                    <div>
+                      <p className="text-md leading-5 text-gray-600">Profile Picture</p>
+                      <p className="mt-2 text-[13px] leading-5 text-gray-400 line-clamp-1">
+                        Use a square image for best results
+                      </p>
+                    </div>
+                  </div>
+                  <button className="btn-primary">Choose</button>
+                </div>
+                <div>
+                  <label htmlFor="biography">
+                    Biography <span className="text-gray-400">(optional)</span>
+                  </label>
+                  <textarea
+                    name="biopgraphy"
+                    className="mt-2.5 md:mt-3"
+                    id="biopgraphy"
+                    rows="5"></textarea>
+                </div>
+                <div>
+                  <label htmlFor="birthday">Birthday</label>
+                  <div className="relative">
+                    <input
+                      type="date"
+                      id="birthday"
+                      defaultValue="2022-01-01"
+                      className="mt-2.5 appearance-none md:mt-3"
+                    />
+                    <div className="absolute inset-y-0 right-3.5 flex items-center justify-center text-gray-400">
+                      <Calendar strokeWidth={1.5} />
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-5 flex justify-end md:mt-4">
+                  <button className="btn-primary">Save Changes</button>
+                </div>
+              </div>
+            </div>
+            <div className="bg-right bg-repeat-y 2xl:bg-dotted-pattern-vertical">
+              <div className="sticky top-[72px] z-10 border-y border-gray-200 bg-gray-50 py-3.5 px-6 text-xs font-medium uppercase text-gray-900 md:hidden">
+                Security - Password
+              </div>
+              <div className="hidden items-center gap-x-4 px-9 pt-5 pb-1 md:flex">
+                <div className="rounded-full bg-gray-100 p-2">
+                  <div className="rounded-full bg-gray-800 p-1.5 text-gray-200">
+                    <Key />
+                  </div>
+                </div>
+                <h5 className="font-medium text-gray-900">Security - Password</h5>
+              </div>
+              <div className="flex flex-col gap-y-6 px-6 py-7 pb-10 md:gap-y-7 md:px-9">
+                <div>
+                  <label htmlFor="current_password">Current Password</label>
+                  <input type="password" id="current_password" className="mt-2.5 md:mt-3" />
+                </div>
+                <div>
+                  <label htmlFor="new_password">New Password</label>
+                  <input type="password" id="new_password" className="mt-2.5 md:mt-3" />
+                </div>
+                <div>
+                  <label htmlFor="confirm_new_password">Repeat Password</label>
+                  <input type="password" id="confirm_new_password" className="mt-2.5 md:mt-3" />
+                </div>
+                <div className="mt-3 md:mt-2">
+                  <div className="flex items-start gap-x-4 rounded-lg border border-dotted border-gray-200 py-4 px-5">
+                    <div className="hidden pt-0.5 pr-0.5 text-gray-400 lg:block">
+                      <AlertCircle />
+                    </div>
+                    <div>
+                      <h5 className="text-md font-medium leading-5 text-gray-600">
+                        Password Update
+                      </h5>
+                      <p className="mt-2.5 text-sm leading-6 text-gray-500">
+                        Once you update your password every active session will be terminated an
+                        you'll need to re-enter your new password in order to continue.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-5 flex justify-end md:mt-4">
+                  <button className="btn-primary flex items-center gap-x-1.5 pl-3">
+                    <span>
+                      <Lock className="text-gray-400" size={20} />
+                    </span>
+                    <span>Update Password</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="sticky top-[72px] z-10 border-y border-gray-200 bg-gray-50 py-3.5 px-6 text-xs font-medium uppercase text-gray-900 md:hidden">
+                2FA Authentication
+              </div>
+              <div className="hidden items-center gap-x-4 px-9 pt-5 pb-1 md:flex">
+                <div className="rounded-full bg-gray-100 p-2">
+                  <div className="rounded-full bg-gray-800 p-1.5 text-gray-200">
+                    <TwoFA />
+                  </div>
+                </div>
+                <h5 className="font-medium text-gray-900">2FA Authentication</h5>
+              </div>
+              <div className="flex flex-col px-6 py-7 pb-10 md:px-9">
+                <div className="flex items-start gap-x-4 rounded-lg border border-dotted border-gray-200 py-4 px-5">
+                  <div className="hidden pt-0.5 pr-0.5 text-gray-400 lg:block">
+                    <UserExclamation />
+                  </div>
+                  <div>
+                    <h5 className="text-md font-medium leading-5 text-gray-600">
+                      Enrolling 2FA Protection
+                    </h5>
+                    <p className="mt-2.5 text-sm leading-6 text-gray-500">
+                      Using 2FA is a great way to protect your account against unauthroized use,
+                      even if your password gets leaked there is still another layer of protection.
+                    </p>
+                  </div>
+                </div>
+                <ul className="mt-10 space-y-14">
+                  <li>
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
+                        1
+                      </div>
+                      <h4 className="text-base font-medium text-gray-800">Scan the code</h4>
+                    </div>
+                    <div className="mt-5">
+                      <div
+                        onClick={console.info(
+                          'otpauth://totp/Project%20X:ventusblade1%40gmail.com?secret=LZKKND254WEDICP7&issuer=Project%20X&algorithm=SHA1&digits=6&period=30'
+                        )}
+                        className="grid aspect-square w-60 place-items-center justify-items-center rounded-lg border border-gray-200 p-2.5">
+                        <img src={FakeQRCode} className="grayscale" alt="QR Code" />
+                      </div>
+                    </div>
+                    <p className="mt-6 text-sm leading-6 text-gray-500">
+                      Scan the QR code using any authentication application, we highly recommend
+                      using Google's Authentication App. It's available for both IOS and Android via
+                      App & Play Store.
+                    </p>
+                  </li>
+                  <li>
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
+                        2
+                      </div>
+                      <h4 className="text-base font-medium text-gray-800">Save recovery codes</h4>
+                    </div>
+                    <div className="mt-6 divide-y divide-gray-100 rounded-lg border border-gray-200 text-sm text-gray-700">
+                      {recoveryCodes.map((code, index) => (
+                        <div className="py-2.5 px-5">{code}</div>
+                      ))}
+                    </div>
+                    <div className="mt-6 flex justify-end">
+                      <button className="btn-primary flex items-center gap-x-1.5 pl-3">
+                        <span>
+                          <Copy size={20} className="text-gray-400" />
+                        </span>
+                        <span>Copy All</span>
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>

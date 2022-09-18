@@ -13,7 +13,7 @@ const index = () => {
       <section className="relative -mt-px w-full border-y border-gray-200/50 md:mt-0">
         <input
           type="text"
-          className="block w-full py-5 px-6 pl-[54px] text-md focus:outline-none md:pl-[66px]"
+          className="focus:ring-none !focus:ring-0 block w-full rounded-none py-5 px-6 pl-[54px] text-md focus:outline-none focus:ring-gray-200 focus:ring-offset-0 md:pl-[66px]"
           placeholder="Browse movies..."
         />
         <div className="absolute inset-y-0 left-6 flex items-center justify-center text-gray-400 md:left-9">
@@ -155,7 +155,9 @@ const index = () => {
                         <div className="flex flex-col items-center justify-center px-4">
                           <p className="text-gray-700">Yes</p>
                           <p className="mt-2 text-sm text-gray-500">2 torrents</p>
-                          <button className="mt-1 flex items-center text-primary-500 hover:text-primary-400 focus:outline-none">
+                          <button
+                            onClick={() => setShowTorrent(true)}
+                            className="mt-1 flex items-center text-primary-500 hover:text-primary-400 focus:outline-none">
                             <span className="text-sm font-medium">view all</span>
                             <ArrowNarrowRight className="text-primary-400" size={20} />
                           </button>
