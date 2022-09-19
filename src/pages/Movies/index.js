@@ -15,7 +15,6 @@ const Movie = () => {
       const response = await getMovies()
       if (response && response.data && response.data.data) {
         setMovies(response.data.data)
-        console.log(response.data.data)
       }
     }
     fetchMovies()
