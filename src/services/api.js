@@ -45,7 +45,9 @@ export const getUser = async () => {
   return response
 }
 
-export const getMovies = async () => {
-  const response = await API.get('api/movies?include=poster,torrents,genres,languages')
+export const getMovies = async (searchPhrase = '') => {
+  const response = await API.get(
+    `api/movies?include=poster,torrents,genres,languages&filter[search]=${searchPhrase}`
+  )
   return response
 }

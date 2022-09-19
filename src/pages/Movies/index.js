@@ -9,16 +9,35 @@ import { toCommaSeparate } from '../../helpers/toCommaSeparate'
 const Movie = () => {
   const [movies, setMovies] = useState([])
   const [showTorrent, setShowTorrent] = useState(false)
+  const [searchTerm, setSearcTerm] = useState('')
+
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
   useEffect(() => {
     const fetchMovies = async () => {
       const response = await getMovies()
       if (response && response.data && response.data.data) {
+        await delay(1000)
         setMovies(response.data.data)
       }
     }
     fetchMovies()
   }, [])
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const response = await getMovies(searchTerm)
+      if (response && response.data && response.data.data) {
+        setMovies(response.data.data)
+      }
+    }
+
+    const delayDebounceFn = setTimeout(() => {
+      fetchMovies()
+    }, 500)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [searchTerm])
 
   return (
     <main className="w-full grow">
@@ -37,6 +56,8 @@ const Movie = () => {
           type="text"
           className="focus:ring-none !focus:ring-0 block w-full rounded-none py-5 px-6 pl-[54px] text-md focus:outline-none focus:ring-gray-200 focus:ring-offset-0 md:pl-[66px]"
           placeholder="Browse movies..."
+          value={searchTerm}
+          onChange={(e) => setSearcTerm(e.target.value)}
         />
         <div className="absolute inset-y-0 left-6 flex items-center justify-center text-gray-400 md:left-9">
           <Search size={20} strokeWidth={1.5} color="currentColor" />
