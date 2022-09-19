@@ -1,6 +1,97 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  Calendar,
+  Clock,
+  CodePlus,
+  Components,
+  Crown,
+  Diamond,
+  Dice,
+  Focus2,
+  Language,
+  Pencil,
+  Stars,
+  Trash
+} from 'tabler-icons-react'
+import UpdateTorrent from '../Modals/UpdateTorrent'
+import DeleteTorrent from '../Modals/DeleteTorrent'
+
 const UpdateMovie = () => {
+  const data = [
+    {
+      id: 1,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/74xTEgt7R36Fpooo50r9T25onhq.jpg',
+      title: 'The Batman',
+      year: '2021',
+      availability: '1080P, 2160P, 720P',
+      tagline: 'Unmask the truth.',
+      released_at: '06.05.2022',
+      description:
+        "When a sadistic serial killer begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption and question his family's involvement."
+    },
+    {
+      id: 2,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/2MiG2aG2OrOgnPpbv8xnuS984xQ.jpg',
+      title: 'Thor: Love and Thunder',
+      year: '2022',
+      availability: '1080P, 2160P, 720P',
+      tagline: 'The one is not the only.',
+      released_at: '11.12.2021',
+      description:
+        'Thor enlists the help of Valkyrie, Korg and ex-girlfriend Jane Foster to fight Gorr the God Butcher, who intends to make the gods extinct.'
+    },
+    {
+      id: 3,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg',
+      title: 'Doctor Strange: Multiverse of Madness',
+      year: '2022',
+      availability: '1080P, 2160P, 3D',
+      tagline: 'Enter a new dimension of Strange.',
+      released_at: '18.5.2023',
+      description:
+        'Doctor Strange, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary.'
+    },
+    {
+      id: 4,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/62HCnUTziyWcpDaBO2i1DX17ljH.jpg',
+      title: 'Top Gun: Maverick',
+      year: '2022',
+      availability: '1080P, 720P, 3D',
+      tagline: 'Feel the need... The need for speed.',
+      released_at: '18.5.2022',
+      description:
+        'After more than thirty years of service as one of the Navy’s top aviators, and dodging the advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.'
+    },
+    {
+      id: 5,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/td5uOBW41ib1KGz3g1Kc33BdFyj.jpg',
+      title: 'Next',
+      year: '2007',
+      availability: '2160P, 3D',
+      tagline: 'If you can see the future, you can save it.',
+      released_at: '18.5.2023',
+      description:
+        'Las Vegas showroom magician Cris Johnson has a secret which torments him: he can see a few minutes into the future. Sick of the examinations he underwent as a child and the interest of the government and medical establishment in his power, he lies low under an assumed name in Vegas, performing cheap tricks and living off small-time gambling "winnings." But when a terrorist group threatens to detonate a nuclear device in Los Angeles, government agent Callie Ferris must use all her wiles to capture Cris and convince him to help her stop the cataclysm.'
+    },
+    {
+      id: 6,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/ujr5pztc1oitbe7ViMUOilFaJ7s.jpg',
+      title: 'Prey',
+      year: '2022',
+      availability: '1080P, 2160P, 3D',
+      tagline: 'They hunt to live. It lives to hunt.',
+      released_at: '18.5.2023',
+      description:
+        'When danger threatens her camp, the fierce and highly skilled Comanche warrior Naru sets out to protect her people. But the prey she stalks turns out to be a highly evolved alien predator with a technically advanced arsenal.'
+    }
+  ]
+  const [updateTorrent, setUpdateTorrent] = useState(false)
+  const [deleteTorrent, setDeleteTorrent] = useState(false)
   return (
     <div>
+      <DeleteTorrent deleteTorrent={deleteTorrent} setDeleteTorrent={setDeleteTorrent} />
+      <UpdateTorrent updateTorrent={updateTorrent} setUpdateTorrent={setUpdateTorrent} />
       <section className="bg-white bg-opacity-50 bg-grid bg-repeat py-5 px-6 md:px-9">
         <div className="flex items-center gap-4">
           <div>

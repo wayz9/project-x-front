@@ -4,22 +4,21 @@ import { lazy, Suspense } from 'react'
 import ProtectedRoute from './helpers/protected-route'
 import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
-import SplideTest from './pages/SplideTest'
-import Reviews from './pages/Reviews'
-import CarouselDemo from './pages/CarouselDemo'
-import Movie from './pages/Public/Movie'
-import Demo2 from './pages/Demo2'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
 const ResetPassword = lazy(() => import('./pages/Auth/ResetPassword'))
 const Register = lazy(() => import('./pages/Auth/Register'))
 const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword'))
-const Test = lazy(() => import('./pages/Test'))
+const Settings = lazy(() => import('./pages/Settings'))
+const UpdateMovie = lazy(() => import('./pages/Movies/UpdateMovie'))
+const Movies = lazy(() => import('./pages/Movies'))
 
 function App() {
-  const { isLoggedIn, setIsLoggedIn } = useLogin()
+  const { isLoggedIn, setIsLoggedIn, isLoadingAuth } = useLogin()
   useXSRFCookie()
+
+  if (isLoadingAuth) return <div>Loading...</div>
 
   return (
     <Router>
@@ -42,21 +41,17 @@ function App() {
             }
           />
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/splide-test" element={<SplideTest />} />
-          <Route path="/reviews-demo" element={<Reviews />} />
-          <Route path="/carousel-demo" element={<CarouselDemo />} />
-          <Route path="/movie/1" element={<Movie />} />
-          <Route path="/demodemo" element={<Demo2 />} />
 
           <Route
             path={ROUTES.RESET_PASSWORD}
             element={<ResetPassword setIsLoggedIn={setIsLoggedIn} />}
           />
 
-          <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}>
+          <Route element={<ProtectedRoute auth={isLoggedIn} setAuth={setIsLoggedIn} />}>
             <Route path={ROUTES.HOME} element={<Admin />} />
-            <Route path={ROUTES.MOVIES} element={<Admin />} />
+            <Route path={ROUTES.SETTINGS} element={<Settings />} />
+            <Route path={ROUTES.UPDATE_MOVIE} element={<UpdateMovie />} />
+            <Route path={ROUTES.MOVIES} element={<Movies />} />
           </Route>
         </Routes>
       </Suspense>

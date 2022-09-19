@@ -16,7 +16,7 @@ const Login = ({ setIsLoggedIn }) => {
     body.append('password', password)
 
     const response = await login(body)
-    if (response && response.status === 204) {
+    if (response && response.status === 200) {
       let now = new Date()
       now.setHours(now.getHours() + 2)
       localStorage.setItem('logoutTime', String(now))

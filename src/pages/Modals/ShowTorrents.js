@@ -1,6 +1,6 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { Copy, Edit, Pencil, TrashX } from 'tabler-icons-react'
+import { Copy, Pencil, TrashX } from 'tabler-icons-react'
 
 const ShowTorrents = ({ showTorrent, setShowTorrent }) => {
   const cancelButtonRef = useRef(null)
