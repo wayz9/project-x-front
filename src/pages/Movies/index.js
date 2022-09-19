@@ -1,78 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowNarrowRight, Calendar, Copy, Dots, Search } from 'tabler-icons-react'
+import { getMovies } from '../../services/api'
 import ShowTorrents from '../Modals/ShowTorrents'
+import { formatDate } from '../../helpers/formatDate'
+import { toCommaSeparate } from '../../helpers/toCommaSeparate'
 
 const Movie = () => {
-  const data = [
-    {
-      id: 1,
-      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/74xTEgt7R36Fpooo50r9T25onhq.jpg',
-      title: 'The Batman',
-      year: '2021',
-      availability: '1080P, 2160P, 720P',
-      tagline: 'Unmask the truth.',
-      released_at: '06.05.2022',
-      description:
-        "When a sadistic serial killer begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption and question his family's involvement."
-    },
-    {
-      id: 2,
-      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/2MiG2aG2OrOgnPpbv8xnuS984xQ.jpg',
-      title: 'Thor: Love and Thunder',
-      year: '2022',
-      availability: '1080P, 2160P, 720P',
-      tagline: 'The one is not the only.',
-      released_at: '11.12.2021',
-      description:
-        'Thor enlists the help of Valkyrie, Korg and ex-girlfriend Jane Foster to fight Gorr the God Butcher, who intends to make the gods extinct.'
-    },
-    {
-      id: 3,
-      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg',
-      title: 'Doctor Strange: Multiverse of Madness',
-      year: '2022',
-      availability: '1080P, 2160P, 3D',
-      tagline: 'Enter a new dimension of Strange.',
-      released_at: '18.5.2023',
-      description:
-        'Doctor Strange, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary.'
-    },
-    {
-      id: 4,
-      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/62HCnUTziyWcpDaBO2i1DX17ljH.jpg',
-      title: 'Top Gun: Maverick',
-      year: '2022',
-      availability: '1080P, 720P, 3D',
-      tagline: 'Feel the need... The need for speed.',
-      released_at: '18.5.2022',
-      description:
-        'After more than thirty years of service as one of the Navy’s top aviators, and dodging the advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.'
-    },
-    {
-      id: 5,
-      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/td5uOBW41ib1KGz3g1Kc33BdFyj.jpg',
-      title: 'Next',
-      year: '2007',
-      availability: '2160P, 3D',
-      tagline: 'If you can see the future, you can save it.',
-      released_at: '18.5.2023',
-      description:
-        'Las Vegas showroom magician Cris Johnson has a secret which torments him: he can see a few minutes into the future. Sick of the examinations he underwent as a child and the interest of the government and medical establishment in his power, he lies low under an assumed name in Vegas, performing cheap tricks and living off small-time gambling "winnings." But when a terrorist group threatens to detonate a nuclear device in Los Angeles, government agent Callie Ferris must use all her wiles to capture Cris and convince him to help her stop the cataclysm.'
-    },
-    {
-      id: 6,
-      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/ujr5pztc1oitbe7ViMUOilFaJ7s.jpg',
-      title: 'Prey',
-      year: '2022',
-      availability: '1080P, 2160P, 3D',
-      tagline: 'They hunt to live. It lives to hunt.',
-      released_at: '18.5.2023',
-      description:
-        'When danger threatens her camp, the fierce and highly skilled Comanche warrior Naru sets out to protect her people. But the prey she stalks turns out to be a highly evolved alien predator with a technically advanced arsenal.'
-    }
-  ]
+  const [movies, setMovies] = useState([])
   const [showTorrent, setShowTorrent] = useState(false)
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const response = await getMovies()
+      if (response && response.data && response.data.data) {
+        setMovies(response.data.data)
+        console.log(response.data.data)
+      }
+    }
+    fetchMovies()
+  }, [])
 
   return (
     <main className="w-full grow">
@@ -105,14 +52,14 @@ const Movie = () => {
         <div className="py-5 px-6 md:px-9 md:py-4">
           <p className="text-gray-600">Results: </p>
           <div className="mt-4 grid grid-cols-1 gap-5 md:gap-7">
-            {data.map((item) => (
+            {movies.map((item) => (
               <div
                 key={item.id}
                 className="-mx-4 rounded-lg border border-dotted border-gray-200 p-4 md:-mx-5 md:px-5">
                 <div className="flex gap-x-5">
                   <div className="shrink-0">
                     <img
-                      src={item.image}
+                      src={item.poster.path}
                       alt={item.title}
                       className="w-20 rounded-md border border-gray-200 object-cover object-center md:w-[86px]"
                     />
@@ -122,7 +69,7 @@ const Movie = () => {
                       <div className="font-medium uppercase text-gray-800 line-clamp-2 md:line-clamp-1">
                         {item.title}
                         <span className="pl-2.5 font-mono text-sm font-medium leading-6 text-gray-400">
-                          ({item.year})
+                          ({new Date(item.release_date).getFullYear()})
                         </span>
                       </div>
                       <div className="mt-2 font-mono text-md italic text-gray-500 line-clamp-1 md:mt-0">
@@ -136,7 +83,7 @@ const Movie = () => {
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="mt-2.5 text-sm text-gray-400 md:mt-0 md:text-md md:line-clamp-1">
-                        Available in: {item.availability}
+                        Available in: 1080P, 2160P, 720P
                       </div>
                       <div className="hidden md:block">
                         <span className="text-sm text-gray-500">Added by:</span>
@@ -184,13 +131,13 @@ const Movie = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((item) => (
+                  {movies.map((item) => (
                     <tr key={item.id} className="bg-dotted-pattern bg-bottom bg-repeat-x">
                       <td>
                         <div className="flex w-96 items-center gap-7 py-5 pl-9">
                           <div className="flex-shrink-0">
                             <img
-                              src={item.image}
+                              src={item.poster.path}
                               alt={item.title}
                               className="w-20 rounded-md border border-gray-200 object-cover object-center"
                             />
@@ -242,7 +189,7 @@ const Movie = () => {
                       <td>
                         <div className="flex flex-col items-center justify-center px-4">
                           <Calendar strokeWidth={1.5} className="text-gray-400" />
-                          <p className="mt-1 text-gray-700">{item.released_at}</p>
+                          <p className="mt-1 text-gray-700">{formatDate(item.release_date)}</p>
                         </div>
                       </td>
                       <td>
@@ -262,14 +209,19 @@ const Movie = () => {
                       </td>
                       <td>
                         <div className="justify-ceenter flex flex-col items-center px-4 text-center">
-                          <p className="text-gray-700">04.07.2022</p>
-                          <p className="mt-1 text-gray-700">06.07.2022</p>
+                          <p className="text-gray-700">{formatDate(item.created_at)}</p>
+                          <p className="mt-1 text-gray-700">{formatDate(item.updated_at)}</p>
                         </div>
                       </td>
                       <td>
                         <div className="flex flex-col items-center justify-center text-gray-700">
-                          <div className="text-center line-clamp-1">Crime, Mystery</div>
-                          <div className="mt-1.5 text-center line-clamp-1">English, Espanol</div>
+                          <div className="text-center line-clamp-1">
+                            {toCommaSeparate(item.genres, 'name')}
+                          </div>
+                          <div className="mt-1.5 text-center line-clamp-1">
+                            {' '}
+                            {toCommaSeparate(item.languages, 'name')}
+                          </div>
                           <button className="mt-1 flex items-center text-primary-500 hover:text-primary-400 focus:outline-none">
                             <span className="text-sm font-medium">view all</span>
                             <ArrowNarrowRight className="text-primary-400" size={20} />

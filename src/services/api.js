@@ -44,3 +44,8 @@ export const getUser = async () => {
   const response = await API.get('api/user')
   return response
 }
+
+export const getMovies = async () => {
+  const response = await API.get('api/movies?include=poster,torrents,genres,languages')
+  return response
+}
