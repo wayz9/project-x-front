@@ -4,6 +4,7 @@ import { lazy, Suspense } from 'react'
 import ProtectedRoute from './helpers/protected-route'
 import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
+import UpdateTvShow from './pages/TvShows/UpdateTvShow'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -52,6 +53,7 @@ function App() {
             <Route path={ROUTES.SETTINGS} element={<Settings />} />
             <Route path={ROUTES.UPDATE_MOVIE} element={<UpdateMovie />} />
             <Route path={ROUTES.MOVIES} element={<Movies />} />
+            <Route path={ROUTES.UPDATE_TV} element={<UpdateTvShow />} />
           </Route>
         </Routes>
       </Suspense>

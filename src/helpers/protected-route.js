@@ -7,7 +7,7 @@ import { useState } from 'react'
 
 const ProtectedRoute = ({ auth }) => {
   const [headerOpen, setHeaderOpen] = useState(false)
-  return auth ? (
+  return true ? (
     <div className="relative flex min-h-screen antialiased">
       <Nav headerOpen={headerOpen} />
       <div className="relative flex max-w-full grow flex-col" onClick={() => setHeaderOpen(false)}>
