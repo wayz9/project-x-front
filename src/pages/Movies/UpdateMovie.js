@@ -486,7 +486,7 @@ const UpdateMovie = () => {
             </div>
             <hr className="my-4 block md:hidden" />
             <div className="flex items-center justify-between md:hidden">
-              <button className="bg-secondary">Save as Draft</button>
+              <button className="btn-secondary">Save as Draft</button>
               <div className="h-0.5 w-6 rounded-full bg-gray-400"></div>
               <button className="btn-primary">Save Changes</button>
             </div>

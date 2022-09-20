@@ -157,7 +157,7 @@ const UpdateTvShow = () => {
                           </li>
                         ))}
                       </ul>
-                      <div className="mt-8 flex items-center justify-between">
+                      <div className="mt-6 flex items-center justify-between md:mt-8">
                         <Link
                           to="/tvShows/1"
                           className="flex items-center text-sm font-medium text-gray-800 focus:outline-none">
@@ -295,7 +295,7 @@ const UpdateTvShow = () => {
             </div>
             <hr className="my-4 block md:hidden" />
             <div className="flex items-center justify-between md:hidden">
-              <button className="bg-secondary">Save as Draft</button>
+              <button className="btn-secondary">Save as Draft</button>
               <div className="h-0.5 w-6 rounded-full bg-gray-400"></div>
               <button className="btn-primary">Save Changes</button>
             </div>
