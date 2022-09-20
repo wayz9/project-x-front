@@ -51,3 +51,8 @@ export const getMovies = async (searchPhrase = '') => {
   )
   return response
 }
+
+export const getTvShowById = async (id) => {
+  const response = await API.get(`/api/tv-shows/${id}`)
+  return response
+}

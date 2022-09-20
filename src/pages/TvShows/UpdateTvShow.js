@@ -1,55 +1,23 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { BrandAsana, Components, Crown, Focus2, Language } from 'tabler-icons-react'
 import SeasonAccordion from '../../components/SeasonAccordion'
+import { getTvShowById } from '../../services/api'
 
 const UpdateTvShow = () => {
-  const episodes = [
-    {
-      id: 1,
-      title: 'eps1.0_hellofriend.mov',
-      watchtime: '45min'
-    },
-    {
-      id: 2,
-      title: 'eps1.1_ones-and-zer0es.mpeg',
-      watchtime: '52min'
-    },
-    {
-      id: 3,
-      title: 'eps1.2_d3bug.mkv',
-      watchtime: '47min'
-    },
-    {
-      id: 4,
-      title: 'eps1.3_da3m0ns.mp4',
-      watchtime: '59min'
-    },
-    {
-      id: 5,
-      title: 'eps1.4_3xpl0its.wmv',
-      watchtime: '1h 2min'
-    },
-    {
-      id: 6,
-      title: 'eps1.5_br4ve-trave1er.asf',
-      watchtime: '1h 12min'
-    },
-    {
-      id: 7,
-      title: 'eps1.6_v1ew-s0urce.es',
-      watchtime: '53min'
-    },
-    {
-      id: 8,
-      title: 'eps1.7_wh1ter0se.m4v',
-      watchtime: '46min'
-    },
-    {
-      id: 9,
-      title: 'eps1.8_zer0-day.avi',
-      watchtime: '1h'
+  const { id } = useParams()
+  const [tvShow, setTvShow] = useState({})
+
+  useEffect(() => {
+    const fetchTvShow = async () => {
+      const response = await getTvShowById(id)
+      if (response && response.data && response.data.data) {
+        setTvShow(response.data.data)
+      }
     }
-  ]
+    fetchTvShow()
+  }, [id])
+
   return (
     <div>
       <section className="bg-white bg-opacity-50 bg-grid bg-repeat py-5 px-6 md:px-9">
@@ -107,9 +75,11 @@ const UpdateTvShow = () => {
           <div className="px-6 py-7 md:px-9">
             <label htmlFor="seasons">Seasons</label>
             <div className="mt-2.5 flex flex-col gap-y-5 md:mt-3">
-              {['I', 'II', 'III', 'IV', 'V'].map((season, index) => (
-                <SeasonAccordion key={index} index={index} season={season} episodes={episodes} />
-              ))}
+              {tvShow && tvShow.seasons
+                ? tvShow.seasons.map((season) => (
+                    <SeasonAccordion key={season.id} season={season} />
+                  ))
+                : null}
             </div>
           </div>
         </div>
