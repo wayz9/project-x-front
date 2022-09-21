@@ -10,7 +10,9 @@ const SeasonAccordion = ({ season }) => {
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white">
-      <div className="flex items-center justify-between">
+      <div
+        onClick={() => setIsOpened(!isOpened)}
+        className="flex items-center justify-between hover:cursor-pointer">
         <div className="flex items-center">
           <div className="flex h-16 w-[4.5rem] items-center justify-center text-center text-xl text-gray-400">
             <span>{romanize(season.index)}</span>
@@ -21,7 +23,7 @@ const SeasonAccordion = ({ season }) => {
           </div>
         </div>
         <button
-          onClick={() => setIsOpened(!isOpened)}
+          aria-label="Toggle Episode Accordion"
           className="mr-5 rounded-md p-2 text-gray-600 hover:bg-gray-50 focus:text-gray-800">
           <ChevronDown className={isOpened ? 'rotate-180 transition-all' : 'transition-all'} />
         </button>
@@ -39,7 +41,7 @@ const SeasonAccordion = ({ season }) => {
                       <p className="text-md leading-6 text-gray-800 line-clamp-1">{episode.name}</p>
                     </div>
                     <div className="whitespace-nowrap text-sm text-gray-400">
-                      {episode.converted_runtime}
+                      {episode.converted_runtime.replace('0h', '')}
                     </div>
                   </li>
                 ))

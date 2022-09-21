@@ -159,7 +159,7 @@ const ShowTorrents = ({ showTorrent, setShowTorrent }) => {
                     <button
                       onClick={() => setShowTorrent(false)}
                       className="btn-primary block w-full">
-                      Dismis
+                      Dismiss
                     </button>
                   </div>
                 </div>

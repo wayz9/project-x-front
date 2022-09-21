@@ -19,6 +19,7 @@ const ProtectedRoute = ({ auth }) => {
         <section className="sticky top-0 z-20 flex items-center justify-between bg-white/80 bg-dotted-pattern bg-bottom bg-repeat-x py-4 px-6 backdrop-blur-lg md:px-9 lg:py-6">
           <div className="flex items-center gap-x-3">
             <button
+              aria-label="Open Main Menu"
               onClick={(e) => {
                 setHeaderOpen((headerOpen) => !headerOpen)
                 e.stopPropagation()
@@ -28,9 +29,7 @@ const ProtectedRoute = ({ auth }) => {
             </button>
             <h5 className="font-medium text-gray-900">
               <span className="md:hidden">Movies</span>
-              <span className="hidden md:inline">
-                Welcome, {user && user.name ? user.name : null}
-              </span>
+              <span className="hidden md:inline">Welcome, {user ? user.name : null}</span>
             </h5>
           </div>
           <div className="flex items-center gap-x-9">

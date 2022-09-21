@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getUser } from '../services/api'
 
 const useAuth = () => {
-  const [authUser, setAuthUser] = useState(null)
+  const [authUser, setAuthUser] = useState()
 
   useEffect(() => {
     const isAuth = async () => {
