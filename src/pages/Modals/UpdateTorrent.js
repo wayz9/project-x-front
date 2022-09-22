@@ -94,9 +94,9 @@ const UpdateTorrent = ({ isOpen, setIsOpen, torrent }) => {
                       <label htmlFor="quality" className="block text-left">
                         Quality
                       </label>
-                      <select id="quality" className="mt-2.5 sm:mt-3">
+                      <select defaultValue="1080p" id="quality" className="mt-2.5 sm:mt-3">
                         <option value="1080p">1080P - Full HD</option>
-                        <option selected value="2160p">
+                        <option value="2160p">
                           2160P - Ultra HD
                         </option>
                         <option value="3d">3D - 3D</option>

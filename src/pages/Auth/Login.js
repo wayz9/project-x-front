@@ -47,7 +47,6 @@ const Login = ({ setIsLoggedIn }) => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  autoComplete="off"
                   id="email"
                   placeholder="Email address"
                   className="block w-full rounded-md bg-neutral-800/[0.55] py-3 pl-[50px] pr-6 text-base font-semibold 

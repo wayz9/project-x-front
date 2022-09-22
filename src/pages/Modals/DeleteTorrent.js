@@ -11,7 +11,7 @@ const DeleteTorrent = ({ isOpen, setIsOpen, torrent }) => {
   const cancelButtonRef = useRef(null)
 
   const handleDeleteTorrent = async () => {
-    const response = await mutate('movie', () => deleteTorrent(movieId, torrent.id))
+    const response = await mutate('torrents', () => deleteTorrent(movieId, torrent.id))
     if (response && response.status === 204) {
       setIsOpen(false)
     }

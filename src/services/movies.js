@@ -17,3 +17,8 @@ export const getMovieById = async (id) => {
     }
   }
 }
+
+export const getMovieTorrents = async (id) => {
+  const response = await API.get(`/api/movies/${id}/torrents`)
+  return response.data.data
+}

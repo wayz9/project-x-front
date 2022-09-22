@@ -5,6 +5,7 @@ import ProtectedRoute from './helpers/protected-route'
 import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
 import UpdateTvShow from './pages/TvShows/UpdateTvShow'
+import Skeleton from './pages/Public/Skeleton'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -42,6 +43,7 @@ function App() {
             }
           />
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+          <Route path="/skeleton" element={<Skeleton />} />
 
           <Route
             path={ROUTES.RESET_PASSWORD}

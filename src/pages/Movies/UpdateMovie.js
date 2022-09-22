@@ -13,13 +13,14 @@ import {
   Stars
 } from 'tabler-icons-react'
 import Torrent from '../../components/Torrents'
-import { getMovieById, getMovies } from '../../services/movies'
+import { getMovieById, getMovieTorrents } from '../../services/movies'
 import useSWR from 'swr'
 
 const UpdateMovie = () => {
   const { id } = useParams()
 
   const { data: movie } = useSWR('movie', () => getMovieById(id))
+  const { data: torrents } = useSWR('torrents', () => getMovieTorrents(id))
 
   return (
     <div>
@@ -175,9 +176,9 @@ const UpdateMovie = () => {
             <div>
               <label>Available Torrents</label>
               <div className="mt-3.5 grid gap-4">
-                {movie &&
-                  movie.torrents &&
-                  movie.torrents.map((torrent) => <Torrent key={torrent.id} torrent={torrent} />)}
+                {torrents &&
+                  torrents instanceof Array &&
+                  torrents.map((torrent) => <Torrent key={torrent.id} torrent={torrent} />)}
               </div>
             </div>
             <button className="mt-7 flex w-full items-center justify-center gap-x-2 rounded-lg py-3 px-6 text-sm font-medium text-gray-800 ring-1 ring-gray-200 focus:outline-none focus:outline-1 focus:outline-primary-200 focus:ring-primary-300 2xl:mt-[52px]">
