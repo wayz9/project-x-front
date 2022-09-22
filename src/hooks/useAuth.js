@@ -1,19 +1,8 @@
-import { useEffect, useState } from 'react'
 import { getUser } from '../services/auth'
+import useSWR from 'swr'
 
 const useAuth = () => {
-  const [authUser, setAuthUser] = useState()
-
-  useEffect(() => {
-    const isAuth = async () => {
-      const response = await getUser()
-      if (response && response.data && response.data.data) {
-        setAuthUser(response.data.data)
-      }
-    }
-    isAuth()
-  }, [])
-
-  return { authUser }
+  const { data: user } = useSWR('user', () => getUser())
+  return { user }
 }
 export default useAuth

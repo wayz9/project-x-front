@@ -10,7 +10,7 @@ import { toCommaSeparate } from './toCommaSeparate'
 const ProtectedRoute = ({ auth }) => {
   const [headerOpen, setHeaderOpen] = useState(false)
 
-  const { authUser: user } = useAuth()
+  const { user } = useAuth()
 
   return auth ? (
     <div className="relative flex min-h-screen antialiased">

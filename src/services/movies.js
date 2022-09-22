@@ -15,6 +15,7 @@ export const getMovieById = async (id) => {
     if (err.response.status === 404) {
       window.location.href = '/'
     }
+    return Promise.reject(err)
   }
 }
 
