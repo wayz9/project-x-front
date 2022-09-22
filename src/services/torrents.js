@@ -6,6 +6,5 @@ export const getTorrentQualities = async () => {
 }
 
 export const deleteTorrent = async (movieId, torrentId) => {
-  const response = await API.delete(`/api/movies/${movieId}/torrents/${torrentId}`)
-  return response
+  await API.delete(`/api/movies/${movieId}/torrents/${torrentId}`)
 }

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {
   Calendar,
@@ -177,7 +176,6 @@ const UpdateMovie = () => {
               <label>Available Torrents</label>
               <div className="mt-3.5 grid gap-4">
                 {torrents &&
-                  torrents instanceof Array &&
                   torrents.map((torrent) => <Torrent key={torrent.id} torrent={torrent} />)}
               </div>
             </div>
