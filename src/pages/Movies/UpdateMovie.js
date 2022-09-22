@@ -10,18 +10,12 @@ import {
   Dice,
   Focus2,
   Language,
-  Pencil,
-  Stars,
-  Trash
+  Stars
 } from 'tabler-icons-react'
-import UpdateTorrent from '../Modals/UpdateTorrent'
-import DeleteTorrent from '../Modals/DeleteTorrent'
-import { getMovieById } from '../../services/api'
+import Torrent from '../../components/Torrents'
+import { getMovieById } from '../../services/movies'
 
 const UpdateMovie = () => {
-  const [updateTorrent, setUpdateTorrent] = useState(false)
-  const [deleteTorrent, setDeleteTorrent] = useState(false)
-
   const { id } = useParams()
   const [movie, setMovie] = useState()
 
@@ -37,8 +31,6 @@ const UpdateMovie = () => {
 
   return (
     <div>
-      <DeleteTorrent deleteTorrent={deleteTorrent} setDeleteTorrent={setDeleteTorrent} />
-      <UpdateTorrent updateTorrent={updateTorrent} setUpdateTorrent={setUpdateTorrent} />
       <section className="bg-white bg-opacity-50 bg-grid bg-repeat py-5 px-6 md:px-9">
         <div className="flex items-center gap-4">
           <div>
@@ -191,116 +183,8 @@ const UpdateMovie = () => {
             <div>
               <label>Available Torrents</label>
               <div className="mt-3.5 grid gap-4">
-                <div className="relative overflow-hidden rounded-lg">
-                  <div className="flex items-center justify-between gap-x-8 rounded-lg border border-gray-200 py-3 pr-4 pl-8">
-                    <div>
-                      <div className="flex gap-x-1.5 text-gray-800">
-                        <span>0,92GB</span>
-                        <span>&middot;</span>
-                        <span>720P</span>
-                      </div>
-                      <p className="overflow-anywhere mt-1 text-sm text-gray-400 line-clamp-1">
-                        899475841c73391e1df52fdbfea0f18736489835
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-x-2">
-                      <button
-                        onClick={() => setUpdateTorrent(true)}
-                        className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
-                        <Pencil strokeWidth={1.5} />
-                      </button>
-                      <button
-                        onClick={() => setDeleteTorrent(true)}
-                        className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
-                        <Trash strokeWidth={1.5} />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="absolute inset-y-0 w-3.5 bg-yellow-500"></div>
-                </div>
-                <div className="relative overflow-hidden rounded-lg">
-                  <div className="flex items-center justify-between gap-x-8 rounded-lg border border-gray-200 py-3 pr-4 pl-8">
-                    <div>
-                      <div className="flex gap-x-1.5 font-medium text-gray-800">
-                        <span>2,73GB</span>
-                        <span>&middot;</span>
-                        <span>1080P</span>
-                        <span className="hidden md:inline">&middot;</span>
-                        <span className="hidden md:inline">23.976 FPS</span>
-                      </div>
-                      <p className="overflow-anywhere mt-1 text-sm text-gray-400 line-clamp-1">
-                        9289f24a3b5fd98f6542af72a6f8cf5f5dc7b8aa
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-x-2">
-                      <button
-                        onClick={() => setUpdateTorrent(true)}
-                        className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
-                        <Pencil strokeWidth={1.5} />
-                      </button>
-                      <button
-                        onClick={() => setDeleteTorrent(true)}
-                        className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
-                        <Trash strokeWidth={1.5} />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="absolute inset-y-0 w-3.5 bg-green-500"></div>
-                </div>
-                <div className="relative overflow-hidden rounded-lg">
-                  <div className="flex items-center justify-between gap-x-8 rounded-lg border border-gray-200 py-3 pr-4 pl-8">
-                    <div>
-                      <div className="flex gap-x-1.5 text-gray-800">
-                        <span>4,62GB</span>
-                        <span>&middot;</span>
-                        <span>2160P</span>
-                      </div>
-                      <p className="overflow-anywhere mt-1 text-sm text-gray-400 line-clamp-1">
-                        d9bce5187ff43d69954b140887d33e63f8ce407e
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-x-2">
-                      <button
-                        onClick={() => setUpdateTorrent(true)}
-                        className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
-                        <Pencil strokeWidth={1.5} />
-                      </button>
-                      <button
-                        onClick={() => setDeleteTorrent(true)}
-                        className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
-                        <Trash strokeWidth={1.5} />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="absolute inset-y-0 w-3.5 bg-primary-500"></div>
-                </div>
-                <div className="relative overflow-hidden rounded-lg">
-                  <div className="flex items-center justify-between gap-x-8 rounded-lg border border-gray-200 py-3 pr-4 pl-8">
-                    <div>
-                      <div className="flex gap-x-1.5 text-gray-800">
-                        <span>1,44GB</span>
-                        <span>&middot;</span>
-                        <span>3D</span>
-                      </div>
-                      <p className="overflow-anywhere mt-1 text-sm text-gray-400 line-clamp-1">
-                        4ae9d49545c2b1db3c297ea010d9b9553e166e78
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-x-2">
-                      <button
-                        onClick={() => setUpdateTorrent(true)}
-                        className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
-                        <Pencil strokeWidth={1.5} />
-                      </button>
-                      <button
-                        onClick={() => setDeleteTorrent(true)}
-                        className="rounded-md p-2 text-gray-400 hover:bg-gray-50 focus:text-gray-600">
-                        <Trash strokeWidth={1.5} />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="absolute inset-y-0 w-3.5 bg-blue-500"></div>
-                </div>
+                {movie &&
+                  movie.torrents.map((torrent) => <Torrent key={torrent.id} torrent={torrent} />)}
               </div>
             </div>
             <button className="mt-7 flex w-full items-center justify-center gap-x-2 rounded-lg py-3 px-6 text-sm font-medium text-gray-800 ring-1 ring-gray-200 focus:outline-none focus:outline-1 focus:outline-primary-200 focus:ring-primary-300 2xl:mt-[52px]">

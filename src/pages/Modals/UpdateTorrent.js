@@ -1,7 +1,33 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { getTorrentQualities } from '../../services/torrents'
 
-const UpdateTorrent = ({ updateTorrent, setUpdateTorrent }) => {
+const UpdateTorrent = ({ updateTorrent, setUpdateTorrent, torrent }) => {
+  const [hash, setHash] = useState('')
+  const [magnetURL, setMagnetURL] = useState('')
+  const [size, setSize] = useState('')
+  const [fps, setFps] = useState('')
+  const [, setTorrentQualities] = useState([])
+
+  useEffect(() => {
+    if (torrent && torrent.hash) setHash(torrent.hash)
+    if (torrent && torrent.magnet_url) setMagnetURL(torrent.magnet_url)
+    if (torrent && torrent.size) setSize(torrent.size)
+    if (torrent && torrent.fps) setFps(torrent.fps)
+  }, [torrent])
+
+  useEffect(() => {
+    const fetchTorrentQualities = async () => {
+      const response = await getTorrentQualities()
+      if (response && response.data && response.data) {
+        setTorrentQualities(response.data)
+      }
+    }
+    fetchTorrentQualities()
+  }, [])
+
   const cancelButtonRef = useRef(null)
   return (
     <Transition.Root appear show={updateTorrent} as={Fragment}>
@@ -48,10 +74,11 @@ const UpdateTorrent = ({ updateTorrent, setUpdateTorrent }) => {
                       </label>
                       <input
                         type="text"
-                        readOnly
-                        value="63e8030048167a46930a9a72b5a870172c667879"
+                        value={hash}
+                        onChange={(e) => setHash(e.target.value)}
                         id="hash"
                         className="mt-2.5 sm:mt-3"
+                        maxLength={255}
                       />
                     </div>
                     <div>
@@ -62,9 +89,9 @@ const UpdateTorrent = ({ updateTorrent, setUpdateTorrent }) => {
                         type="text"
                         id="magnet"
                         rows={5}
-                        readOnly
+                        value={magnetURL}
+                        onChange={(e) => setMagnetURL(e.target.value)}
                         className="mt-2.5 resize-none break-all sm:mt-3"
-                        value="magnet:?xt=urn:btih:63E8030048167A46930A9A72B5A870172C667879&dn=Blackwood.2022.720p.WEBRip.800MB.x264-GalaxyRG&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce"
                       />
                     </div>
                     <div>
@@ -89,8 +116,9 @@ const UpdateTorrent = ({ updateTorrent, setUpdateTorrent }) => {
                           <input
                             type="text"
                             id="runtime"
-                            defaultValue="87"
                             className="mt-2.5 appearance-none md:mt-3"
+                            value={size}
+                            onChange={(e) => setSize(e.target.value)}
                           />
                           <div className="absolute inset-y-0 right-3.5 flex items-center justify-center text-gray-400">
                             <span className="text-xs font-medium uppercase text-gray-600">mb</span>
@@ -105,8 +133,9 @@ const UpdateTorrent = ({ updateTorrent, setUpdateTorrent }) => {
                           <input
                             type="text"
                             id="fps"
-                            defaultValue="23.976"
                             className="mt-2.5 appearance-none md:mt-3"
+                            value={fps}
+                            onChange={(e) => setFps(e.target.value)}
                           />
                           <div className="absolute inset-y-0 right-3.5 flex items-center justify-center text-gray-400">
                             <span className="text-xs font-medium uppercase text-gray-600">Fps</span>
