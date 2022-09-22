@@ -36,7 +36,7 @@ const UpdateMovie = () => {
           <div className="grow items-center justify-between md:flex">
             <div>
               <div className="text-sm leading-5 text-gray-500 md:text-md">Updating</div>
-              <h3 className="mt-2.5 w-4/5 font-medium uppercase text-gray-900 lg:w-full 2xl:text-lg 2xl:leading-6">
+              <h3 className="mt-2.5 w-4/5 font-medium uppercase text-gray-900 md:w-full 2xl:text-lg 2xl:leading-6">
                 {movie && movie.title}
               </h3>
               <p className="mt-2 hidden text-md leading-5 text-gray-400 md:block xl:hidden">

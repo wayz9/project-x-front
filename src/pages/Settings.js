@@ -4,6 +4,7 @@ import {
   Copy,
   Key,
   Lock,
+  ShieldCheck,
   Target,
   TwoFA,
   UserExclamation
@@ -163,21 +164,7 @@ const Settings = () => {
             <h5 className="font-medium text-gray-900">2FA Authentication</h5>
           </div>
           <div className="flex flex-col px-6 py-7 pb-10 md:px-9">
-            <div className="flex items-start gap-x-4 rounded-lg border border-dotted border-gray-200 py-4 px-5">
-              <div className="hidden pt-0.5 pr-0.5 text-gray-400 lg:block">
-                <UserExclamation />
-              </div>
-              <div>
-                <h5 className="text-md font-medium leading-5 text-gray-600">
-                  Enrolling 2FA Protection
-                </h5>
-                <p className="mt-2.5 text-sm leading-6 text-gray-500">
-                  Using 2FA is a great way to protect your account against unauthroized use, even if
-                  your password gets leaked there is still another layer of protection.
-                </p>
-              </div>
-            </div>
-            <ul className="mt-10 space-y-14">
+            <ul className="space-y-14">
               <li>
                 <div className="flex items-center gap-4">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
@@ -223,7 +210,37 @@ const Settings = () => {
                   </button>
                 </div>
               </li>
+              <li>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
+                    3
+                  </div>
+                  <h4 className="text-base font-medium text-gray-800">Insert current code</h4>
+                </div>
+                <div className="mt-6">
+                  <label htmlFor="code">Code</label>
+                  <div className="mt-2.5 flex items-center gap-x-6 md:mt-3">
+                    <input type="text" id="code" placeholder="XXXXXX" />
+                    <button className="btn-primary">Verify</button>
+                  </div>
+                </div>
+              </li>
             </ul>
+            <div className="mt-10 flex items-start gap-x-4 rounded-lg border border-dotted border-gray-200 py-4 px-5">
+              <div className="hidden pt-0.5 pr-0.5 text-gray-400 lg:block">
+                <ShieldCheck />
+              </div>
+              <div>
+                <h5 className="text-md font-medium leading-5 text-gray-600">
+                  2FA Protection Active
+                </h5>
+                <p className="mt-2.5 text-sm leading-6 text-gray-500">
+                  You have enabled 2FA protection successfully! If you want to disable it, click the
+                  button below.
+                </p>
+                <button className="btn-primary mt-4 py-2">Disable 2FA Protection</button>
+              </div>
+            </div>
           </div>
         </div>
       </section>

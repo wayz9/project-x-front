@@ -7,7 +7,7 @@ const torrentQualityMap = {
   '3D': 'bg-blue-500',
   '1080P': 'bg-green-500',
   '720P': 'bg-yellow-500',
-  '2160P': 'bg-purple-500'
+  '2160P': 'bg-indigo-500'
 }
 
 const Torrent = ({ torrent }) => {
