@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowNarrowRight, Calendar, Copy, Dots, Search } from 'tabler-icons-react'
-import { getMovies } from '../../services/api'
+import { getMovies } from '../../services/movies'
 import ShowTorrents from '../Modals/ShowTorrents'
 import { formatDate } from '../../helpers/formatDate'
 import { toCommaSeparate } from '../../helpers/toCommaSeparate'

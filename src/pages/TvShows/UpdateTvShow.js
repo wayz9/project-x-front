@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { BrandAsana, Components, Crown, Diamond, Focus2, Language, Stars } from 'tabler-icons-react'
 import SeasonAccordion from '../../components/SeasonAccordion'
-import { getTvShowById } from '../../services/api'
+import { getTvShowById } from '../../services/tvShows'
 
 const UpdateTvShow = () => {
   const { id } = useParams()

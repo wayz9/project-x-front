@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AtEmail, Key, User1 } from 'react-swm-icon-pack'
 import Button from '../../components/Essentials/Button'
 import Logo from '../../components/Logo'
-import { register } from '../../services/api'
+import { register } from '../../services/auth'
 
 const Register = ({ setIsLoggedIn }) => {
   const [fullName, setFullName] = useState('')

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AtEmail, Key } from 'react-swm-icon-pack'
 import Button from '../../components/Essentials/Button'
 import Logo from '../../components/Logo'
-import { login } from '../../services/api'
+import { login } from '../../services/auth'
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('')
