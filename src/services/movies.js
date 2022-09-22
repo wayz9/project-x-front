@@ -8,6 +8,12 @@ export const getMovies = async (searchPhrase = '') => {
 }
 
 export const getMovieById = async (id) => {
-  const response = await API.get(`/api/movies/${id}`)
-  return response
+  try {
+    const response = await API.get(`/api/movies/${id}`)
+    return response.data.data
+  } catch (err) {
+    if (err.response.status === 404) {
+      window.location.href = '/'
+    }
+  }
 }

@@ -13,21 +13,13 @@ import {
   Stars
 } from 'tabler-icons-react'
 import Torrent from '../../components/Torrents'
-import { getMovieById } from '../../services/movies'
+import { getMovieById, getMovies } from '../../services/movies'
+import useSWR from 'swr'
 
 const UpdateMovie = () => {
   const { id } = useParams()
-  const [movie, setMovie] = useState()
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-      const response = await getMovieById(id)
-      if (response && response.data && response.data.data) {
-        setMovie(response.data.data)
-      }
-    }
-    fetchMovie()
-  }, [id])
+  const { data: movie } = useSWR('movie', () => getMovieById(id))
 
   return (
     <div>
@@ -36,7 +28,7 @@ const UpdateMovie = () => {
           <div>
             <img
               className="h-[100px] rounded-md border border-gray-200 drop-shadow-lg 2xl:h-28"
-              src={movie && movie.poster.path}
+              src={movie && movie.poster && movie.poster.path}
               alt={movie && movie.title}
             />
           </div>
@@ -184,6 +176,7 @@ const UpdateMovie = () => {
               <label>Available Torrents</label>
               <div className="mt-3.5 grid gap-4">
                 {movie &&
+                  movie.torrents &&
                   movie.torrents.map((torrent) => <Torrent key={torrent.id} torrent={torrent} />)}
               </div>
             </div>

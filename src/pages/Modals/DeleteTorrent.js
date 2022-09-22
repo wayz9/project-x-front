@@ -3,13 +3,15 @@ import { Dialog, Transition } from '@headlessui/react'
 import { ArrowNarrowRight, Dice } from 'tabler-icons-react'
 import { deleteTorrent } from '../../services/torrents'
 import { useParams } from 'react-router-dom'
+import { useSWRConfig } from 'swr'
 
 const DeleteTorrent = ({ isOpen, setIsOpen, torrent }) => {
   const { id: movieId } = useParams()
+  const { mutate } = useSWRConfig()
   const cancelButtonRef = useRef(null)
 
   const handleDeleteTorrent = async () => {
-    const response = await deleteTorrent(movieId, torrent.id)
+    const response = await mutate('movie', () => deleteTorrent(movieId, torrent.id))
     if (response && response.status === 204) {
       setIsOpen(false)
     }
