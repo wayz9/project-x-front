@@ -11,7 +11,12 @@ const DeleteTorrent = ({ isOpen, setIsOpen, torrent }) => {
   const cancelButtonRef = useRef(null)
 
   const handleDeleteTorrent = async () => {
-    await mutate('torrents', () => deleteTorrent(movieId, torrent.id))
+    try {
+      await mutate('torrents', () => deleteTorrent(movieId, torrent.id))
+    } catch (err) {
+      //Todo toast message
+      console.log(err.message)
+    }
   }
 
   return (

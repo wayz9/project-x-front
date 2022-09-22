@@ -6,6 +6,7 @@ import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
 import UpdateTvShow from './pages/TvShows/UpdateTvShow'
 import Skeleton from './pages/Public/Skeleton'
+import useSWR, { SWRConfig } from 'swr'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -23,43 +24,49 @@ function App() {
   if (isLoadingAuth) return <div>Loading...</div>
 
   return (
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route
-            path={ROUTES.LOGIN}
-            element={
-              !isLoggedIn ? <Login setIsLoggedIn={setIsLoggedIn} /> : <Navigate to={ROUTES.HOME} />
-            }
-          />
-          <Route
-            path={ROUTES.REGISTER}
-            element={
-              !isLoggedIn ? (
-                <Register setIsLoggedIn={setIsLoggedIn} />
-              ) : (
-                <Navigate to={ROUTES.HOME} />
-              )
-            }
-          />
-          <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
-          <Route path="/skeleton" element={<Skeleton />} />
+    <SWRConfig value={{ revalidateOnFocus: false }}>
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route
+              path={ROUTES.LOGIN}
+              element={
+                !isLoggedIn ? (
+                  <Login setIsLoggedIn={setIsLoggedIn} />
+                ) : (
+                  <Navigate to={ROUTES.HOME} />
+                )
+              }
+            />
+            <Route
+              path={ROUTES.REGISTER}
+              element={
+                !isLoggedIn ? (
+                  <Register setIsLoggedIn={setIsLoggedIn} />
+                ) : (
+                  <Navigate to={ROUTES.HOME} />
+                )
+              }
+            />
+            <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+            <Route path="/skeleton" element={<Skeleton />} />
 
-          <Route
-            path={ROUTES.RESET_PASSWORD}
-            element={<ResetPassword setIsLoggedIn={setIsLoggedIn} />}
-          />
+            <Route
+              path={ROUTES.RESET_PASSWORD}
+              element={<ResetPassword setIsLoggedIn={setIsLoggedIn} />}
+            />
 
-          <Route element={<ProtectedRoute auth={isLoggedIn} setAuth={setIsLoggedIn} />}>
-            <Route path={ROUTES.HOME} element={<Admin />} />
-            <Route path={ROUTES.SETTINGS} element={<Settings />} />
-            <Route path={ROUTES.UPDATE_MOVIE} element={<UpdateMovie />} />
-            <Route path={ROUTES.MOVIES} element={<Movies />} />
-            <Route path={ROUTES.UPDATE_TV} element={<UpdateTvShow />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </Router>
+            <Route element={<ProtectedRoute auth={isLoggedIn} setAuth={setIsLoggedIn} />}>
+              <Route path={ROUTES.HOME} element={<Admin />} />
+              <Route path={ROUTES.SETTINGS} element={<Settings />} />
+              <Route path={ROUTES.UPDATE_MOVIE} element={<UpdateMovie />} />
+              <Route path={ROUTES.MOVIES} element={<Movies />} />
+              <Route path={ROUTES.UPDATE_TV} element={<UpdateTvShow />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </Router>
+    </SWRConfig>
   )
 }
 
