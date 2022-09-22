@@ -14,6 +14,7 @@ import {
 import Torrent from '../../components/Torrents'
 import { getMovieById, getMovieTorrents } from '../../services/movies'
 import useSWR from 'swr'
+import Skeleton from '../Public/Skeleton'
 
 const UpdateMovie = () => {
   const { id } = useParams()
@@ -175,8 +176,9 @@ const UpdateMovie = () => {
             <div>
               <label>Available Torrents</label>
               <div className="mt-3.5 grid gap-4">
-                {torrents &&
-                  torrents.map((torrent) => <Torrent key={torrent.id} torrent={torrent} />)}
+                {torrents
+                  ? torrents.map((torrent) => <Torrent key={torrent.id} torrent={torrent} />)
+                  : [...Array(3).keys()].map((item) => <Skeleton key={item} />)}
               </div>
             </div>
             <button className="mt-7 flex w-full items-center justify-center gap-x-2 rounded-lg py-3 px-6 text-sm font-medium text-gray-800 ring-1 ring-gray-200 focus:outline-none focus:outline-1 focus:outline-primary-200 focus:ring-primary-300 2xl:mt-[52px]">
