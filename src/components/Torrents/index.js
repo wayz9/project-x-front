@@ -16,12 +16,8 @@ const Torrent = ({ torrent }) => {
 
   return (
     <>
-      <UpdateTorrent
-        torrent={torrent}
-        updateTorrent={updateTorrent}
-        setUpdateTorrent={setUpdateTorrent}
-      />
-      <DeleteTorrent deleteTorrent={deleteTorrent} setDeleteTorrent={setDeleteTorrent} />
+      <UpdateTorrent torrent={torrent} isOpen={updateTorrent} setIsOpen={setUpdateTorrent} />
+      <DeleteTorrent torrent={torrent} isOpen={deleteTorrent} setIsOpen={setDeleteTorrent} />
 
       <div className="relative overflow-hidden rounded-lg">
         <div className="flex items-center justify-between gap-x-8 rounded-lg border border-gray-200 py-3 pr-4 pl-8">

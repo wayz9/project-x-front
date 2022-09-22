@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { getTorrentQualities } from '../../services/torrents'
 
-const UpdateTorrent = ({ updateTorrent, setUpdateTorrent, torrent }) => {
+const UpdateTorrent = ({ isOpen, setIsOpen, torrent }) => {
   const [hash, setHash] = useState('')
   const [magnetURL, setMagnetURL] = useState('')
   const [size, setSize] = useState('')
@@ -30,12 +30,8 @@ const UpdateTorrent = ({ updateTorrent, setUpdateTorrent, torrent }) => {
 
   const cancelButtonRef = useRef(null)
   return (
-    <Transition.Root appear show={updateTorrent} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-50"
-        initialFocus={cancelButtonRef}
-        onClose={setUpdateTorrent}>
+    <Transition.Root appear show={isOpen} as={Fragment}>
+      <Dialog as="div" className="relative z-50" initialFocus={cancelButtonRef} onClose={setIsOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -147,11 +143,11 @@ const UpdateTorrent = ({ updateTorrent, setUpdateTorrent, torrent }) => {
                   <div className="mt-12 flex items-center justify-between sm:mt-10">
                     <button
                       ref={cancelButtonRef}
-                      onClick={() => setUpdateTorrent(false)}
+                      onClick={() => setIsOpen(false)}
                       className="btn-secondary">
                       Cancel
                     </button>
-                    <button onClick={() => setUpdateTorrent(false)} className="btn-primary">
+                    <button onClick={() => setIsOpen(false)} className="btn-primary">
                       Save Changes
                     </button>
                   </div>

@@ -1,16 +1,23 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ArrowNarrowRight, Dice } from 'tabler-icons-react'
+import { deleteTorrent } from '../../services/torrents'
+import { useParams } from 'react-router-dom'
 
-const DeleteTorrent = ({ deleteTorrent, setDeleteTorrent }) => {
+const DeleteTorrent = ({ isOpen, setIsOpen, torrent }) => {
+  const { id: movieId } = useParams()
   const cancelButtonRef = useRef(null)
+
+  const handleDeleteTorrent = async () => {
+    const response = await deleteTorrent(movieId, torrent.id)
+    if (response && response.status === 204) {
+      setIsOpen(false)
+    }
+  }
+
   return (
-    <Transition.Root appear show={deleteTorrent} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-50"
-        initialFocus={cancelButtonRef}
-        onClose={setDeleteTorrent}>
+    <Transition.Root appear show={isOpen} as={Fragment}>
+      <Dialog as="div" className="relative z-50" initialFocus={cancelButtonRef} onClose={setIsOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -50,27 +57,31 @@ const DeleteTorrent = ({ deleteTorrent, setDeleteTorrent }) => {
                     </div>
                     <div>
                       <div className="flex gap-x-1.5 font-medium text-gray-800">
-                        <span>2,73GB</span>
+                        <span>{torrent.converted_size}</span>
                         <span>&middot;</span>
-                        <span>1080P</span>
-                        <span>&middot;</span>
-                        <span>23.976 FPS</span>
+                        <span>{torrent.quality}</span>
+                        {torrent.fps ? (
+                          <>
+                            <span>&middot;</span>
+                            <span>{torrent.fps} FPS</span>
+                          </>
+                        ) : null}
                       </div>
                       <p className="overflow-anywhere mt-1 text-sm text-gray-400 line-clamp-1">
-                        9289f24a3b5fd98f6542af72a6f8cf5f5dc7b8aa
+                        {torrent.hash ? torrent.hash : 'No hash found'}
                       </p>
                     </div>
                   </div>
                   <div className="mt-12 flex items-center justify-between sm:mt-10">
                     <button
                       ref={cancelButtonRef}
-                      onClick={() => setDeleteTorrent(false)}
+                      onClick={() => setIsOpen(false)}
                       className="btn-secondary">
                       <span className="sm:hidden">Cancel</span>
                       <span className="hidden sm:inline">No I have changed my mind!</span>
                     </button>
                     <button
-                      onClick={() => setDeleteTorrent(false)}
+                      onClick={() => handleDeleteTorrent()}
                       className="btn-primary flex items-center gap-1.5 sm:pr-3">
                       <span className="sm:hidden">Delete It</span>
                       <span className="hidden sm:inline">Yes, Delete It</span>
