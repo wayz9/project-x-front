@@ -1,62 +1,74 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AtEmail } from 'react-swm-icon-pack'
-import Button from '../../components/Essentials/Button'
 import Logo from '../../components/Logo'
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState('')
+  const handleForgotPassword = (e) => {
+    e.preventDefault()
+    // Magic goes here.
+  }
+
   return (
-    <div className="bg-moovies min-h-screen justify-items-center pt-20 antialiased sm:grid sm:place-items-center sm:pt-0">
-      <div className="w-full sm:py-12">
-        <Link to="/">
-          <Logo className="mx-auto h-8" />
-        </Link>
-        <div className="mx-auto mt-10 w-full border-y border-neutral-800 bg-neutral-800/40 px-6 pt-6 pb-7 shadow-lg sm:mt-9 sm:max-w-lg sm:rounded-xl sm:border sm:px-9 sm:pt-8 sm:pb-9">
-          <h1 className="text-xl font-extrabold text-neutral-200 sm:text-2xl">Forgot Password?</h1>
-          <p className="mt-2.5 text-base font-semibold text-neutral-400 sm:mt-3">
-            Enter your associated email address.
-          </p>
-          <form className="mt-8 block">
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-2 block text-xs font-extrabold uppercase tracking-wider text-neutral-300">
-                Email
-              </label>
-              <div className="relative mt-2">
-                <input
-                  type="email"
-                  name="email"
-                  autoComplete="off"
-                  id="email"
-                  placeholder="Email address"
-                  className="block w-full rounded-md bg-neutral-800/[0.55] py-3 pl-[50px] pr-6 text-base font-semibold 
-                  text-neutral-200 placeholder:text-neutral-400 focus:bg-neutral-800 focus:outline-none"
-                />
-                <div className="absolute inset-y-0 left-3.5 flex items-center justify-center text-neutral-400">
-                  <AtEmail color="currentColor" set="broken" />
-                </div>
-              </div>
-            </div>
-            <Button name="Send Password Reset Email" />
-          </form>
-        </div>
-        <div className="mt-4 text-center text-base font-semibold text-neutral-400">
-          Not receiveing emails from us?&nbsp;
-          <Link
-            to="/support/emails#spam"
-            className="font-bold text-primary-400 transition-colors hover:text-primary-500">
-            Learn More.
-          </Link>
-        </div>
-        <div className="mt-2 text-center">
-          <Link
-            to="/login"
-            className="text-center text-sm font-bold text-primary-400 transition-colors hover:text-primary-500">
-            Back to sign in.
-          </Link>
-        </div>
+    <main className="relative flex min-h-screen flex-1 flex-col overflow-hidden py-8 px-4 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 text-slate-900/[0.07] [mask-image:linear-gradient(to_bottom_left,white,transparent,transparent)]">
+        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="grid-bg"
+              width="32"
+              height="32"
+              patternUnits="userSpaceOnUse"
+              x="100%"
+              patternTransform="translate(0 -1)">
+              <path d="M0 32V.5H32" fill="none" stroke="currentColor"></path>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid-bg)"></rect>
+        </svg>
       </div>
-    </div>
+      <div className="relative flex flex-1 flex-col items-center justify-center pt-12 pb-20">
+        <Link to="/" className="mx-auto mb-[72px] w-auto">
+          <Logo />
+        </Link>
+        <h1 className="sr-only">Request password reset email.</h1>
+        <form
+          onSubmit={handleForgotPassword}
+          className="relative w-full max-w-[29rem] rounded-2xl border border-gray-200 bg-white">
+          <div className="mt-9 px-9">
+            <h2 className="text-lg font-medium text-gray-800">Forgot Password</h2>
+            <p className="mt-2 text-md leading-5 text-gray-500">
+              Enter an email to receive a password reset link.
+            </p>
+          </div>
+          <div className="mt-10 px-9">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              className="mt-2.5 sm:mt-3"
+            />
+          </div>
+          <div className="mt-14 mb-10 px-9">
+            <button type="submit" className="btn-primary block w-full">
+              Send an email
+            </button>
+          </div>
+          <div className="absolute inset-x-0 -bottom-6 -mx-[120px] h-px bg-gradient-to-r from-black/0 via-black/[0.15] to-black/0"></div>
+          <div className="absolute inset-x-0 -top-6 -mx-[120px] h-px bg-gradient-to-r from-black/0 via-black/[0.15] to-black/0"></div>
+          <div className="absolute inset-y-0 -right-6 -my-24 w-px bg-gradient-to-b from-black/0 via-black/[0.15] to-black/0"></div>
+          <div className="absolute inset-y-0 -left-6 -my-24 w-px bg-gradient-to-b from-black/0 via-black/[0.15] to-black/0"></div>
+          <div className="absolute inset-x-0 bottom-0 -mb-px flex h-8 w-full items-end overflow-hidden">
+            <div className="-mb-px flex h-0.5 w-full">
+              <div className="w-full flex-none bg-gradient-to-r from-violet-200/0 via-violet-500 to-violet-200/0 blur-[1px]"></div>
+              <div className="w-full flex-none bg-gradient-to-r from-primary-200/0 via-primary-400 to-primary-200/0 blur-sm"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
   )
 }
 

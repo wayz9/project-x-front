@@ -4,8 +4,6 @@ import { lazy, Suspense } from 'react'
 import ProtectedRoute from './helpers/protected-route'
 import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
-import UpdateTvShow from './pages/TvShows/UpdateTvShow'
-import Skeleton from './pages/Public/Skeleton'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -15,6 +13,7 @@ const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword'))
 const Settings = lazy(() => import('./pages/Settings'))
 const UpdateMovie = lazy(() => import('./pages/Movies/UpdateMovie'))
 const Movies = lazy(() => import('./pages/Movies'))
+const UpdateTvShow = lazy(() => import('./pages/TvShows/UpdateTvShow'))
 
 function App() {
   const { isLoggedIn, setIsLoggedIn, isLoadingAuth } = useLogin()
@@ -43,7 +42,6 @@ function App() {
             }
           />
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
-          <Route path="/skeleton" element={<Skeleton />} />
 
           <Route
             path={ROUTES.RESET_PASSWORD}

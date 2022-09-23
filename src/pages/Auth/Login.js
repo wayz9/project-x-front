@@ -47,7 +47,7 @@ const Login = ({ setIsLoggedIn }) => {
         <h1 className="sr-only">Log in to your account</h1>
         <form
           onSubmit={handleLogin}
-          className="relative w-full max-w-[464px] rounded-2xl border border-gray-200">
+          className="relative w-full max-w-[29rem] rounded-2xl border border-gray-200 bg-white">
           <div className="mt-9 px-9">
             <h2 className="text-lg font-medium text-gray-800">Sign In</h2>
             <p className="mt-2 text-md leading-5 text-gray-500">Ready to make some changes!</p>

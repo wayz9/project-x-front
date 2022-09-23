@@ -27,18 +27,27 @@ const UpdateMovie = () => {
       <section className="bg-white bg-opacity-50 bg-grid bg-repeat py-5 px-6 md:px-9">
         <div className="flex items-center gap-4">
           <div>
-            <img
-              className="h-[100px] rounded-md border border-gray-200 drop-shadow-lg 2xl:h-28"
-              src={movie && movie.poster && movie.poster.path}
-              alt={movie && movie.title}
-            />
+            {movie && movie.poster ? (
+              <img
+                className="aspect-[2/3] h-[100px] rounded-md border border-gray-200 drop-shadow-lg 2xl:h-28"
+                src={movie.poster && movie.poster.path}
+                alt={movie.title}
+                loading="lazy"
+              />
+            ) : (
+              <div className="aspect-[2/3] h-[100px] animate-pulse rounded-md border border-gray-200 bg-gray-200 2xl:h-28"></div>
+            )}
           </div>
           <div className="grow items-center justify-between md:flex">
             <div>
               <div className="text-sm leading-5 text-gray-500 md:text-md">Updating</div>
-              <h3 className="mt-2.5 w-4/5 font-medium uppercase text-gray-900 md:w-full 2xl:text-lg 2xl:leading-6">
-                {movie && movie.title}
-              </h3>
+              {movie && movie.title ? (
+                <h3 className="mt-2.5 w-4/5 font-medium uppercase text-gray-900 md:w-full 2xl:text-lg 2xl:leading-6">
+                  {movie.title}
+                </h3>
+              ) : (
+                <div className="mt-2.5 h-7 w-56 animate-pulse rounded-md bg-gray-200/60"></div>
+              )}
               <p className="mt-2 hidden text-md leading-5 text-gray-400 md:block xl:hidden">
                 Updated at: <span className="font-medium text-gray-500">26. May 2022</span>
               </p>
