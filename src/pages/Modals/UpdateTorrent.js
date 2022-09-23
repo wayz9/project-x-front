@@ -66,7 +66,7 @@ const UpdateTorrent = ({ isOpen, setIsOpen, torrent }) => {
                   <div className="mt-7 flex flex-col gap-y-6 md:mt-9 md:gap-y-7">
                     <div>
                       <label htmlFor="hash" className="block text-left">
-                        Hash <span className="text-gray-400">optional</span>
+                        Hash <span className="text-gray-400">(optional)</span>
                       </label>
                       <input
                         type="text"
@@ -90,51 +90,55 @@ const UpdateTorrent = ({ isOpen, setIsOpen, torrent }) => {
                         className="mt-2.5 resize-none break-all sm:mt-3"
                       />
                     </div>
-                    <div>
-                      <label htmlFor="quality" className="block text-left">
-                        Quality
-                      </label>
-                      <select defaultValue="1080p" id="quality" className="mt-2.5 sm:mt-3">
-                        <option value="1080p">1080P - Full HD</option>
-                        <option value="2160p">
-                          2160P - Ultra HD
-                        </option>
-                        <option value="3d">3D - 3D</option>
-                        <option value="720p">720P - Only HD</option>
-                      </select>
-                    </div>
-                    <div className="grid grid-cols-2 gap-x-5">
+                    <div className="grid gap-y-6 gap-x-5 md:grid-cols-2 md:gap-y-7">
                       <div>
-                        <label htmlFor="size" className="block text-left">
-                          Size
+                        <label htmlFor="quality" className="block text-left">
+                          Quality
                         </label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            id="runtime"
-                            className="mt-2.5 appearance-none md:mt-3"
-                            value={size}
-                            onChange={(e) => setSize(e.target.value)}
-                          />
-                          <div className="absolute inset-y-0 right-3.5 flex items-center justify-center text-gray-400">
-                            <span className="text-xs font-medium uppercase text-gray-600">mb</span>
+                        <select defaultValue="1080p" id="quality" className="mt-2.5 sm:mt-3">
+                          <option value="1080p">1080P - Full HD</option>
+                          <option value="2160p">2160P - Ultra HD</option>
+                          <option value="3d">3D - 3D</option>
+                          <option value="720p">720P - Only HD</option>
+                        </select>
+                      </div>
+                      <div className="grid grid-cols-2 gap-x-5">
+                        <div>
+                          <label htmlFor="size" className="block text-left">
+                            Size
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              id="runtime"
+                              className="mt-2.5 appearance-none md:mt-3"
+                              value={size}
+                              onChange={(e) => setSize(e.target.value)}
+                            />
+                            <div className="absolute inset-y-0 right-3.5 flex items-center justify-center text-gray-400">
+                              <span className="text-xs font-medium uppercase text-gray-600">
+                                mb
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div>
-                        <label htmlFor="fps" className="block text-left">
-                          Fps
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            id="fps"
-                            className="mt-2.5 appearance-none md:mt-3"
-                            value={fps}
-                            onChange={(e) => setFps(e.target.value)}
-                          />
-                          <div className="absolute inset-y-0 right-3.5 flex items-center justify-center text-gray-400">
-                            <span className="text-xs font-medium uppercase text-gray-600">Fps</span>
+                        <div>
+                          <label htmlFor="fps" className="block text-left">
+                            Fps
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              id="fps"
+                              className="mt-2.5 appearance-none md:mt-3"
+                              value={fps}
+                              onChange={(e) => setFps(e.target.value)}
+                            />
+                            <div className="absolute inset-y-0 right-3.5 flex items-center justify-center text-gray-400">
+                              <span className="text-xs font-medium uppercase text-gray-600">
+                                Fps
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
