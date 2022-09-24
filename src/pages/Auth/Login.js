@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../../components/Logo'
 import { login } from '../../services/auth'
+import * as ROUTES from '../../constants/routes'
+import { ArrowNarrowRight } from 'tabler-icons-react'
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('')
@@ -23,7 +25,7 @@ const Login = ({ setIsLoggedIn }) => {
   }
 
   return (
-    <main className="relative flex min-h-screen flex-1 flex-col overflow-hidden py-8 px-4 sm:px-6 lg:px-8">
+    <main className="relative flex min-h-screen flex-1 flex-col overflow-hidden py-8 sm:px-4 md:px-6 lg:px-8">
       <div className="absolute inset-0 text-slate-900/[0.07] [mask-image:linear-gradient(to_bottom_left,white,transparent,transparent)]">
         <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -40,14 +42,14 @@ const Login = ({ setIsLoggedIn }) => {
           <rect width="100%" height="100%" fill="url(#grid-bg)"></rect>
         </svg>
       </div>
-      <div className="relative flex flex-1 flex-col items-center justify-center pt-12 pb-20">
+      <div className="relative flex flex-1 flex-col items-center justify-center pb-20 sm:pt-12">
         <Link to="/" className="mx-auto mb-[72px] w-auto">
           <Logo />
         </Link>
         <h1 className="sr-only">Log in to your account</h1>
         <form
           onSubmit={handleLogin}
-          className="relative w-full max-w-[29rem] rounded-2xl border border-gray-200 bg-white">
+          className="relative w-full border border-gray-200 bg-white sm:max-w-[29rem] sm:rounded-2xl">
           <div className="mt-9 px-9">
             <h2 className="text-lg font-medium text-gray-800">Sign In</h2>
             <p className="mt-2 text-md leading-5 text-gray-500">Ready to make some changes!</p>
@@ -73,7 +75,7 @@ const Login = ({ setIsLoggedIn }) => {
             />
             <div className="mt-2 text-right">
               <Link
-                to="/"
+                to={ROUTES.FORGOT_PASSWORD}
                 className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900">
                 Forgot your password?
               </Link>
@@ -96,6 +98,17 @@ const Login = ({ setIsLoggedIn }) => {
           </div>
         </form>
       </div>
+      <footer className="relative shrink-0">
+        <div className="flex items-center justify-center gap-x-4">
+          <p className="text-sm font-medium text-gray-600">Don't have an account?</p>
+          <Link className="btn-secondary flex items-center gap-x-1" to={ROUTES.REGISTER}>
+            <span>Register Here</span>
+            <span>
+              <ArrowNarrowRight size={20} className="text-gray-400" />
+            </span>
+          </Link>
+        </div>
+      </footer>
     </main>
   )
 }

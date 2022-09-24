@@ -13,7 +13,7 @@ export const getMovieById = async (id) => {
     return response.data.data
   } catch (err) {
     if (err.response.status === 404) {
-      window.location.href = '/'
+      window.location.href = '/not-found'
     }
     return Promise.reject(err)
   }

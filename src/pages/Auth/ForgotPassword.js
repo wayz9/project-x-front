@@ -10,7 +10,7 @@ const ForgotPassword = () => {
   }
 
   return (
-    <main className="relative flex min-h-screen flex-1 flex-col overflow-hidden py-8 px-4 sm:px-6 lg:px-8">
+    <main className="relative flex min-h-screen flex-1 flex-col overflow-hidden py-8 sm:px-4 md:px-6 lg:px-8">
       <div className="absolute inset-0 text-slate-900/[0.07] [mask-image:linear-gradient(to_bottom_left,white,transparent,transparent)]">
         <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -27,14 +27,14 @@ const ForgotPassword = () => {
           <rect width="100%" height="100%" fill="url(#grid-bg)"></rect>
         </svg>
       </div>
-      <div className="relative flex flex-1 flex-col items-center justify-center pt-12 pb-20">
+      <div className="relative flex flex-1 flex-col items-center justify-center pb-20 sm:pt-12">
         <Link to="/" className="mx-auto mb-[72px] w-auto">
           <Logo />
         </Link>
         <h1 className="sr-only">Request password reset email.</h1>
         <form
           onSubmit={handleForgotPassword}
-          className="relative w-full max-w-[29rem] rounded-2xl border border-gray-200 bg-white">
+          className="relative w-full border border-gray-200 bg-white sm:max-w-[29rem] sm:rounded-2xl">
           <div className="mt-9 px-9">
             <h2 className="text-lg font-medium text-gray-800">Forgot Password</h2>
             <p className="mt-2 text-md leading-5 text-gray-500">

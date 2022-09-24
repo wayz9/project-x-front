@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Logo from '../../components/Logo'
 
 const ResetPassword = () => {
+  const email = useParams('email')
+  const token = useParams('token')
   const [newPassword, setNewPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
   return (
-    <main className="relative flex min-h-screen flex-1 flex-col overflow-hidden py-8 px-4 sm:px-6 lg:px-8">
+    <main className="relative flex min-h-screen flex-1 flex-col overflow-hidden py-8 sm:px-4 md:px-6 lg:px-8">
       <div className="absolute inset-0 text-slate-900/[0.07] [mask-image:linear-gradient(to_bottom_left,white,transparent,transparent)]">
         <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -31,7 +33,7 @@ const ResetPassword = () => {
         <h1 className="sr-only">Log in to your account</h1>
         <form
           onSubmit=""
-          className="relative w-full max-w-[29rem] rounded-2xl border border-gray-200 bg-white">
+          className="relative w-full border border-gray-200 bg-white sm:max-w-[29rem] sm:rounded-2xl">
           <div className="mt-9 px-9">
             <h2 className="text-lg font-medium text-gray-800">Reset Password</h2>
             <p className="mt-2 text-md leading-5 text-gray-500">

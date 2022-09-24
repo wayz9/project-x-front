@@ -13,6 +13,7 @@ const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword'))
 const Settings = lazy(() => import('./pages/Settings'))
 const UpdateMovie = lazy(() => import('./pages/Movies/UpdateMovie'))
 const Movies = lazy(() => import('./pages/Movies'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 const UpdateTvShow = lazy(() => import('./pages/TvShows/UpdateTvShow'))
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               !isLoggedIn ? <Login setIsLoggedIn={setIsLoggedIn} /> : <Navigate to={ROUTES.HOME} />
             }
           />
+
           <Route
             path={ROUTES.REGISTER}
             element={
@@ -41,7 +43,11 @@ function App() {
               )
             }
           />
-          <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+
+          <Route
+            path={ROUTES.FORGOT_PASSWORD}
+            element={!isLoggedIn ? <ForgotPassword /> : <Navigate to={ROUTES.HOME} />}
+          />
 
           <Route
             path={ROUTES.RESET_PASSWORD}
@@ -55,6 +61,8 @@ function App() {
             <Route path={ROUTES.MOVIES} element={<Movies />} />
             <Route path={ROUTES.UPDATE_TV} element={<UpdateTvShow />} />
           </Route>
+
+          <Route path="*" element={<NotFound />} status={404} />
         </Routes>
       </Suspense>
     </Router>
