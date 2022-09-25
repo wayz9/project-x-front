@@ -9,7 +9,7 @@ import NotFound from './pages/Global/NotFound'
 /* import Forbidden from './pages/Global/Forbidden' */
 import TwoFactorStep from './pages/Auth/TwoFactorStep'
 
-const Admin = lazy(() => import('./pages/Admin'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
 const Login = lazy(() => import('./pages/Auth/Login'))
 const ResetPassword = lazy(() => import('./pages/Auth/ResetPassword'))
 const Register = lazy(() => import('./pages/Auth/Register'))
@@ -60,7 +60,7 @@ function App() {
           />
 
           <Route element={<ProtectedRoute auth={isLoggedIn} setAuth={setIsLoggedIn} />}>
-            <Route path={ROUTES.HOME} element={<Admin />} />
+            <Route path={ROUTES.HOME} element={<Dashboard />} />
             <Route path={ROUTES.SETTINGS} element={<Settings />} />
             <Route path={ROUTES.UPDATE_MOVIE} element={<UpdateMovie />} />
             <Route path={ROUTES.MOVIES} element={<Movies />} />

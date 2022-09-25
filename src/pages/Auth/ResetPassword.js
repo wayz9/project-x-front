@@ -3,7 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import Logo from '../../components/Logo'
 
 const ResetPassword = () => {
+  // eslint-disable-next-line
   const email = useParams('email')
+  // eslint-disable-next-line
   const token = useParams('token')
   const [newPassword, setNewPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
