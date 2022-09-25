@@ -5,6 +5,8 @@ import ProtectedRoute from './helpers/protected-route'
 import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
 import LoadingPage from './pages/Global/LoadingPage'
+import NotFound from './pages/Global/NotFound'
+import Forbidden from './pages/Global/Forbidden'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -14,7 +16,6 @@ const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword'))
 const Settings = lazy(() => import('./pages/Settings'))
 const UpdateMovie = lazy(() => import('./pages/Movies/UpdateMovie'))
 const Movies = lazy(() => import('./pages/Movies'))
-const NotFound = lazy(() => import('./pages/NotFound'))
 const UpdateTvShow = lazy(() => import('./pages/TvShows/UpdateTvShow'))
 
 function App() {
