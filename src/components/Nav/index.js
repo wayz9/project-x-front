@@ -1,129 +1,220 @@
-import { ReactComponent as MoviesLogo } from '../../assets/logo/moovies.svg'
-import { ChevronSmallDown } from 'react-swm-icon-pack'
+import { Link } from 'react-router-dom'
 import {
-  Home1,
-  Screen,
-  Cam,
-  ScreenShare,
-  Crown1,
-  UsersMore,
-  Circle,
-  ArrowSmallRight,
-  Inbox,
-  ChartVertical,
-  Grid2Horizontal,
-  Cardiology,
-  Settings
-} from 'react-swm-icon-pack'
-import NavLink from './NavLink'
-import Label from './Label'
+  Book2,
+  Braces,
+  BrandGithub,
+  CircleSquare,
+  Crown,
+  Focus2,
+  Ghost,
+  HeartRateMonitor,
+  LayersUnion,
+  LetterM,
+  Settings,
+  Stack2,
+  Users
+} from 'tabler-icons-react'
+import clsx from 'clsx'
+import * as ROUTES from '../../constants/routes'
+import Logo from '../../components/Logo'
 
-const Nav = () => {
+const Nav = ({ headerOpen }) => {
   return (
-    <div className="hidden h-screen w-full max-w-[300px] overflow-y-scroll bg-neutral-800/30 scrollbar-thin 2xl:block">
-      <div className="flex items-center justify-between p-6">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-11 w-11 items-center justify-center rounded-md bg-neutral-800">
-            <MoviesLogo className="-ml-0.5" />
-          </div>
-          <div className="flex flex-col gap-y-1">
-            <p className="text-base font-bold leading-5 text-neutral-100">moovies. LLC</p>
-            <p className="text-xs font-medium text-neutral-400">Remaining free forever!</p>
-          </div>
+    <nav
+      className={clsx(
+        'fixed top-0 left-0 z-30 h-screen w-[300px] shrink-0 overflow-y-auto bg-white bg-dotted-pattern-vertical bg-right bg-repeat-y duration-150 md:w-80 lg:sticky lg:transform-none lg:overflow-hidden lg:opacity-100 lg:transition-none lg:hover:overflow-y-auto',
+        {
+          '-translate-x-full opacity-0 ease-out': !headerOpen,
+          'translate-x-0 opacity-100 ease-in': headerOpen
+        }
+      )}>
+      <div className="flex bg-dotted-pattern bg-bottom bg-repeat-x py-[18px] px-8 md:py-7">
+        <Link to="/">
+          <Logo />
+        </Link>
+      </div>
+      <div className="flex flex-col gap-y-7 py-8">
+        <div>
+          <ul>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <Stack2 strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Dashboard</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <HeartRateMonitor strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Monitoring</span>
+              </Link>
+            </li>
+          </ul>
         </div>
-        <div className="text-neutral-200">
-          <ChevronSmallDown color="currentColor" set="curved" strokeWidth="1.8" />
+        <div>
+          <span className="pl-8 text-xs uppercase text-gray-400">Main</span>
+          <ul className="mt-3">
+            <li>
+              <Link
+                to={ROUTES.MOVIES}
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <CircleSquare strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Movies</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <CircleSquare strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">TV Shows</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <Focus2 strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Genres</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <Users strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Members</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <span className="pl-8 text-xs uppercase text-gray-400">Updates</span>
+          <ul className="mt-3">
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <LayersUnion strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Doctor Strange 2</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <LayersUnion strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Better Call Saul</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <LayersUnion strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Thor: Love and Thunder</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <span className="pl-8 text-xs uppercase text-gray-400">Realted</span>
+          <ul className="mt-3">
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <Braces strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">API</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <Crown strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Roles</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <BrandGithub strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Github</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <LetterM strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Maintenance</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <Book2 strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Docs</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <Ghost strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">ToS</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={ROUTES.SETTINGS}
+                className="flex items-center gap-x-2.5 py-2 px-6 transition-all hover:bg-gray-50 focus:bg-gray-100 focus:outline-none">
+                <span>
+                  <Settings strokeWidth={1.5} className="text-gray-600" />
+                </span>
+                <span className="text-md text-gray-900">Settings</span>
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
-      <div className="mt-8 flex flex-col gap-y-11 pb-8">
-        <div>
-          <ul className="flex flex-col gap-y-5">
-            <NavLink path="/1" linkText="Dashboard" Icon={Home1} />
-            <NavLink path="/2" linkText="Monitoring" Icon={Screen}>
-              <div className="rounded bg-cyan-100/5 px-1.5 text-xs font-extrabold uppercase leading-[22px] tracking-wider text-cyan-400">
-                beta
-              </div>
-            </NavLink>
-          </ul>
-        </div>
-        <div>
-          <Label name="Menu" />
-          <ul className="mt-6 flex flex-col gap-y-5">
-            <NavLink path="/movies" Icon={Cam} linkText="Movies" />
-            <NavLink path="/tv-shows" Icon={ScreenShare} linkText="TV Shows" />
-            <NavLink path="/genres" Icon={Crown1} linkText="Genres" />
-            <NavLink path="/members" Icon={UsersMore} linkText="Members" />
-          </ul>
-        </div>
-        <div>
-          <Label name="Recent Updates" />
-          <ul className="mt-6 flex flex-col gap-y-5">
-            <li>
-              <a href="/" className="block pl-7 pr-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="text-neutral-400">
-                      <Circle color="currentColor" set="curved" strokeWidth="1.8" />
-                    </div>
-                    <p className="text-[15px] font-semibold leading-6 text-neutral-200">
-                      Memory <span className="text-neutral-400">(2022)</span>
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="/" className="block pl-7 pr-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="text-neutral-400">
-                      <Circle color="currentColor" set="curved" strokeWidth="1.8" />
-                    </div>
-                    <p className="text-[15px] font-semibold leading-6 text-neutral-200">
-                      Morbius <span className="text-neutral-400">(2022)</span>
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="/" className="block pl-7 pr-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="text-neutral-400">
-                      <Circle color="currentColor" set="curved" strokeWidth="1.8" />
-                    </div>
-                    <p className="text-[15px] font-semibold leading-6 text-neutral-200">
-                      Better Call Saul <span className="text-neutral-400">(S06)</span>
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a
-                href="/"
-                className="ml-16 flex items-center text-[15px] font-bold leading-6 text-neutral-400">
-                <div>view more</div>
-                <div className="text-primary-400">
-                  <ArrowSmallRight color="currentColor" set="curved" strokeWidth="1.8" />
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <Label name="Related" />
-          <ul className="mt-6 flex flex-col gap-y-5">
-            <NavLink path="/reports" Icon={Inbox} linkText="Reports" />
-            <NavLink path="/statistics" Icon={ChartVertical} linkText="Statistics" />
-            <NavLink path="/lists" Icon={Grid2Horizontal} linkText="Lists" />
-            <NavLink path="/api-status" Icon={Cardiology} linkText="API Status" />
-            <NavLink path="/settings" Icon={Settings} linkText="Acc. Settings" />
-          </ul>
-        </div>
-      </div>
-    </div>
+    </nav>
   )
 }
 

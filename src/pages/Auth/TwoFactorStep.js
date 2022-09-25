@@ -1,12 +1,7 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import Logo from '../../components/Logo'
-
-const ForgotPassword = () => {
-  const [email, setEmail] = useState('')
-  const handleForgotPassword = (e) => {
+const TwoFactorStep = () => {
+  const handle2Fa = async (e) => {
     e.preventDefault()
-    // Magic goes here.
+    // Rest of the code
   }
 
   return (
@@ -28,32 +23,68 @@ const ForgotPassword = () => {
         </svg>
       </div>
       <div className="relative flex flex-1 flex-col items-center justify-center pb-20 sm:pt-12">
-        <Link to="/" className="mx-auto mb-[72px] w-auto">
-          <Logo />
-        </Link>
-        <h1 className="sr-only">Request password reset email.</h1>
+        <h1 className="sr-only">Two factor step challenge</h1>
         <form
-          onSubmit={handleForgotPassword}
+          onSubmit={handle2Fa}
           className="relative w-full border border-gray-200 bg-white sm:max-w-[29rem] sm:rounded-2xl">
-          <div className="mt-9 px-9">
-            <h2 className="text-lg font-medium text-gray-800">Forgot Password</h2>
+          <div className="mt-9 px-9 text-center">
+            <h2 className="text-lg font-medium text-gray-800">2FA Authorization Step</h2>
             <p className="mt-2 text-md leading-5 text-gray-500">
-              Enter an email to receive a password reset link.
+              Enter the current code from application.
             </p>
           </div>
-          <div className="mt-10 px-9">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              id="email"
-              className="mt-2.5 sm:mt-3"
-            />
+          <div className="mt-12 px-9">
+            <div className="flex items-center justify-center gap-x-4">
+              <div className="aspect-square shrink-0">
+                <input
+                  type="text"
+                  className="h-full w-12 text-center text-lg leading-6"
+                  maxLength={1}
+                />
+              </div>
+              <div className="aspect-square shrink-0">
+                <input
+                  type="text"
+                  className="h-full w-12 text-center text-lg leading-6"
+                  maxLength={1}
+                />
+              </div>
+              <div className="aspect-square shrink-0">
+                <input
+                  type="text"
+                  className="h-full w-12 text-center text-lg leading-6"
+                  maxLength={1}
+                />
+              </div>
+              <div className="aspect-square shrink-0">
+                <input
+                  type="text"
+                  className="h-full w-12 text-center text-lg leading-6"
+                  maxLength={1}
+                />
+              </div>
+              <div className="aspect-square shrink-0">
+                <input
+                  type="text"
+                  className="h-full w-12 text-center text-lg leading-6"
+                  maxLength={1}
+                />
+              </div>
+              <div className="aspect-square shrink-0">
+                <input
+                  type="text"
+                  className="h-full w-12 text-center text-lg leading-6"
+                  maxLength={1}
+                />
+              </div>
+            </div>
           </div>
-          <div className="mt-14 mb-10 px-9">
+          <div className="mt-12 mb-9 px-9">
             <button type="submit" className="btn-primary block w-full">
-              Send an email
+              Confirm
+            </button>
+            <button className="ml-[25%] mt-4 text-center text-sm font-medium text-gray-600 hover:text-gray-800">
+              Use recovery code instead?
             </button>
           </div>
           <div className="absolute inset-x-0 -bottom-6 -mx-[120px] h-px bg-gradient-to-r from-black/0 via-black/[0.15] to-black/0"></div>
@@ -72,4 +103,4 @@ const ForgotPassword = () => {
   )
 }
 
-export default ForgotPassword
+export default TwoFactorStep

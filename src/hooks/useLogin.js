@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 const useLogin = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoadingAuth, setIsLoadingAuth] = useState(true)
 
   useEffect(() => {
     const logoutTime = localStorage.getItem('logoutTime')
@@ -10,8 +11,9 @@ const useLogin = () => {
     } else {
       setIsLoggedIn(false)
     }
+    setIsLoadingAuth(false)
   }, [setIsLoggedIn, isLoggedIn])
-  return { isLoggedIn, setIsLoggedIn }
+  return { isLoggedIn, setIsLoggedIn, isLoadingAuth }
 }
 
 export default useLogin

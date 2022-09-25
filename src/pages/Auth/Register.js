@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AtEmail, Key, User1 } from 'react-swm-icon-pack'
-import Button from '../../components/Essentials/Button'
 import Logo from '../../components/Logo'
-import { register } from '../../services/api'
+import { register } from '../../services/auth'
+import * as ROUTES from '../../constants/routes'
 
 const Register = ({ setIsLoggedIn }) => {
   const [fullName, setFullName] = useState('')
@@ -28,128 +27,93 @@ const Register = ({ setIsLoggedIn }) => {
   }
 
   return (
-    <div className="bg-moovies min-h-screen justify-items-center pt-20 antialiased sm:grid sm:place-items-center sm:pt-0">
-      <div className="w-full pb-10 sm:py-12">
-        <Link to="/">
-          <Logo className="mx-auto h-8" />
-        </Link>
-        <div className="mx-auto mt-10 w-full border-y border-neutral-800 bg-neutral-800/40 px-6 pt-6 pb-7 shadow-lg sm:mt-9 sm:max-w-lg sm:rounded-xl sm:border sm:px-9 sm:pt-8 sm:pb-9">
-          <h1 className="text-xl font-extrabold text-neutral-200 sm:text-2xl">Register</h1>
-          <p className="mt-2.5 text-base font-semibold text-neutral-400 sm:mt-3">
-            Register for better experience
-          </p>
-          <form className="mt-8 block" onSubmit={handleRegister}>
-            <div>
-              <label
-                htmlFor="name"
-                className="mb-2 block text-xs font-extrabold uppercase tracking-wider text-neutral-300">
-                Name
-              </label>
-              <div className="relative mt-2">
-                <input
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  type="text"
-                  name="name"
-                  autoComplete="off"
-                  id="name"
-                  placeholder="Full name"
-                  className="block w-full rounded-md bg-neutral-800/[0.55] py-3 pl-[50px] pr-6 text-base font-semibold 
-                  text-neutral-200 placeholder:text-neutral-400 focus:bg-neutral-800 focus:outline-none"
-                />
-                <div className="absolute inset-y-0 left-3.5 flex items-center justify-center text-neutral-400">
-                  <User1 color="currentColor" set="broken" />
-                </div>
-              </div>
-            </div>
-            <div className="mt-8">
-              <label
-                htmlFor="email"
-                className="mb-2 block text-xs font-extrabold uppercase tracking-wider text-neutral-300">
-                Email
-              </label>
-              <div className="relative mt-2">
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  autoComplete="off"
-                  id="email"
-                  placeholder="Email address"
-                  className="block w-full rounded-md bg-red-400/10 py-3 pl-[50px] pr-6 text-base font-semibold 
-                  text-neutral-200 placeholder:text-red-400 focus:outline-none"
-                />
-                <div className="absolute inset-y-0 left-3.5 flex items-center justify-center text-red-400">
-                  <AtEmail color="currentColor" set="broken" />
-                </div>
-                <div className="absolute pt-1 text-xs font-semibold text-red-400">
-                  Email has already been taken.
-                </div>
-              </div>
-            </div>
-            <div className="mt-8">
-              <label
-                htmlFor="password"
-                className="mb-2 block text-xs font-extrabold uppercase tracking-wider text-neutral-300">
-                Password
-              </label>
-              <div className="relative mt-2">
-                <input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-                  autoComplete="off"
-                  id="password"
-                  placeholder="Password"
-                  className="relative z-0 block w-full rounded-md bg-neutral-800/[0.55] py-3 pl-[50px] pr-6 text-base font-semibold 
-                  text-neutral-200 placeholder:text-neutral-400 focus:bg-neutral-800 focus:outline-none"
-                />
-                <div className="absolute inset-y-0 left-3.5 flex items-center justify-center text-neutral-400">
-                  <Key color="currentColor" set="broken" />
-                </div>
-                <div className="absolute inset-y-0 right-4 z-10 flex items-center justify-center text-sm font-bold text-neutral-400 hover:cursor-pointer">
-                  Show
-                </div>
-              </div>
-            </div>
-            <div className="mt-8">
-              <label
-                htmlFor="password_confirmation"
-                className="mb-2 block text-xs font-extrabold uppercase tracking-wider text-neutral-300">
-                Confirm Password
-              </label>
-              <div className="relative mt-2">
-                <input
-                  value={passwordConfirmation}
-                  onChange={(e) => setPasswordConfirmation(e.target.value)}
-                  type="password"
-                  autoComplete="off"
-                  id="password_confirmation"
-                  placeholder="Confirm password"
-                  className="relative z-0 block w-full rounded-md bg-neutral-800/[0.55] py-3 pl-[50px] pr-6 text-base font-semibold 
-                  text-neutral-200 placeholder:text-neutral-400 focus:bg-neutral-800 focus:outline-none"
-                />
-                <div className="absolute inset-y-0 left-3.5 flex items-center justify-center text-neutral-400">
-                  <Key color="currentColor" set="broken" />
-                </div>
-                <div className="absolute inset-y-0 right-4 z-10 flex items-center justify-center text-sm font-bold text-neutral-400 hover:cursor-pointer">
-                  Show
-                </div>
-              </div>
-            </div>
-            <Button name="Register" type="submit" />
-          </form>
-        </div>
-        <div className="mt-4 text-center text-base font-semibold text-neutral-400">
-          Already have an account.&nbsp;
-          <Link
-            to="/login"
-            className="font-bold text-primary-400 transition-colors hover:text-primary-500">
-            Login here.
-          </Link>
-        </div>
+    <main className="relative flex min-h-screen flex-1 flex-col overflow-hidden py-6 sm:px-4 md:px-6 lg:px-8">
+      <div className="absolute inset-0 text-slate-900/[0.07] [mask-image:linear-gradient(to_bottom_left,white,transparent,transparent)]">
+        <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="grid-bg"
+              width="32"
+              height="32"
+              patternUnits="userSpaceOnUse"
+              x="100%"
+              patternTransform="translate(0 -1)">
+              <path d="M0 32V.5H32" fill="none" stroke="currentColor"></path>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid-bg)"></rect>
+        </svg>
       </div>
-    </div>
+      <div className="pb-18 relative flex flex-1 flex-col items-center justify-center">
+        <Link to="/" className="mx-auto mb-[72px] w-auto" tabIndex={-1}>
+          <Logo />
+        </Link>
+        <h1 className="sr-only">Registration form</h1>
+        <form
+          onSubmit={handleRegister}
+          className="relative w-full border border-gray-200 bg-white sm:max-w-[29rem] sm:rounded-2xl">
+          <div className="mt-9 px-9">
+            <h2 className="text-lg font-medium text-gray-800">Register</h2>
+            <p className="mt-2 text-md leading-5 text-gray-500">Get access to all we offer.</p>
+          </div>
+          <div className="mt-10 px-9">
+            <label htmlFor="full_name">Full Name</label>
+            <input
+              type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              id="full_name"
+              className="mt-2.5 sm:mt-3"
+            />
+          </div>
+          <div className="mt-10 px-9">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              className="mt-2.5 sm:mt-3"
+            />
+          </div>
+          <div className="mt-10 px-9">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+              className="mt-2.5 sm:mt-3"
+            />
+          </div>
+          <div className="mt-10 px-9">
+            <label htmlFor="password_confirmation">Confirm Password</label>
+            <input
+              type="password"
+              value={passwordConfirmation}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
+              id="password_confirmation"
+              className="mt-2.5 sm:mt-3"
+            />
+          </div>
+          <div className="mt-14 mb-10 px-9">
+            <button type="submit" className="btn-primary block w-full">
+              Reigster
+            </button>
+          </div>
+          <div className="absolute inset-x-0 -bottom-6 -mx-[120px] h-px bg-gradient-to-r from-black/0 via-black/[0.15] to-black/0"></div>
+          <div className="absolute inset-x-0 -top-6 -mx-[120px] h-px bg-gradient-to-r from-black/0 via-black/[0.15] to-black/0"></div>
+          <div className="absolute inset-y-0 -right-6 -my-24 w-px bg-gradient-to-b from-black/0 via-black/[0.15] to-black/0"></div>
+          <div className="absolute inset-y-0 -left-6 -my-24 w-px bg-gradient-to-b from-black/0 via-black/[0.15] to-black/0"></div>
+          <div className="absolute inset-x-0 bottom-0 -mb-px flex h-8 w-full items-end overflow-hidden">
+            <div className="-mb-px flex h-0.5 w-full">
+              <div className="w-full flex-none bg-gradient-to-r from-violet-200/0 via-violet-500 to-violet-200/0 blur-[1px]"></div>
+              <div className="w-full flex-none bg-gradient-to-r from-primary-200/0 via-primary-400 to-primary-200/0 blur-sm"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
   )
 }
 

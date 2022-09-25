@@ -1,18 +1,57 @@
-@import url('fonts.css');
 @import url('@splidejs/splide/css');
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    color-scheme: dark;
-  }
-
   * {
     -webkit-tap-highlight-color: transparent;
     font-smooth: never !important;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply block w-full rounded-md border-none py-2 px-4 text-md leading-6 text-gray-800 ring-1 ring-gray-200 focus:outline-none focus:outline-1 focus:outline-primary-200 focus:ring-primary-300;
+  }
+
+  input[type='date']::-webkit-inner-spin-button,
+  input[type='date']::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .overflow-anywhere {
+    overflow-wrap: anywhere;
+  }
+
+  input[type='date'] {
+    background: transparent;
+  }
+
+  .btn-primary {
+    @apply rounded-lg bg-gray-900 py-2.5 px-4 text-sm font-medium text-gray-100 transition-all hover:bg-gray-800 focus:bg-gray-800 focus:outline-none;
+  }
+
+  .btn-secondary {
+    @apply rounded-lg py-2.5 px-4 text-sm font-medium text-gray-600 ring-1 ring-inset ring-gray-200 transition-all hover:bg-white focus:bg-gray-50 focus:outline-none;
+  }
+
+  label {
+    @apply text-sm font-normal leading-5 text-gray-600 md:text-md;
   }
 
   @supports (font-variation-settings: normal) {
