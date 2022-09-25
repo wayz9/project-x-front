@@ -6,8 +6,7 @@ import {
   Lock,
   ShieldCheck,
   Target,
-  TwoFA,
-  UserExclamation
+  TwoFA
 } from 'tabler-icons-react'
 
 import AvatarChangeSvg from '../assets/avatar-change.svg'

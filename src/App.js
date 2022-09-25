@@ -6,7 +6,8 @@ import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
 import LoadingPage from './pages/Global/LoadingPage'
 import NotFound from './pages/Global/NotFound'
-import Forbidden from './pages/Global/Forbidden'
+/* import Forbidden from './pages/Global/Forbidden' */
+import TwoFactorStep from './pages/Auth/TwoFactorStep'
 
 const Admin = lazy(() => import('./pages/Admin'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -45,6 +46,8 @@ function App() {
               )
             }
           />
+
+          <Route path={ROUTES.TWO_FACTOR_AUTH} element={<TwoFactorStep />} />
 
           <Route
             path={ROUTES.FORGOT_PASSWORD}
