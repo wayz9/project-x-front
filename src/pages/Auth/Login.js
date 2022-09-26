@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../components/Logo'
 import { login } from '../../services/auth'
 import * as ROUTES from '../../constants/routes'
 import { ArrowNarrowRight } from 'tabler-icons-react'
+import { useSWRConfig } from 'swr'
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { mutate } = useSWRConfig()
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -15,11 +18,17 @@ const Login = ({ setIsLoggedIn }) => {
     body.append('email', email)
     body.append('password', password)
 
-    const response = await login(body)
+    const response = await mutate('login', () => login(body))
     if (response && response.status === 200) {
       let now = new Date()
       now.setHours(now.getHours() + 2)
       localStorage.setItem('logoutTime', String(now))
+      if (response && response.data) {
+        if (response.data.two_factor) {
+          localStorage.setItem('2fa_confirmed', false)
+          navigate(ROUTES.TWO_FACTOR_AUTH)
+        }
+      }
       setIsLoggedIn(true)
     }
   }

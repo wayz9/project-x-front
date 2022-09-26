@@ -1,7 +1,38 @@
+import { useState } from 'react'
+import { ensureNumberOnly } from '../../helpers/ensureNumberOnly'
+import { useSWRConfig } from 'swr'
+import { confirmTwoFactorAuth } from '../../services/auth'
+
 const TwoFactorStep = () => {
-  const handle2Fa = async (e) => {
+  const [charOne, setCharOne] = useState('')
+  const [charTwo, setCharTwo] = useState('')
+  const [charThree, setCharThree] = useState('')
+  const [charFour, setCharFour] = useState('')
+  const [charFive, setCharFive] = useState('')
+  const [charSix, setCharSix] = useState('')
+  const { mutate } = useSWRConfig()
+
+  const isValidForm = () => {
+    return charOne && charTwo && charThree && charFour && charFive
+  }
+
+  const handle2Fa = async () => {
+    if (!isValidForm && !charSix) return
+    const reqBody = new FormData()
+    reqBody.append('code', `${charOne}${charTwo}${charThree}${charFour}${charFive}${charSix}`)
+    const response = await mutate('twoFA', () => confirmTwoFactorAuth(reqBody))
+    console.log(response)
+  }
+
+  const handle2FaForm = (e) => {
     e.preventDefault()
-    // Rest of the code
+    handle2Fa()
+  }
+
+  const handleBackSpace = (e) => {
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+      e.target.previousSibling.focus()
+    }
   }
 
   return (
@@ -25,7 +56,7 @@ const TwoFactorStep = () => {
       <div className="relative flex flex-1 flex-col items-center justify-center pb-20 sm:pt-12">
         <h1 className="sr-only">Two factor step challenge</h1>
         <form
-          onSubmit={handle2Fa}
+          onSubmit={handle2FaForm}
           className="relative w-full border border-gray-200 bg-white sm:max-w-[29rem] sm:rounded-2xl">
           <div className="mt-9 px-9 text-center">
             <h2 className="text-lg font-medium text-gray-800">2FA Authorization Step</h2>
@@ -35,48 +66,76 @@ const TwoFactorStep = () => {
           </div>
           <div className="mt-12 px-9">
             <div className="flex items-center justify-center gap-x-4">
-              <div className="aspect-square shrink-0">
-                <input
-                  type="text"
-                  className="h-full w-12 text-center text-lg leading-6"
-                  maxLength={1}
-                />
-              </div>
-              <div className="aspect-square shrink-0">
-                <input
-                  type="text"
-                  className="h-full w-12 text-center text-lg leading-6"
-                  maxLength={1}
-                />
-              </div>
-              <div className="aspect-square shrink-0">
-                <input
-                  type="text"
-                  className="h-full w-12 text-center text-lg leading-6"
-                  maxLength={1}
-                />
-              </div>
-              <div className="aspect-square shrink-0">
-                <input
-                  type="text"
-                  className="h-full w-12 text-center text-lg leading-6"
-                  maxLength={1}
-                />
-              </div>
-              <div className="aspect-square shrink-0">
-                <input
-                  type="text"
-                  className="h-full w-12 text-center text-lg leading-6"
-                  maxLength={1}
-                />
-              </div>
-              <div className="aspect-square shrink-0">
-                <input
-                  type="text"
-                  className="h-full w-12 text-center text-lg leading-6"
-                  maxLength={1}
-                />
-              </div>
+              <input
+                type="text"
+                className="aspect-square h-full w-12 shrink-0 text-center text-lg leading-6"
+                maxLength={1}
+                value={charOne}
+                onChange={(e) => {
+                  setCharOne(ensureNumberOnly(e.target.value))
+                  if (e.target.nextSibling && ensureNumberOnly(e.target.value))
+                    e.target.nextSibling.focus()
+                }}
+              />
+              <input
+                type="text"
+                className="aspect-square h-full w-12 shrink-0 text-center text-lg leading-6"
+                maxLength={1}
+                value={charTwo}
+                onKeyUp={handleBackSpace}
+                onChange={(e) => {
+                  setCharTwo(ensureNumberOnly(e.target.value))
+                  if (e.target.nextSibling && ensureNumberOnly(e.target.value))
+                    e.target.nextSibling.focus()
+                }}
+              />
+              <input
+                type="text"
+                className="aspect-square h-full w-12 shrink-0 text-center text-lg leading-6"
+                maxLength={1}
+                value={charThree}
+                onKeyUp={handleBackSpace}
+                onChange={(e) => {
+                  setCharThree(ensureNumberOnly(e.target.value))
+                  if (e.target.nextSibling && ensureNumberOnly(e.target.value))
+                    e.target.nextSibling.focus()
+                }}
+              />
+              <input
+                type="text"
+                className="aspect-square h-full w-12 shrink-0 text-center text-lg leading-6"
+                maxLength={1}
+                value={charFour}
+                onKeyUp={handleBackSpace}
+                onChange={(e) => {
+                  setCharFour(ensureNumberOnly(e.target.value))
+                  if (e.target.nextSibling && ensureNumberOnly(e.target.value))
+                    e.target.nextSibling.focus()
+                }}
+              />
+              <input
+                type="text"
+                className="aspect-square h-full w-12 shrink-0 text-center text-lg leading-6"
+                maxLength={1}
+                value={charFive}
+                onKeyUp={handleBackSpace}
+                onChange={(e) => {
+                  setCharFive(ensureNumberOnly(e.target.value))
+                  if (e.target.nextSibling && ensureNumberOnly(e.target.value))
+                    e.target.nextSibling.focus()
+                }}
+              />
+              <input
+                type="text"
+                className="aspect-square h-full w-12 shrink-0 text-center text-lg leading-6"
+                maxLength={1}
+                value={charSix}
+                onKeyUp={handleBackSpace}
+                onChange={(e) => {
+                  setCharSix(ensureNumberOnly(e.target.value))
+                  if (isValidForm() && ensureNumberOnly(e.target.value)) handle2Fa()
+                }}
+              />
             </div>
           </div>
           <div className="mt-12 mb-9 px-9">
