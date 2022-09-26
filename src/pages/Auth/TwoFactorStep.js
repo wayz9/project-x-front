@@ -77,6 +77,7 @@ const TwoFactorStep = () => {
                 type="text"
                 className="aspect-square h-full w-12 shrink-0 text-center text-lg leading-6"
                 maxLength={1}
+                autoFocus
                 value={charOne}
                 onChange={(e) => {
                   setCharOne(ensureNumberOnly(e.target.value))
