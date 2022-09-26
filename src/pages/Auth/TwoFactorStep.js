@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ensureNumberOnly } from '../../helpers/ensureNumberOnly'
 import { useSWRConfig } from 'swr'
 import { confirmTwoFactorAuth } from '../../services/auth'
+import { useNavigate } from 'react-router-dom'
 
 const TwoFactorStep = () => {
   const [charOne, setCharOne] = useState('')
@@ -11,17 +12,23 @@ const TwoFactorStep = () => {
   const [charFive, setCharFive] = useState('')
   const [charSix, setCharSix] = useState('')
   const { mutate } = useSWRConfig()
+  const navigate = useNavigate()
 
   const isValidForm = () => {
     return charOne && charTwo && charThree && charFour && charFive
   }
 
-  const handle2Fa = async () => {
+  const handle2Fa = async (sixthChar = '') => {
     if (!isValidForm && !charSix) return
     const reqBody = new FormData()
-    reqBody.append('code', `${charOne}${charTwo}${charThree}${charFour}${charFive}${charSix}`)
+    reqBody.append(
+      'code',
+      `${charOne}${charTwo}${charThree}${charFour}${charFive}${sixthChar || charSix}`
+    )
     const response = await mutate('twoFA', () => confirmTwoFactorAuth(reqBody))
-    console.log(response)
+    if (response && response.status === 204) {
+      navigate('/')
+    }
   }
 
   const handle2FaForm = (e) => {
@@ -133,7 +140,7 @@ const TwoFactorStep = () => {
                 onKeyUp={handleBackSpace}
                 onChange={(e) => {
                   setCharSix(ensureNumberOnly(e.target.value))
-                  if (isValidForm() && ensureNumberOnly(e.target.value)) handle2Fa()
+                  if (isValidForm() && ensureNumberOnly(e.target.value)) handle2Fa(e.target.value)
                 }}
               />
             </div>

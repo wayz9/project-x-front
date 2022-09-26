@@ -47,7 +47,7 @@ export const getUser = async () => {
 
 export const confirmTwoFactorAuth = async (body) => {
   try {
-    const response = await API.post('user/confirmed-two-factor-authentication', body)
+    const response = await API.post('two-factor-challenge', body)
     return response
   } catch (err) {
     if (err.message) {

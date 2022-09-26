@@ -47,7 +47,10 @@ function App() {
             }
           />
 
-          <Route path={ROUTES.TWO_FACTOR_AUTH} element={<TwoFactorStep />} />
+          <Route
+            path={ROUTES.TWO_FACTOR_AUTH}
+            element={isLoggedIn ? <TwoFactorStep /> : <Navigate to={ROUTES.LOGIN} />}
+          />
 
           <Route
             path={ROUTES.FORGOT_PASSWORD}
