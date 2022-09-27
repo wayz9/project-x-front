@@ -48,7 +48,7 @@ const ProtectedRoute = ({ auth }) => {
             </button>
           </div>
         </section>
-        <Outlet />
+        <Outlet context={[user]} />
       </div>
     </div>
   ) : (
