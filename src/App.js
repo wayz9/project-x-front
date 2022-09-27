@@ -7,7 +7,6 @@ import useLogin from './hooks/useLogin'
 import LoadingPage from './pages/Global/LoadingPage'
 import NotFound from './pages/Global/NotFound'
 /* import Forbidden from './pages/Global/Forbidden' */
-import TwoFactorStep from './pages/Auth/TwoFactorStep'
 
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -18,6 +17,8 @@ const Settings = lazy(() => import('./pages/Settings'))
 const UpdateMovie = lazy(() => import('./pages/Movies/UpdateMovie'))
 const Movies = lazy(() => import('./pages/Movies'))
 const UpdateTvShow = lazy(() => import('./pages/TvShows/UpdateTvShow'))
+const ConfirmPassword = lazy(() => import('./pages/Auth/ConfirmPassword'))
+const TwoFactorStep = lazy(() => import('./pages/Auth/TwoFactorStep'))
 
 function App() {
   const { isLoggedIn, setIsLoggedIn, isLoadingAuth } = useLogin()
@@ -56,6 +57,8 @@ function App() {
             path={ROUTES.FORGOT_PASSWORD}
             element={!isLoggedIn ? <ForgotPassword /> : <Navigate to={ROUTES.HOME} />}
           />
+
+          <Route path={ROUTES.CONFIRM_PASSWORD} element={<ConfirmPassword />} />
 
           <Route
             path={ROUTES.RESET_PASSWORD}
