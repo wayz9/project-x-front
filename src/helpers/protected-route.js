@@ -6,6 +6,7 @@ import { Menu2 } from 'tabler-icons-react'
 import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import { toCommaSeparate } from './toCommaSeparate'
+import AvatarDropdown from '../components/User/AvatarDropdown'
 
 const ProtectedRoute = ({ auth }) => {
   const [headerOpen, setHeaderOpen] = useState(false)
@@ -39,13 +40,7 @@ const ProtectedRoute = ({ auth }) => {
                 {user && toCommaSeparate(user.roles, 'name')}
               </p>
             </div>
-            <button className="rounded-full focus:ring-1 focus:ring-gray-300">
-              <img
-                className="h-10 w-10 rounded-full object-cover object-center"
-                src="https://avatars.cloudflare.steamstatic.com/36f85e68d703bd07b32aa7773aa7cf7dd4df5ee6_full.jpg"
-                alt="Avatar"
-              />
-            </button>
+            <AvatarDropdown />
           </div>
         </section>
         <Outlet context={[user]} />
