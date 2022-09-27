@@ -18,7 +18,8 @@ import {
   getConfirmedPasswordStatus,
   getQRCode,
   getRecoveryCodes,
-  confirmTwoFactorAuth
+  confirmTwoFactorAuth,
+  disableTwoFactorAuth
 } from '../services/auth'
 import * as ROUTES from '../constants/routes'
 import { useState } from 'react'
@@ -58,6 +59,11 @@ const Settings = () => {
         if (err.response && err.response.data) console.log(err.response.data.message)
       }
     }
+  }
+
+  const handleDisableTwoFA = async () => {
+    await mutate('user', () => disableTwoFactorAuth())
+    //todo toast message
   }
 
   return (
@@ -290,7 +296,9 @@ const Settings = () => {
                     You have enabled 2FA protection successfully! If you want to disable it, click
                     the button below.
                   </p>
-                  <button className="btn-primary mt-4 py-2">Disable 2FA Protection</button>
+                  <button onClick={handleDisableTwoFA} className="btn-primary mt-4 py-2">
+                    Disable 2FA Protection
+                  </button>
                 </div>
               </div>
             ) : null}

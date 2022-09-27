@@ -68,6 +68,11 @@ export const enableTwoFactorAuth = async () => {
   return response.data
 }
 
+export const disableTwoFactorAuth = async () => {
+  const response = await API.delete('user/two-factor-authentication')
+  return response
+}
+
 export const confirmPassword = async (body) => {
   try {
     const response = await API.post('user/confirm-password', body)
