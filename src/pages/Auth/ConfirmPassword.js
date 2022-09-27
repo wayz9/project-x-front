@@ -1,10 +1,22 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSWRConfig } from 'swr'
+import { confirmPassword } from '../../services/auth'
 
-const ConfirmPassword = ({ setIsLoggedIn }) => {
+const ConfirmPassword = () => {
   const [password, setPassword] = useState('')
+  const { mutate } = useSWRConfig()
+  const navigate = useNavigate()
 
   const handlePasswordConfirmation = async (e) => {
     e.preventDefault()
+    const reqBody = new FormData()
+    reqBody.append('password', password)
+    const response = await mutate('confirm-password', () => confirmPassword(reqBody))
+    if (response && response.status === 201) {
+      navigate(-1)
+    }
+    //else display error message
   }
 
   return (

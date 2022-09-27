@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ensureNumberOnly } from '../../helpers/ensureNumberOnly'
 import { useSWRConfig } from 'swr'
-import { confirmTwoFactorAuth } from '../../services/auth'
+import { twoFactorChallenge } from '../../services/auth'
 import { useNavigate } from 'react-router-dom'
 
 const TwoFactorStep = () => {
@@ -25,7 +25,7 @@ const TwoFactorStep = () => {
       'code',
       `${charOne}${charTwo}${charThree}${charFour}${charFive}${sixthChar || charSix}`
     )
-    const response = await mutate('twoFA', () => confirmTwoFactorAuth(reqBody))
+    const response = await mutate('twoFA', () => twoFactorChallenge(reqBody))
     if (response && response.status === 204) {
       navigate('/')
     }
