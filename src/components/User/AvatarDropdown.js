@@ -1,6 +1,6 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   BellRinging,
   ChevronDown,
@@ -11,8 +11,19 @@ import {
   Sun,
   ThreeDCubeSphere
 } from 'tabler-icons-react'
+import { logout } from '../../services/auth'
+import { LOGIN } from '../../constants/routes'
 
 const AvatarDropdown = () => {
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    const res = await logout()
+    if (res.status === 204) {
+      navigate(LOGIN)
+    }
+  }
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -108,12 +119,12 @@ const AvatarDropdown = () => {
               <span className="pl-5 text-xs uppercase text-gray-400">Auth</span>
               <ul className="mt-2.5 text-md leading-5 text-gray-800">
                 <li>
-                  <Link
-                    to="/"
-                    className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
+                  <div
+                    onClick={handleLogout}
+                    className="flex cursor-pointer items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
                     <span>Logout</span>
                     <Logout className="-mr-0.5 text-gray-400" size={20} />
-                  </Link>
+                  </div>
                 </li>
               </ul>
             </div>
