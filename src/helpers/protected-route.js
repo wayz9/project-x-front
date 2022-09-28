@@ -7,14 +7,17 @@ import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import { toCommaSeparate } from './toCommaSeparate'
 import AvatarDropdown from '../components/User/AvatarDropdown'
+import Search from '../pages/Modals/Search'
 
 const ProtectedRoute = ({ auth }) => {
   const [headerOpen, setHeaderOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   const { user } = useAuth()
 
   return auth ? (
     <div className="relative flex min-h-screen antialiased">
+      <Search isOpen={searchOpen} setIsOpen={setSearchOpen} />
       <Nav authUser={user} headerOpen={headerOpen} />
       <div className="relative flex max-w-full grow flex-col" onClick={() => setHeaderOpen(false)}>
         <section className="sticky top-0 z-20 flex items-center justify-between bg-white/80 bg-dotted-pattern bg-bottom bg-repeat-x py-4 px-6 backdrop-blur-lg md:px-9 lg:py-6">

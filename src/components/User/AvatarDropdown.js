@@ -25,17 +25,15 @@ const AvatarDropdown = () => {
   }
 
   return (
-    <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <Menu.Button className="inline-flex w-full items-center justify-center gap-x-2">
-          <img
-            className="h-10 w-10 rounded-full object-cover object-center"
-            src="https://avatars.cloudflare.steamstatic.com/36f85e68d703bd07b32aa7773aa7cf7dd4df5ee6_full.jpg"
-            alt="Avatar"
-          />
-          <ChevronDown size={20} className="hidden text-gray-500 lg:inline" />
-        </Menu.Button>
-      </div>
+    <Menu as="div" className="relative inline-flex text-left">
+      <Menu.Button className="inline-flex w-full items-center justify-center gap-x-2">
+        <img
+          className="h-10 w-10 rounded-full object-cover object-center"
+          src="https://avatars.cloudflare.steamstatic.com/36f85e68d703bd07b32aa7773aa7cf7dd4df5ee6_full.jpg"
+          alt="Avatar"
+        />
+        <ChevronDown size={20} className="hidden text-gray-500 lg:inline" />
+      </Menu.Button>
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"
@@ -44,7 +42,7 @@ const AvatarDropdown = () => {
         leave="transition ease-in duration-75"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95">
-        <Menu.Items className="absolute right-0 mt-2 w-64 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 top-10 mt-2 w-64 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="flex flex-col items-center justify-center pt-7">
             <img
               className="h-12 w-12 rounded-full object-cover object-center"
