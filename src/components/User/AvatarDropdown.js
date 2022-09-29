@@ -12,7 +12,7 @@ import {
   ThreeDCubeSphere
 } from 'tabler-icons-react'
 import { logout } from '../../services/auth'
-import { LOGIN } from '../../constants/routes'
+import { LOGIN, SETTINGS } from '../../constants/routes'
 
 const AvatarDropdown = () => {
   const navigate = useNavigate()
@@ -59,28 +59,34 @@ const AvatarDropdown = () => {
               <span className="pl-5 text-xs uppercase text-gray-400">Main</span>
               <ul className="mt-2.5 text-md leading-5 text-gray-800">
                 <li>
-                  <Link
-                    to="/"
-                    className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
-                    <span>Notifications</span>
-                    <BellRinging className="-mr-0.5 text-gray-400" size={20} />
-                  </Link>
+                  <Menu.Item>
+                    <Link
+                      to="/"
+                      className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
+                      <span>Notifications</span>
+                      <BellRinging className="-mr-0.5 text-gray-400" size={20} />
+                    </Link>
+                  </Menu.Item>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
-                    <span>Achievements</span>
-                    <ThreeDCubeSphere className="-mr-0.5 text-gray-400" size={20} />
-                  </Link>
+                  <Menu.Item>
+                    <Link
+                      to="/"
+                      className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
+                      <span>Achievements</span>
+                      <ThreeDCubeSphere className="-mr-0.5 text-gray-400" size={20} />
+                    </Link>
+                  </Menu.Item>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
-                    <span>Settings</span>
-                    <Settings className="-mr-0.5 text-gray-400" size={20} />
-                  </Link>
+                  <Menu.Item>
+                    <Link
+                      to={SETTINGS}
+                      className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
+                      <span>Settings</span>
+                      <Settings className="-mr-0.5 text-gray-400" size={20} />
+                    </Link>
+                  </Menu.Item>
                 </li>
               </ul>
             </div>
@@ -88,28 +94,34 @@ const AvatarDropdown = () => {
               <span className="pl-5 text-xs uppercase text-gray-400">Theme</span>
               <ul className="mt-2.5 text-md leading-5 text-gray-800">
                 <li>
-                  <Link
-                    to="/"
-                    className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
-                    <span>Dark</span>
-                    <MoonStars className="-mr-0.5 text-gray-400" size={20} />
-                  </Link>
+                  <Menu.Item>
+                    <Link
+                      to="/"
+                      className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
+                      <span>Dark</span>
+                      <MoonStars className="-mr-0.5 text-gray-400" size={20} />
+                    </Link>
+                  </Menu.Item>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="flex items-center justify-between bg-gray-900 py-2 px-5 text-gray-100 transition-all">
-                    <span>Light</span>
-                    <Sun className="-mr-0.5 text-gray-400" size={20} />
-                  </Link>
+                  <Menu.Item>
+                    <Link
+                      to="/"
+                      className="flex items-center justify-between bg-gray-900 py-2 px-5 text-gray-100 transition-all">
+                      <span>Light</span>
+                      <Sun className="-mr-0.5 text-gray-400" size={20} />
+                    </Link>
+                  </Menu.Item>
                 </li>
                 <li>
-                  <Link
-                    to="/"
-                    className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
-                    <span>System</span>
-                    <Devices2 className="-mr-0.5 text-gray-400" size={20} />
-                  </Link>
+                  <Menu.Item>
+                    <Link
+                      to="/"
+                      className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
+                      <span>System</span>
+                      <Devices2 className="-mr-0.5 text-gray-400" size={20} />
+                    </Link>
+                  </Menu.Item>
                 </li>
               </ul>
             </div>
@@ -117,12 +129,14 @@ const AvatarDropdown = () => {
               <span className="pl-5 text-xs uppercase text-gray-400">Auth</span>
               <ul className="mt-2.5 text-md leading-5 text-gray-800">
                 <li>
-                  <div
-                    onClick={handleLogout}
-                    className="flex cursor-pointer items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
-                    <span>Logout</span>
-                    <Logout className="-mr-0.5 text-gray-400" size={20} />
-                  </div>
+                  <Menu.Item>
+                    <div
+                      onClick={handleLogout}
+                      className="flex cursor-pointer items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
+                      <span>Logout</span>
+                      <Logout className="-mr-0.5 text-gray-400" size={20} />
+                    </div>
+                  </Menu.Item>
                 </li>
               </ul>
             </div>
