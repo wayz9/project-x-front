@@ -40,7 +40,7 @@ const ProtectedRoute = ({ auth }) => {
             <div className="hidden text-center md:block">
               <p className="text-sm text-gray-400">Role:</p>
               <p className="mt-1 text-md leading-5 text-gray-700">
-                {user && toCommaSeparate(user.roles, 'name')}
+                {user && toCommaSeparate(user.roles)}
               </p>
             </div>
             <AvatarDropdown />

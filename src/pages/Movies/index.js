@@ -244,11 +244,11 @@ const Movie = () => {
                       <td>
                         <div className="flex flex-col items-center justify-center text-gray-700">
                           <div className="text-center line-clamp-1">
-                            {toCommaSeparate(item.genres, 'name')}
+                            {toCommaSeparate(item.genres)}
                           </div>
                           <div className="mt-1.5 text-center line-clamp-1">
                             {' '}
-                            {toCommaSeparate(item.languages, 'name')}
+                            {toCommaSeparate(item.languages)}
                           </div>
                           <button className="mt-1 flex items-center text-primary-500 hover:text-primary-400 focus:outline-none">
                             <span className="text-sm font-medium">view all</span>

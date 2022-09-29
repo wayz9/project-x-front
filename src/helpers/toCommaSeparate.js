@@ -1,4 +1,4 @@
-export const toCommaSeparate = (array, key) => {
+export const toCommaSeparate = (array, key = 'name') => {
   if (!array) return 'None'
   return array.length > 0
     ? array

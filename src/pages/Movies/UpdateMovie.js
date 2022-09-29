@@ -30,7 +30,7 @@ const UpdateMovie = () => {
             {movie && movie.poster ? (
               <img
                 className="aspect-[2/3] h-[100px] rounded-md border border-gray-200 drop-shadow-lg 2xl:h-28"
-                src={movie.poster && movie.poster.path}
+                src={movie.poster.path}
                 alt={movie.title}
                 loading="lazy"
               />
