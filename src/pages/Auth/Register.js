@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../../components/Logo'
 import { register } from '../../services/auth'
-import * as ROUTES from '../../constants/routes'
 
 const Register = ({ setIsLoggedIn }) => {
   const [fullName, setFullName] = useState('')

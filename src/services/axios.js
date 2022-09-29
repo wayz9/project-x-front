@@ -30,6 +30,10 @@ API.interceptors.response.use(undefined, (err) => {
       Cookies.remove('XSRF-TOKEN')
       useXSRFCookie()
     }
+    if (err.response.status === 423 && !originalConfig._retry) {
+      originalConfig._retry = true
+      window.location.href = '/confirm-password'
+    }
     return Promise.reject(err)
   }
   return null

@@ -1,36 +1,22 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import Logo from '../../components/Logo'
-import { login } from '../../services/auth'
-import * as ROUTES from '../../constants/routes'
-import { ArrowNarrowRight } from 'tabler-icons-react'
+import { useNavigate } from 'react-router-dom'
 import { useSWRConfig } from 'swr'
+import { confirmPassword } from '../../services/auth'
 
-const Login = ({ setIsLoggedIn }) => {
-  const [email, setEmail] = useState('')
+const ConfirmPassword = () => {
   const [password, setPassword] = useState('')
   const { mutate } = useSWRConfig()
   const navigate = useNavigate()
 
-  const handleLogin = async (e) => {
+  const handlePasswordConfirmation = async (e) => {
     e.preventDefault()
-    const body = new FormData()
-    body.append('email', email)
-    body.append('password', password)
-
-    const response = await mutate('login', () => login(body))
-    if (response && response.status === 200) {
-      let now = new Date()
-      now.setHours(now.getHours() + 2)
-      localStorage.setItem('logoutTime', String(now))
-      if (response && response.data) {
-        if (response.data.two_factor) {
-          localStorage.setItem('2fa_confirmed', false)
-          navigate(ROUTES.TWO_FACTOR_AUTH)
-        }
-      }
-      setIsLoggedIn(true)
+    const reqBody = new FormData()
+    reqBody.append('password', password)
+    const response = await mutate('confirm-password', () => confirmPassword(reqBody))
+    if (response && response.status === 201) {
+      navigate(-1)
     }
+    //else display error message
   }
 
   return (
@@ -52,26 +38,15 @@ const Login = ({ setIsLoggedIn }) => {
         </svg>
       </div>
       <div className="relative flex flex-1 flex-col items-center justify-center pb-20 sm:pt-12">
-        <Link to="/" className="mx-auto mb-[72px] w-auto">
-          <Logo />
-        </Link>
         <h1 className="sr-only">Log in to your account</h1>
         <form
-          onSubmit={handleLogin}
+          onSubmit={handlePasswordConfirmation}
           className="relative w-full border border-gray-200 bg-white sm:max-w-[29rem] sm:rounded-2xl">
           <div className="mt-9 px-9">
-            <h2 className="text-lg font-medium text-gray-800">Sign In</h2>
-            <p className="mt-2 text-md leading-5 text-gray-500">Ready to make some changes!</p>
-          </div>
-          <div className="mt-10 px-9">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              id="email"
-              className="mt-2.5 sm:mt-3"
-            />
+            <h2 className="text-lg font-medium text-gray-800">Confirm Password</h2>
+            <p className="mt-2 text-md leading-5 text-gray-500">
+              Confirm your password to proceed.
+            </p>
           </div>
           <div className="mt-10 px-9">
             <label htmlFor="password">Password</label>
@@ -82,17 +57,10 @@ const Login = ({ setIsLoggedIn }) => {
               id="password"
               className="mt-2.5 sm:mt-3"
             />
-            <div className="mt-2 text-right">
-              <Link
-                to={ROUTES.FORGOT_PASSWORD}
-                className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900">
-                Forgot your password?
-              </Link>
-            </div>
           </div>
           <div className="mt-14 mb-10 px-9">
             <button type="submit" className="btn-primary block w-full">
-              Sign in to account
+              Confirm Password
             </button>
           </div>
           <div className="absolute inset-x-0 -bottom-6 -mx-[120px] h-px bg-gradient-to-r from-black/0 via-black/[0.15] to-black/0"></div>
@@ -107,19 +75,8 @@ const Login = ({ setIsLoggedIn }) => {
           </div>
         </form>
       </div>
-      <footer className="relative shrink-0">
-        <div className="flex items-center justify-center gap-x-4">
-          <p className="text-sm font-medium text-gray-600">Don't have an account?</p>
-          <Link className="btn-secondary flex items-center gap-x-1" to={ROUTES.REGISTER}>
-            <span>Register Here</span>
-            <span>
-              <ArrowNarrowRight size={20} className="text-gray-400" />
-            </span>
-          </Link>
-        </div>
-      </footer>
     </main>
   )
 }
 
-export default Login
+export default ConfirmPassword

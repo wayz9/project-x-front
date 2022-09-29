@@ -7,9 +7,8 @@ import useLogin from './hooks/useLogin'
 import LoadingPage from './pages/Global/LoadingPage'
 import NotFound from './pages/Global/NotFound'
 /* import Forbidden from './pages/Global/Forbidden' */
-import TwoFactorStep from './pages/Auth/TwoFactorStep'
 
-const Admin = lazy(() => import('./pages/Admin'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
 const Login = lazy(() => import('./pages/Auth/Login'))
 const ResetPassword = lazy(() => import('./pages/Auth/ResetPassword'))
 const Register = lazy(() => import('./pages/Auth/Register'))
@@ -18,6 +17,8 @@ const Settings = lazy(() => import('./pages/Settings'))
 const UpdateMovie = lazy(() => import('./pages/Movies/UpdateMovie'))
 const Movies = lazy(() => import('./pages/Movies'))
 const UpdateTvShow = lazy(() => import('./pages/TvShows/UpdateTvShow'))
+const ConfirmPassword = lazy(() => import('./pages/Auth/ConfirmPassword'))
+const TwoFactorStep = lazy(() => import('./pages/Auth/TwoFactorStep'))
 
 function App() {
   const { isLoggedIn, setIsLoggedIn, isLoadingAuth } = useLogin()
@@ -47,12 +48,17 @@ function App() {
             }
           />
 
-          <Route path={ROUTES.TWO_FACTOR_AUTH} element={<TwoFactorStep />} />
+          <Route
+            path={ROUTES.TWO_FACTOR_AUTH}
+            element={isLoggedIn ? <TwoFactorStep /> : <Navigate to={ROUTES.LOGIN} />}
+          />
 
           <Route
             path={ROUTES.FORGOT_PASSWORD}
             element={!isLoggedIn ? <ForgotPassword /> : <Navigate to={ROUTES.HOME} />}
           />
+
+          <Route path={ROUTES.CONFIRM_PASSWORD} element={<ConfirmPassword />} />
 
           <Route
             path={ROUTES.RESET_PASSWORD}
@@ -60,7 +66,7 @@ function App() {
           />
 
           <Route element={<ProtectedRoute auth={isLoggedIn} setAuth={setIsLoggedIn} />}>
-            <Route path={ROUTES.HOME} element={<Admin />} />
+            <Route path={ROUTES.HOME} element={<Dashboard />} />
             <Route path={ROUTES.SETTINGS} element={<Settings />} />
             <Route path={ROUTES.UPDATE_MOVIE} element={<UpdateMovie />} />
             <Route path={ROUTES.MOVIES} element={<Movies />} />

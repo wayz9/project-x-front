@@ -78,11 +78,15 @@ const Movie = () => {
                 className="-mx-4 rounded-lg border border-dotted border-gray-200 p-4 md:-mx-5 md:px-5">
                 <div className="flex gap-x-5">
                   <div className="shrink-0">
-                    <img
-                      src={item.poster.path}
-                      alt={item.title}
-                      className="w-20 rounded-md border border-gray-200 object-cover object-center md:w-[86px]"
-                    />
+                    {item.poster ? (
+                      <img
+                        src={item.poster.path}
+                        alt={item.title}
+                        className="w-20 rounded-md border border-gray-200 object-cover object-center md:w-[86px]"
+                      />
+                    ) : (
+                      <div className="aspect-[2/3] w-20 rounded-md border border-gray-200 bg-gray-50 md:w-[86px]" />
+                    )}
                   </div>
                   <div className="flex grow flex-col">
                     <div className="flex flex-col justify-between md:flex-row md:items-center">
@@ -156,11 +160,15 @@ const Movie = () => {
                       <td>
                         <div className="flex w-96 items-center gap-7 py-5 pl-9">
                           <div className="flex-shrink-0">
-                            <img
-                              src={item.poster.path}
-                              alt={item.title}
-                              className="w-20 rounded-md border border-gray-200 object-cover object-center"
-                            />
+                            {item.poster ? (
+                              <img
+                                src={item.poster.path}
+                                alt={item.title}
+                                className="w-20 rounded-md border border-gray-200 object-cover object-center"
+                              />
+                            ) : (
+                              <div className="aspect-[2/3] w-20 rounded-md border border-gray-200 bg-gray-50" />
+                            )}
                           </div>
                           <div>
                             <div className="font-medium uppercase text-gray-800 line-clamp-2">
@@ -236,11 +244,11 @@ const Movie = () => {
                       <td>
                         <div className="flex flex-col items-center justify-center text-gray-700">
                           <div className="text-center line-clamp-1">
-                            {toCommaSeparate(item.genres, 'name')}
+                            {toCommaSeparate(item.genres)}
                           </div>
                           <div className="mt-1.5 text-center line-clamp-1">
                             {' '}
-                            {toCommaSeparate(item.languages, 'name')}
+                            {toCommaSeparate(item.languages)}
                           </div>
                           <button className="mt-1 flex items-center text-primary-500 hover:text-primary-400 focus:outline-none">
                             <span className="text-sm font-medium">view all</span>

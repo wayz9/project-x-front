@@ -1,3 +1,5 @@
+import { useNavigate, useOutletContext } from 'react-router-dom'
+import useSWR, { useSWRConfig } from 'swr'
 import {
   AlertCircle,
   Calendar,
@@ -5,24 +7,70 @@ import {
   Key,
   Lock,
   ShieldCheck,
+  ShieldX,
   Target,
   TwoFA
 } from 'tabler-icons-react'
 
 import AvatarChangeSvg from '../assets/avatar-change.svg'
-import FakeQRCode from '../assets/qr-code.svg'
+import {
+  enableTwoFactorAuth,
+  getConfirmedPasswordStatus,
+  getQRCode,
+  getRecoveryCodes,
+  confirmTwoFactorAuth,
+  disableTwoFactorAuth
+} from '../services/auth'
+import * as ROUTES from '../constants/routes'
+import { useState } from 'react'
 
 const Settings = () => {
-  const recoveryCodes = [
-    'Hsr3FT2K2b-1SpeuYbCn7',
-    'T58YjxLe8T-a5zpcmP0Qv',
-    'EoR6DHaRrp-YWV783oS30',
-    'bmBh4vnv99-Gi0oHEho5U',
-    'TqhEiavt1f-v6FCG4TFXN',
-    'ZWcoAZQsWg-Hd6LbsJQON',
-    'JOaUGGzgwF-IVgnmLSoc2',
-    '5Z40XSXag0-t0bhEng08Y'
-  ]
+  const [twoFACode, setTwoFACode] = useState('')
+  const { data: passwordStatus } = useSWR('password-status', () => getConfirmedPasswordStatus())
+  const { data: qrCode } = useSWR(
+    passwordStatus && passwordStatus.confirmed ? 'QRCode' : null,
+    () => getQRCode()
+  )
+  const { data: recoveryCodes } = useSWR(
+    passwordStatus && passwordStatus.confirmed ? 'recovery-codes' : null,
+    () => getRecoveryCodes()
+  )
+  const { mutate } = useSWRConfig()
+  const navigate = useNavigate()
+
+  const [user] = useOutletContext()
+
+  const twoFAEnabled = user && user.two_factor_secret && user.two_factor_recovery_codes
+
+  const handleEnableTwoFA = () => {
+    if (!passwordStatus?.confirmed || !passwordStatus) navigate(ROUTES.CONFIRM_PASSWORD)
+    if (passwordStatus && passwordStatus.confirmed) {
+      mutate('user', () => enableTwoFactorAuth())
+      mutate('QRCode')
+      mutate('recovery-codes')
+    }
+  }
+
+  const handleConfirmTwoFA = async () => {
+    if (twoFACode.length === 6) {
+      const reqBody = new FormData()
+      reqBody.append('code', twoFACode)
+      try {
+        const response = await confirmTwoFactorAuth(reqBody)
+        if (response.status === 200) {
+          setTwoFACode('')
+          mutate('user')
+        }
+      } catch (err) {
+        if (err.response && err.response.data) console.log(err.response.data.message)
+      }
+    }
+  }
+
+  const handleDisableTwoFA = async () => {
+    await mutate('user', () => disableTwoFactorAuth())
+    //todo toast message
+  }
 
   return (
     <div>
@@ -163,83 +211,122 @@ const Settings = () => {
             <h5 className="font-medium text-gray-900">2FA Authentication</h5>
           </div>
           <div className="flex flex-col px-6 py-7 pb-10 md:px-9">
-            <ul className="space-y-14">
-              <li>
-                <div className="flex items-center gap-4">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
-                    1
-                  </div>
-                  <h4 className="text-base font-medium text-gray-800">Scan the code</h4>
-                </div>
-                <div className="mt-5">
-                  <div
-                    onClick={console.info(
-                      'otpauth://totp/Project%20X:ventusblade1%40gmail.com?secret=LZKKND254WEDICP7&issuer=Project%20X&algorithm=SHA1&digits=6&period=30'
-                    )}
-                    className="grid aspect-square w-60 place-items-center justify-items-center rounded-lg border border-gray-200 p-2.5">
-                    <img src={FakeQRCode} className="grayscale" alt="QR Code" />
-                  </div>
-                </div>
-                <p className="mt-6 text-sm leading-6 text-gray-500">
-                  Scan the QR code using any authentication application, we highly recommend using
-                  Google's Authentication App. It's available for both IOS and Android via App &
-                  Play Store.
-                </p>
-              </li>
-              <li>
-                <div className="flex items-center gap-4">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
-                    2
-                  </div>
-                  <h4 className="text-base font-medium text-gray-800">Save recovery codes</h4>
-                </div>
-                <div className="mt-6 divide-y divide-gray-100 rounded-lg border border-gray-200 text-sm text-gray-700">
-                  {recoveryCodes.map((code, index) => (
-                    <div key={index} className="py-2.5 px-5">
-                      {code}
+            {twoFAEnabled && user && !user.two_factor_confirmed_at ? (
+              <ul className="space-y-14">
+                <li>
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
+                      1
                     </div>
-                  ))}
+                    <h4 className="text-base font-medium text-gray-800">Scan the code</h4>
+                  </div>
+                  <div className="mt-5">
+                    <div
+                      onClick={console.info(
+                        'otpauth://totp/Project%20X:ventusblade1%40gmail.com?secret=LZKKND254WEDICP7&issuer=Project%20X&algorithm=SHA1&digits=6&period=30'
+                      )}
+                      className="grid aspect-square w-60 place-items-center justify-items-center rounded-lg border border-gray-200 p-2.5">
+                      {qrCode && qrCode.svg ? (
+                        <div dangerouslySetInnerHTML={{ __html: qrCode.svg }} />
+                      ) : null}
+                    </div>
+                  </div>
+                  <p className="mt-6 text-sm leading-6 text-gray-500">
+                    Scan the QR code using any authentication application, we highly recommend using
+                    Google's Authentication App. It's available for both IOS and Android via App &
+                    Play Store.
+                  </p>
+                </li>
+                <li>
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
+                      2
+                    </div>
+                    <h4 className="text-base font-medium text-gray-800">Save recovery codes</h4>
+                  </div>
+                  <div className="mt-6 divide-y divide-gray-100 rounded-lg border border-gray-200 text-sm text-gray-700">
+                    {recoveryCodes &&
+                      recoveryCodes.map((code, index) => (
+                        <div key={index} className="py-2.5 px-5">
+                          {code}
+                        </div>
+                      ))}
+                  </div>
+                  <div className="mt-6 flex justify-end">
+                    <button className="btn-primary flex items-center gap-x-1.5 pl-3">
+                      <span>
+                        <Copy size={20} className="text-gray-400" />
+                      </span>
+                      <span>Copy All</span>
+                    </button>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
+                      3
+                    </div>
+                    <h4 className="text-base font-medium text-gray-800">Insert current code</h4>
+                  </div>
+                  <div className="mt-6">
+                    <label htmlFor="code">Code</label>
+                    <div className="mt-2.5 flex items-center gap-x-6 md:mt-3">
+                      <input
+                        maxLength={6}
+                        value={twoFACode}
+                        onChange={(e) => setTwoFACode(e.target.value)}
+                        type="text"
+                        id="code"
+                        placeholder="XXXXXX"
+                      />
+                      <button onClick={handleConfirmTwoFA} className="btn-primary">
+                        Verify
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            ) : null}
+
+            {twoFAEnabled && user && user.two_factor_confirmed_at ? (
+              <div className="flex items-start gap-x-4 rounded-lg border border-dotted border-gray-200 py-4 px-5">
+                <div className="hidden pt-0.5 pr-0.5 text-gray-400 lg:block">
+                  <ShieldCheck />
                 </div>
-                <div className="mt-6 flex justify-end">
-                  <button className="btn-primary flex items-center gap-x-1.5 pl-3">
-                    <span>
-                      <Copy size={20} className="text-gray-400" />
-                    </span>
-                    <span>Copy All</span>
+                <div>
+                  <h5 className="text-md font-medium leading-5 text-gray-600">
+                    2FA Protection Active
+                  </h5>
+                  <p className="mt-2.5 text-sm leading-6 text-gray-500">
+                    You have enabled 2FA protection successfully! If you want to disable it, click
+                    the button below.
+                  </p>
+                  <button onClick={handleDisableTwoFA} className="btn-primary mt-4 py-2">
+                    Disable 2FA Protection
                   </button>
                 </div>
-              </li>
-              <li>
-                <div className="flex items-center gap-4">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-base font-semibold text-white">
-                    3
-                  </div>
-                  <h4 className="text-base font-medium text-gray-800">Insert current code</h4>
-                </div>
-                <div className="mt-6">
-                  <label htmlFor="code">Code</label>
-                  <div className="mt-2.5 flex items-center gap-x-6 md:mt-3">
-                    <input type="text" id="code" placeholder="XXXXXX" />
-                    <button className="btn-primary">Verify</button>
-                  </div>
-                </div>
-              </li>
-            </ul>
-            <div className="mt-10 flex items-start gap-x-4 rounded-lg border border-dotted border-gray-200 py-4 px-5">
-              <div className="hidden pt-0.5 pr-0.5 text-gray-400 lg:block">
-                <ShieldCheck />
               </div>
-              <div>
-                <h5 className="text-md font-medium leading-5 text-gray-600">
-                  2FA Protection Active
-                </h5>
-                <p className="mt-2.5 text-sm leading-6 text-gray-500">
-                  You have enabled 2FA protection successfully! If you want to disable it, click the
-                  button below.
-                </p>
-                <button className="btn-primary mt-4 py-2">Disable 2FA Protection</button>
+            ) : null}
+            {!twoFAEnabled && user && !user.two_factor_confirmed_at ? (
+              <div className="flex items-start gap-x-4 rounded-lg border border-dotted border-gray-200 py-4 px-5">
+                <div className="hidden pt-0.5 pr-0.5 text-gray-400 lg:block">
+                  <ShieldX />
+                </div>
+                <div>
+                  <h5 className="text-md font-medium leading-5 text-gray-600">
+                    2FA Protection Inactive
+                  </h5>
+                  <p className="mt-2.5 text-sm leading-6 text-gray-500">
+                    You don't have 2FA protection enabled! If you want to enable it, click the
+                    button below.
+                  </p>
+                  <button onClick={handleEnableTwoFA} className="btn-primary mt-4 py-2">
+                    Enable 2FA Protection
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </section>
