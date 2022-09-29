@@ -7,13 +7,14 @@ import MovieDesktop from '../../components/Movies/MovieDesktop'
 import useSWR, { mutate } from 'swr'
 
 const Movies = () => {
-  const { data: movies } = useSWR('movies', () => getMovies())
-  const [showTorrent, setShowTorrent] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
+
+  const { data: movies } = useSWR('movies', () => getMovies(searchTerm))
+  const [showTorrent, setShowTorrent] = useState(false)
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      mutate('movies', () => getMovies(searchTerm))
+      mutate('movies')
     }, 500)
 
     return () => clearTimeout(delayDebounceFn)
