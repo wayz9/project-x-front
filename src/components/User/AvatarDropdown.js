@@ -12,7 +12,7 @@ import {
   ThreeDCubeSphere
 } from 'tabler-icons-react'
 import { logout } from '../../services/auth'
-import { LOGIN } from '../../constants/routes'
+import { LOGIN, SETTINGS } from '../../constants/routes'
 
 const AvatarDropdown = () => {
   const navigate = useNavigate()
@@ -76,7 +76,7 @@ const AvatarDropdown = () => {
                 </li>
                 <li>
                   <Link
-                    to="/"
+                    to={SETTINGS}
                     className="flex items-center justify-between py-2 px-5 transition-all hover:bg-gray-50">
                     <span>Settings</span>
                     <Settings className="-mr-0.5 text-gray-400" size={20} />
