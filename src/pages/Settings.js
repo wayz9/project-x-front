@@ -21,19 +21,18 @@ import {
   confirmTwoFactorAuth,
   disableTwoFactorAuth
 } from '../services/auth'
-import * as ROUTES from '../constants/routes'
+import { CONFIRM_PASSWORD } from '../constants/routes'
 import { useState } from 'react'
 
 const Settings = () => {
   const [twoFACode, setTwoFACode] = useState('')
   const { data: passwordStatus } = useSWR('password-status', () => getConfirmedPasswordStatus())
-  const { data: qrCode } = useSWR(
-    passwordStatus && passwordStatus.confirmed ? 'QRCode' : null,
-    () => getQRCode()
-  )
-  const { data: recoveryCodes } = useSWR(
-    passwordStatus && passwordStatus.confirmed ? 'recovery-codes' : null,
-    () => getRecoveryCodes()
+
+  const confirmedPassword = passwordStatus && passwordStatus.confirmed
+
+  const { data: qrCode } = useSWR(confirmedPassword ? 'QRCode' : null, () => getQRCode())
+  const { data: recoveryCodes } = useSWR(confirmedPassword ? 'recovery-codes' : null, () =>
+    getRecoveryCodes()
   )
   const { mutate } = useSWRConfig()
   const navigate = useNavigate()
@@ -43,8 +42,8 @@ const Settings = () => {
   const twoFAEnabled = user && user.two_factor_secret && user.two_factor_recovery_codes
 
   const handleEnableTwoFA = () => {
-    if (!passwordStatus?.confirmed || !passwordStatus) navigate(ROUTES.CONFIRM_PASSWORD)
-    if (passwordStatus && passwordStatus.confirmed) {
+    if (!passwordStatus?.confirmed || !passwordStatus) navigate(CONFIRM_PASSWORD)
+    if (confirmedPassword) {
       mutate('user', () => enableTwoFactorAuth())
       mutate('QRCode')
       mutate('recovery-codes')
@@ -71,6 +70,9 @@ const Settings = () => {
     await mutate('user', () => disableTwoFactorAuth())
     //todo toast message
   }
+
+  if (twoFAEnabled && !confirmedPassword && !user.two_factor_confirmed_at)
+    navigate(CONFIRM_PASSWORD)
 
   return (
     <div>
