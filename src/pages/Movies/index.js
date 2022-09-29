@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowNarrowRight, Calendar, Copy, Dots, Search } from 'tabler-icons-react'
+import { ArrowNarrowRight, Calendar, Copy, Search } from 'tabler-icons-react'
 import { getMovies } from '../../services/movies'
 import ShowTorrents from '../Modals/ShowTorrents'
 import { formatDate } from '../../helpers/formatDate'
 import { toCommaSeparate } from '../../helpers/toCommaSeparate'
+import RowContextMenu from '../Modals/RowContextMenu'
 
 const Movie = () => {
   const [movies, setMovies] = useState([])
   const [showTorrent, setShowTorrent] = useState(false)
-  const [searchTerm, setSearcTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -40,7 +41,7 @@ const Movie = () => {
   }, [searchTerm])
 
   return (
-    <main className="w-full grow">
+    <div className="w-full grow">
       <ShowTorrents showTorrent={showTorrent} setShowTorrent={setShowTorrent} />
       <section className="hidden items-center justify-between px-9 py-7 md:flex">
         <div>
@@ -57,7 +58,7 @@ const Movie = () => {
           className="focus:ring-none !focus:ring-0 block w-full rounded-none py-5 px-6 pl-[54px] text-md focus:outline-none focus:ring-gray-200 focus:ring-offset-0 md:pl-[66px]"
           placeholder="Browse movies..."
           value={searchTerm}
-          onChange={(e) => setSearcTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <div className="absolute inset-y-0 left-6 flex items-center justify-center text-gray-400 md:left-9">
           <Search size={20} strokeWidth={1.5} color="currentColor" />
@@ -124,7 +125,7 @@ const Movie = () => {
       <section className="hidden lg:grid">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
-            <div className="overflow-hidden">
+            <div className="overflow-hidden pb-40">
               <table className="min-w-full">
                 <thead className="bg-dotted-pattern bg-bottom bg-repeat-x">
                   <tr>
@@ -242,12 +243,15 @@ const Movie = () => {
                         </div>
                       </td>
                       <td>
-                        <div className="flex flex-col items-center justify-center text-gray-700">
-                          <div className="text-center line-clamp-1">
+                        <div className="mx-auto flex w-48 flex-col items-center justify-center text-gray-700">
+                          <div
+                            title={toCommaSeparate(item.genres)}
+                            className="text-center line-clamp-1">
                             {toCommaSeparate(item.genres)}
                           </div>
-                          <div className="mt-1.5 text-center line-clamp-1">
-                            {' '}
+                          <div
+                            title={toCommaSeparate(item.languages)}
+                            className="mt-1.5 text-center line-clamp-1">
                             {toCommaSeparate(item.languages)}
                           </div>
                           <button className="mt-1 flex items-center text-primary-500 hover:text-primary-400 focus:outline-none">
@@ -258,9 +262,7 @@ const Movie = () => {
                       </td>
                       <td>
                         <div className="flex items-center justify-center">
-                          <button className="rounded-md p-2 text-gray-600 hover:bg-gray-50 focus:text-gray-800">
-                            <Dots size={20} />
-                          </button>
+                          <RowContextMenu id={item.id} />
                         </div>
                       </td>
                     </tr>
@@ -271,7 +273,7 @@ const Movie = () => {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   )
 }
 
