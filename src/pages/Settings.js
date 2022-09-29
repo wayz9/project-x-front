@@ -27,8 +27,14 @@ import { useState } from 'react'
 const Settings = () => {
   const [twoFACode, setTwoFACode] = useState('')
   const { data: passwordStatus } = useSWR('password-status', () => getConfirmedPasswordStatus())
-  const { data: qrCode } = useSWR('QRCode', () => getQRCode())
-  const { data: recoveryCodes } = useSWR('recovery-codes', () => getRecoveryCodes())
+  const { data: qrCode } = useSWR(
+    passwordStatus && passwordStatus.confirmed ? 'QRCode' : null,
+    () => getQRCode()
+  )
+  const { data: recoveryCodes } = useSWR(
+    passwordStatus && passwordStatus.confirmed ? 'recovery-codes' : null,
+    () => getRecoveryCodes()
+  )
   const { mutate } = useSWRConfig()
   const navigate = useNavigate()
 
