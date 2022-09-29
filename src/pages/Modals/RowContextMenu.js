@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Copy, Dots, Edit, ListDetails, Trash } from 'tabler-icons-react'
 import { MOVIES } from '../../constants/routes'
 
-const RowContextMenu = ({ id }) => {
+const RowContextMenu = ({ id, handleDelete }) => {
   return (
     <Menu as="div" className="relative inline-flex text-left">
       <Menu.Button className="rounded-md p-2 text-gray-600 hover:bg-gray-50 focus:text-gray-800">
@@ -48,14 +48,18 @@ const RowContextMenu = ({ id }) => {
                 <span>Copy URL</span>
               </button>
             </li>
-            <li>
-              <button className="flex w-full gap-x-2.5 px-4 py-2 text-sm font-medium text-gray-600 transition-all hover:bg-gray-100">
-                <span className="text-gray-400">
-                  <Trash size={20} />
-                </span>
-                <span>Delete</span>
-              </button>
-            </li>
+            <Menu.Item>
+              <li>
+                <button
+                  onClick={handleDelete}
+                  className="flex w-full gap-x-2.5 px-4 py-2 text-sm font-medium text-gray-600 transition-all hover:bg-gray-100">
+                  <span className="text-gray-400">
+                    <Trash size={20} />
+                  </span>
+                  <span>Delete</span>
+                </button>
+              </li>
+            </Menu.Item>
           </ul>
         </Menu.Items>
       </Transition>
