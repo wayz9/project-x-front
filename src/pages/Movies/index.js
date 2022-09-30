@@ -5,6 +5,8 @@ import ShowTorrents from '../Modals/ShowTorrents'
 import MovieMobile from '../../components/Movies/MovieMobile'
 import MovieDesktop from '../../components/Movies/MovieDesktop'
 import useSWR, { mutate } from 'swr'
+import { CREATE_MOVIE } from '../../constants/routes'
+import { Link } from 'react-router-dom'
 
 const Movies = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -28,9 +30,9 @@ const Movies = () => {
           <h4 className="text-lg font-medium leading-6 text-gray-900">Movies</h4>
           <p className="mt-2.5 text-md text-gray-500">Add or update existing movies.</p>
         </div>
-        <button className="rounded-lg bg-gray-900 py-2.5 px-4 text-sm font-medium text-gray-100 transition-all hover:bg-gray-800 focus:bg-gray-800 focus:outline-none">
+        <Link to={CREATE_MOVIE} className="btn-primary">
           Add new movie
-        </button>
+        </Link>
       </section>
       <section className="relative -mt-px w-full border-y border-gray-200/50 md:mt-0">
         <input
