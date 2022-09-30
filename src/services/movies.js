@@ -4,7 +4,7 @@ export const getMovies = async (searchPhrase = '') => {
   const response = await API.get(
     `api/movies?include=poster,torrents,genres,languages&filter[search]=${searchPhrase}`
   )
-  return response
+  return response.data.data
 }
 
 export const getMovieById = async (id) => {
@@ -22,4 +22,8 @@ export const getMovieById = async (id) => {
 export const getMovieTorrents = async (id) => {
   const response = await API.get(`/api/movies/${id}/torrents`)
   return response.data.data
+}
+
+export const deleteMovie = async (id) => {
+  await API.delete(`/api/movies/${id}`)
 }
