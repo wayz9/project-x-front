@@ -12,7 +12,7 @@ import {
   TwoFA
 } from 'tabler-icons-react'
 
-import AvatarChangeSvg from '../assets/avatar-change.svg'
+import AvatarChangeSvg from '../../assets/avatar-change.svg'
 import {
   enableTwoFactorAuth,
   getConfirmedPasswordStatus,
@@ -20,8 +20,8 @@ import {
   getRecoveryCodes,
   confirmTwoFactorAuth,
   disableTwoFactorAuth
-} from '../services/auth'
-import { CONFIRM_PASSWORD } from '../constants/routes'
+} from '../../services/auth'
+import { CONFIRM_PASSWORD } from '../../constants/routes'
 import { useState } from 'react'
 
 const Settings = () => {
