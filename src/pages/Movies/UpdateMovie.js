@@ -157,12 +157,12 @@ const UpdateMovie = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="title">
+              <label htmlFor="short_title">
                 Short Title <span className="text-gray-400">(optional)</span>
               </label>
               <input
                 type="text"
-                id="title"
+                id="short_title"
                 className="mt-2.5 md:mt-3"
                 defaultValue={movie && movie.short_name}
               />
