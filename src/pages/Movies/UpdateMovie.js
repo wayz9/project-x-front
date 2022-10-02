@@ -14,7 +14,7 @@ import {
 import Torrent from '../../components/Torrents'
 import { getMovieById, getMovieTorrents } from '../../services/movies'
 import useSWR from 'swr'
-import Skeleton from '../Public/Skeleton'
+import TorrentSkeleton from '../../components/Skeleton/TorrentSkeleton'
 import { useState } from 'react'
 import AddTorrent from '../Modals/AddTorrent'
 
@@ -193,7 +193,7 @@ const UpdateMovie = () => {
                   ? torrents.map((torrent) => (
                       <Torrent key={torrent.id} movieId={id} torrent={torrent} />
                     ))
-                  : [...Array(3).keys()].map((item) => <Skeleton key={item} />)}
+                  : [...Array(3).keys()].map((item) => <TorrentSkeleton key={item} />)}
               </div>
             </div>
             <button

@@ -1,4 +1,4 @@
-const Skeleton = () => {
+const TorrentSkeleton = () => {
   return (
     <div className="relative animate-pulse overflow-hidden rounded-lg bg-gray-50/25">
       <div className="flex items-center justify-between gap-x-8 rounded-lg border border-gray-200 py-3 pr-4 pl-8">
@@ -16,4 +16,4 @@ const Skeleton = () => {
   )
 }
 
-export default Skeleton
+export default TorrentSkeleton

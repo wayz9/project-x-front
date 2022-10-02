@@ -78,7 +78,7 @@ const AddTorrent = ({ isOpen, setIsOpen, movieId }) => {
                       New Torrent
                     </h5>
                     <p className="mt-2 text-sm font-normal text-gray-500 sm:text-md">
-                      Add new torrent to current movie.
+                      Add new torrent to current resource.
                     </p>
                   </div>
                   <div className="mt-7 flex flex-col gap-y-6 md:mt-9 md:gap-y-7">
