@@ -6,7 +6,6 @@ import useXSRFCookie from './hooks/useXSRFCookie'
 import useLogin from './hooks/useLogin'
 import LoadingPage from './pages/Global/LoadingPage'
 import NotFound from './pages/Global/NotFound'
-import CreateMovie from './pages/Movies/CreateMovie'
 /* import Forbidden from './pages/Global/Forbidden' */
 
 const Dashboard = lazy(() => import('./pages/Dashboard'))
@@ -20,6 +19,7 @@ const Movies = lazy(() => import('./pages/Movies'))
 const UpdateTvShow = lazy(() => import('./pages/TvShows/UpdateTvShow'))
 const ConfirmPassword = lazy(() => import('./pages/Auth/ConfirmPassword'))
 const TwoFactorStep = lazy(() => import('./pages/Auth/TwoFactorStep'))
+const AddMovie = lazy(() => import('./pages/Movies/AddMovie'))
 
 function App() {
   const { isLoggedIn, setIsLoggedIn, isLoadingAuth } = useLogin()
@@ -70,7 +70,7 @@ function App() {
             <Route path={ROUTES.HOME} element={<Dashboard />} />
             <Route path={ROUTES.SETTINGS} element={<Settings />} />
             <Route path={ROUTES.UPDATE_MOVIE} element={<UpdateMovie />} />
-            <Route path={ROUTES.CREATE_MOVIE} element={<CreateMovie />} />
+            <Route path={ROUTES.CREATE_MOVIE} element={<AddMovie />} />
             <Route path={ROUTES.MOVIES} element={<Movies />} />
             <Route path={ROUTES.UPDATE_TV} element={<UpdateTvShow />} />
           </Route>

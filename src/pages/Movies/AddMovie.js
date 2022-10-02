@@ -13,7 +13,7 @@ import {
   Stars
 } from 'tabler-icons-react'
 
-const CreateMovie = () => {
+const AddMovie = () => {
   return (
     <div>
       <section className="bg-white bg-opacity-50 bg-grid bg-repeat py-5 px-6 md:px-9">
@@ -279,4 +279,4 @@ const CreateMovie = () => {
   )
 }
 
-export default CreateMovie
+export default AddMovie

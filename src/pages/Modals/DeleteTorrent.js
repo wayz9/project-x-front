@@ -34,7 +34,7 @@ const DeleteTorrent = ({ isOpen, setIsOpen, torrent }) => {
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-start justify-center px-4 py-8 text-center sm:items-center sm:p-0">
+          <div className="flex min-h-full items-start justify-center px-4 py-8 sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"

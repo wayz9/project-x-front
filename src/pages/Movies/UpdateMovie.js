@@ -15,8 +15,11 @@ import Torrent from '../../components/Torrents'
 import { getMovieById, getMovieTorrents } from '../../services/movies'
 import useSWR from 'swr'
 import Skeleton from '../Public/Skeleton'
+import { useState } from 'react'
+import AddTorrent from '../Modals/AddTorrent'
 
 const UpdateMovie = () => {
+  const [addTorrentModalOpen, setAddTorrentModalOpen] = useState(false)
   const { id } = useParams()
 
   const { data: movie } = useSWR('movie', () => getMovieById(id))
@@ -24,6 +27,7 @@ const UpdateMovie = () => {
 
   return (
     <div>
+      <AddTorrent isOpen={addTorrentModalOpen} setIsOpen={setAddTorrentModalOpen} movieId={id} />
       <section className="bg-white bg-opacity-50 bg-grid bg-repeat py-5 px-6 md:px-9">
         <div className="flex items-center gap-4">
           <div>
@@ -186,11 +190,15 @@ const UpdateMovie = () => {
               <label>Available Torrents</label>
               <div className="mt-3.5 grid gap-4">
                 {torrents
-                  ? torrents.map((torrent) => <Torrent key={torrent.id} torrent={torrent} />)
+                  ? torrents.map((torrent) => (
+                      <Torrent key={torrent.id} movieId={id} torrent={torrent} />
+                    ))
                   : [...Array(3).keys()].map((item) => <Skeleton key={item} />)}
               </div>
             </div>
-            <button className="mt-7 flex w-full items-center justify-center gap-x-2 rounded-lg py-3 px-6 text-sm font-medium text-gray-800 ring-1 ring-gray-200 focus:outline-none focus:outline-1 focus:outline-primary-200 focus:ring-primary-300 2xl:mt-[52px]">
+            <button
+              onClick={() => setAddTorrentModalOpen(true)}
+              className="mt-7 flex w-full items-center justify-center gap-x-2 rounded-lg py-3 px-6 text-sm font-medium text-gray-800 ring-1 ring-gray-200 focus:outline-none focus:outline-1 focus:outline-primary-200 focus:ring-primary-300 2xl:mt-[52px]">
               <span className="text-gray-400">
                 <CodePlus size={20} />
               </span>

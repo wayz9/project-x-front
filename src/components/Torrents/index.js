@@ -10,13 +10,18 @@ const torrentQualityMap = {
   '2160P': 'bg-indigo-500'
 }
 
-const Torrent = ({ torrent }) => {
+const Torrent = ({ torrent, movieId }) => {
   const [updateTorrent, setUpdateTorrent] = useState(false)
   const [deleteTorrent, setDeleteTorrent] = useState(false)
 
   return (
     <>
-      <UpdateTorrent torrent={torrent} isOpen={updateTorrent} setIsOpen={setUpdateTorrent} />
+      <UpdateTorrent
+        movieId={movieId}
+        torrent={torrent}
+        isOpen={updateTorrent}
+        setIsOpen={setUpdateTorrent}
+      />
       <DeleteTorrent torrent={torrent} isOpen={deleteTorrent} setIsOpen={setDeleteTorrent} />
 
       <div className="relative overflow-hidden rounded-lg">
