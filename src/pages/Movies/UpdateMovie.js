@@ -27,7 +27,12 @@ const UpdateMovie = () => {
 
   return (
     <div>
-      <AddTorrent isOpen={addTorrentModalOpen} setIsOpen={setAddTorrentModalOpen} movieId={id} />
+      <AddTorrent
+        isOpen={addTorrentModalOpen}
+        setIsOpen={setAddTorrentModalOpen}
+        resourceId={id}
+        type="movie"
+      />
       <section className="bg-white bg-opacity-50 bg-grid bg-repeat py-5 px-6 md:px-9">
         <div className="flex items-center gap-4">
           <div>

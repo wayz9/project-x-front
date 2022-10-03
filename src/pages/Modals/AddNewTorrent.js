@@ -1,57 +1,36 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { mutate } from 'swr'
-import { addTorrentToMovie } from '../../services/movies'
-// import { getTorrentQualities } from '../../services/torrents'
 
-const AddTorrent = ({ isOpen, setIsOpen, resourceId, type }) => {
-  const [torrentQuality, setTorrentQuality] = useState('1080P')
-  const [hash, setHash] = useState('')
-  const [magnetURL, setMagnetURL] = useState('')
-  const [size, setSize] = useState('')
-  const [fps, setFps] = useState('')
+const AddNewTorrent = ({
+  isOpen,
+  setIsOpen,
+  handleAddTorrent,
+  hash,
+  setHash,
+  fps,
+  setFps,
+  size,
+  setSize,
+  magnetURL,
+  setMagnetURL,
+  torrentQuality,
+  setTorrentQuality,
+  handleClearInputs
+}) => {
   const cancelButtonRef = useRef(null)
 
-  // const [torrentQualities, setTorrentQualities] = useState([])
-  // useEffect(() => {
-  //   const fetchTorrentQualities = async () => {
-  //     const response = await getTorrentQualities()
-  //     if (response && response.data && response.data) {
-  //       setTorrentQualities(response.data)
-  //     }
-  //   }
-  //   fetchTorrentQualities()
-  // }, [])
-
-  const handleAddTorrent = async () => {
-    const body = new FormData()
-    body.append('magnet_url', magnetURL)
-    if (hash) body.append('hash', hash)
-    body.append('size', size)
-    body.append('fps', fps)
-    body.append('quality', torrentQuality)
-    try {
-      let response
-      if (type === 'movie') response = await addTorrentToMovie(resourceId, body)
-      //else add torrent to episode
-      if (response.status === 201) {
-        mutate('torrents')
-        setIsOpen(false)
-        setHash('')
-        setTorrentQuality('1080P')
-        setMagnetURL('')
-        setSize('')
-        setFps('')
-      }
-    } catch (err) {
-      if (err.response && err.response.data && err.response.data.message)
-        console.log(err.response.data.message)
-    }
+  const handleCloseModal = () => {
+    handleClearInputs()
+    setIsOpen(false)
   }
 
   return (
     <Transition.Root appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50" initialFocus={cancelButtonRef} onClose={setIsOpen}>
+      <Dialog
+        as="div"
+        className="relative z-50"
+        initialFocus={cancelButtonRef}
+        onClose={handleCloseModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -172,11 +151,14 @@ const AddTorrent = ({ isOpen, setIsOpen, resourceId, type }) => {
                     <button
                       type="button"
                       ref={cancelButtonRef}
-                      onClick={() => setIsOpen(false)}
+                      onClick={handleCloseModal}
                       className="btn-secondary">
                       Cancel
                     </button>
-                    <button type="button" onClick={handleAddTorrent} className="btn-primary">
+                    <button
+                      type="button"
+                      onClick={() => handleAddTorrent(handleCloseModal)}
+                      className="btn-primary">
                       Save Changes
                     </button>
                   </div>
@@ -190,4 +172,4 @@ const AddTorrent = ({ isOpen, setIsOpen, resourceId, type }) => {
   )
 }
 
-export default AddTorrent
+export default AddNewTorrent

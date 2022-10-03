@@ -1,57 +1,48 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { mutate } from 'swr'
-import { addTorrentToMovie } from '../../services/movies'
-// import { getTorrentQualities } from '../../services/torrents'
+import { useEffect } from 'react'
 
-const AddTorrent = ({ isOpen, setIsOpen, resourceId, type }) => {
-  const [torrentQuality, setTorrentQuality] = useState('1080P')
-  const [hash, setHash] = useState('')
-  const [magnetURL, setMagnetURL] = useState('')
-  const [size, setSize] = useState('')
-  const [fps, setFps] = useState('')
+const UpdateNewTorrent = ({
+  isOpen,
+  setIsOpen,
+  torrent,
+  handleEditTorrent,
+  torrentQuality,
+  setTorrentQuality,
+  hash,
+  setHash,
+  magnetURL,
+  setMagnetURL,
+  size,
+  setSize,
+  fps,
+  setFps,
+  handleClearInputs
+}) => {
   const cancelButtonRef = useRef(null)
 
-  // const [torrentQualities, setTorrentQualities] = useState([])
-  // useEffect(() => {
-  //   const fetchTorrentQualities = async () => {
-  //     const response = await getTorrentQualities()
-  //     if (response && response.data && response.data) {
-  //       setTorrentQualities(response.data)
-  //     }
-  //   }
-  //   fetchTorrentQualities()
-  // }, [])
-
-  const handleAddTorrent = async () => {
-    const body = new FormData()
-    body.append('magnet_url', magnetURL)
-    if (hash) body.append('hash', hash)
-    body.append('size', size)
-    body.append('fps', fps)
-    body.append('quality', torrentQuality)
-    try {
-      let response
-      if (type === 'movie') response = await addTorrentToMovie(resourceId, body)
-      //else add torrent to episode
-      if (response.status === 201) {
-        mutate('torrents')
-        setIsOpen(false)
-        setHash('')
-        setTorrentQuality('1080P')
-        setMagnetURL('')
-        setSize('')
-        setFps('')
-      }
-    } catch (err) {
-      if (err.response && err.response.data && err.response.data.message)
-        console.log(err.response.data.message)
+  useEffect(() => {
+    if (isOpen) {
+      if (torrent && torrent.hash) setHash(torrent.hash)
+      if (torrent && torrent.magnet_url) setMagnetURL(torrent.magnet_url)
+      if (torrent && torrent.size) setSize(torrent.size)
+      if (torrent && torrent.fps) setFps(torrent.fps)
+      if (torrent && torrent.quality) setTorrentQuality(torrent.quality)
     }
+  }, [torrent, setHash, setMagnetURL, setSize, setFps, setTorrentQuality, isOpen])
+
+  const handleCloseModal = () => {
+    handleClearInputs()
+    setIsOpen(false)
   }
 
   return (
     <Transition.Root appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50" initialFocus={cancelButtonRef} onClose={setIsOpen}>
+      <Dialog
+        as="div"
+        className="relative z-50"
+        initialFocus={cancelButtonRef}
+        onClose={handleCloseModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -74,13 +65,13 @@ const AddTorrent = ({ isOpen, setIsOpen, resourceId, type }) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
               <Dialog.Panel className="relative w-full max-w-xl transform overflow-hidden rounded-xl border border-gray-100 bg-white transition-all sm:my-16">
-                <form className="p-6 md:px-8">
+                <div className="p-6 md:px-8">
                   <div className="text-center sm:text-left">
                     <h5 className="font-medium uppercase leading-5 text-gray-900 sm:text-lg sm:leading-6 md:normal-case">
-                      New Torrent
+                      Torrent Update
                     </h5>
                     <p className="mt-2 text-sm font-normal text-gray-500 sm:text-md">
-                      Add new torrent to current resource.
+                      Update currently selected torrent.
                     </p>
                   </div>
                   <div className="mt-7 flex flex-col gap-y-6 md:mt-9 md:gap-y-7">
@@ -90,9 +81,9 @@ const AddTorrent = ({ isOpen, setIsOpen, resourceId, type }) => {
                       </label>
                       <input
                         type="text"
-                        id="hash"
                         value={hash}
                         onChange={(e) => setHash(e.target.value)}
+                        id="hash"
                         className="mt-2.5 sm:mt-3"
                         maxLength={255}
                       />
@@ -170,17 +161,18 @@ const AddTorrent = ({ isOpen, setIsOpen, resourceId, type }) => {
                   </div>
                   <div className="mt-12 flex items-center justify-between sm:mt-10">
                     <button
-                      type="button"
                       ref={cancelButtonRef}
-                      onClick={() => setIsOpen(false)}
+                      onClick={handleCloseModal}
                       className="btn-secondary">
                       Cancel
                     </button>
-                    <button type="button" onClick={handleAddTorrent} className="btn-primary">
+                    <button
+                      onClick={() => handleEditTorrent(torrent.index, handleCloseModal)}
+                      className="btn-primary">
                       Save Changes
                     </button>
                   </div>
-                </form>
+                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -190,4 +182,4 @@ const AddTorrent = ({ isOpen, setIsOpen, resourceId, type }) => {
   )
 }
 
-export default AddTorrent
+export default UpdateNewTorrent

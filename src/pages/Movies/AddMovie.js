@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Calendar,
@@ -12,10 +13,78 @@ import {
   Photo,
   Stars
 } from 'tabler-icons-react'
+import TorrentSkeleton from '../../components/Skeleton/TorrentSkeleton'
+import NewTorrent from '../../components/Torrents/NewTorrent'
+import AddNewTorrent from '../Modals/AddNewTorrent'
 
 const AddMovie = () => {
+  const [torrents, setTorrents] = useState([])
+  const [torrentQuality, setTorrentQuality] = useState('1080P')
+  const [hash, setHash] = useState('')
+  const [magnetURL, setMagnetURL] = useState('')
+  const [size, setSize] = useState('')
+  const [fps, setFps] = useState('')
+  const [addTorrentModalOpen, setAddTorrentModalOpen] = useState(false)
+
+  const handleClearInputs = () => {
+    setHash('')
+    setTorrentQuality('1080P')
+    setMagnetURL('')
+    setSize('')
+    setFps('')
+  }
+
+  const handleAddTorrent = async (callback) => {
+    if (!magnetURL || !size) return
+    const newTorrent = {
+      index: torrents.length + 1,
+      magnet_url: magnetURL,
+      hash,
+      size,
+      fps,
+      quality: torrentQuality
+    }
+    setTorrents([...torrents, newTorrent])
+    setAddTorrentModalOpen(false)
+    callback()
+  }
+
+  const handleDeleteTorrent = (torrent, callback) => {
+    setTorrents(torrents.filter((t) => torrent.index !== t.index))
+    callback()
+  }
+
+  const handleEditTorrent = (index, callback) => {
+    const newTorrent = {
+      index,
+      magnet_url: magnetURL,
+      hash,
+      size,
+      fps,
+      quality: torrentQuality
+    }
+    setTorrents(torrents.map((t) => (t.index === newTorrent.index ? newTorrent : t)))
+    callback()
+  }
+
   return (
     <div>
+      <AddNewTorrent
+        isOpen={addTorrentModalOpen}
+        setIsOpen={setAddTorrentModalOpen}
+        handleAddTorrent={handleAddTorrent}
+        torrentQuality={torrentQuality}
+        setTorrentQuality={setTorrentQuality}
+        hash={hash}
+        setHash={setHash}
+        fps={fps}
+        setFps={setFps}
+        size={size}
+        setSize={setSize}
+        magnetURL={magnetURL}
+        setMagnetURL={setMagnetURL}
+        handleClearInputs={handleClearInputs}
+      />
       <section className="bg-white bg-opacity-50 bg-grid bg-repeat py-5 px-6 md:px-9">
         <div className="flex items-center gap-4">
           <div>
@@ -146,9 +215,33 @@ const AddMovie = () => {
           <div className="flex flex-col px-6 py-7 md:px-9">
             <div>
               <label>Available Torrents</label>
-              <div className="mt-3.5 grid gap-4">{/* Torrents Here */}</div>
+              <div className="mt-3.5 grid gap-4">
+                {torrents
+                  ? torrents.map((torrent, index) => (
+                      <NewTorrent
+                        key={index}
+                        torrent={torrent}
+                        handleDeleteTorrent={handleDeleteTorrent}
+                        handleEditTorrent={handleEditTorrent}
+                        torrentQuality={torrentQuality}
+                        setTorrentQuality={setTorrentQuality}
+                        hash={hash}
+                        setHash={setHash}
+                        magnetURL={magnetURL}
+                        setMagnetURL={setMagnetURL}
+                        size={size}
+                        setSize={setSize}
+                        fps={fps}
+                        setFps={setFps}
+                        handleClearInputs={handleClearInputs}
+                      />
+                    ))
+                  : [...Array(3).keys()].map((item) => <TorrentSkeleton key={item} />)}
+              </div>
             </div>
-            <button className="mt-7 flex w-full items-center justify-center gap-x-2 rounded-lg py-3 px-6 text-sm font-medium text-gray-800 ring-1 ring-gray-200 focus:outline-none focus:outline-1 focus:outline-primary-200 focus:ring-primary-300 2xl:mt-[52px]">
+            <button
+              onClick={() => setAddTorrentModalOpen(true)}
+              className="mt-7 flex w-full items-center justify-center gap-x-2 rounded-lg py-3 px-6 text-sm font-medium text-gray-800 ring-1 ring-gray-200 focus:outline-none focus:outline-1 focus:outline-primary-200 focus:ring-primary-300 2xl:mt-[52px]">
               <span className="text-gray-400">
                 <CodePlus size={20} />
               </span>
