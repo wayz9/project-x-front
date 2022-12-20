@@ -67,10 +67,10 @@ const ResetPassword = () => {
               Reset password
             </button>
           </div>
-          <div className="absolute inset-x-0 -bottom-6 -mx-[120px] h-px bg-gradient-to-r from-black/0 via-black/[0.15] to-black/0"></div>
-          <div className="absolute inset-x-0 -top-6 -mx-[120px] h-px bg-gradient-to-r from-black/0 via-black/[0.15] to-black/0"></div>
-          <div className="absolute inset-y-0 -right-6 -my-24 w-px bg-gradient-to-b from-black/0 via-black/[0.15] to-black/0"></div>
-          <div className="absolute inset-y-0 -left-6 -my-24 w-px bg-gradient-to-b from-black/0 via-black/[0.15] to-black/0"></div>
+          <div className="absolute inset-x-0 -bottom-6 -mx-[120px] h-px bg-gradient-to-r from-transparent via-black/[0.15] to-transparent"></div>
+          <div className="absolute inset-x-0 -top-6 -mx-[120px] h-px bg-gradient-to-r from-transparent via-black/[0.15] to-transparent"></div>
+          <div className="absolute inset-y-0 -right-6 -my-24 w-px bg-gradient-to-b from-transparent via-black/[0.15] to-transparent"></div>
+          <div className="absolute inset-y-0 -left-6 -my-24 w-px bg-gradient-to-b from-transparent via-black/[0.15] to-transparent"></div>
           <div className="absolute inset-x-0 bottom-0 -mb-px flex h-8 w-full items-end overflow-hidden">
             <div className="-mb-px flex h-0.5 w-full">
               <div className="w-full flex-none bg-gradient-to-r from-violet-200/0 via-violet-500 to-violet-200/0 blur-[1px]"></div>
